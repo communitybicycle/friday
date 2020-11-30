@@ -1,8 +1,9 @@
 {
-  "name": "electron-forge-typescript",
-  "productName": "electron-forge-typescript",
-  "version": "1.0.0",
-  "description": "My Electron application description",
+  "name": "friday",
+  "productName": "friday",
+  "version": "0.1.0",
+  "author": "Hal Shin <hal.shin@alumni.ubc.ca>",
+  "description": "An electron app for personal productivity",
   "main": ".webpack/main",
   "scripts": {
     "start": "electron-forge start",
