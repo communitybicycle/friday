@@ -26,12 +26,42 @@
  * ```
  */
 
-import './index.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import { CSSReset, ThemeProvider } from "@chakra-ui/core";
+import { BrowserRouter } from "react-router-dom";
+import customTheme from "./theme/theme";
+import { Provider } from "react-redux";
+import { store } from "./reducers/store";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const customTitleBar = window.require("custom-electron-titlebar");
 
+new customTitleBar.Titlebar({
+  backgroundColor: customTitleBar.Color.fromHex("#333"),
+  // menu: null,
+  titleHorizontalAlignment: "left",
+  unfocusEffect: false,
+  closeable: true,
+});
 
-console.log('👋 This message is being logged by "renderer.js", included via webpack');
+// myTitleBar.updateTitle("Friday - Your Personal Assistant");
+
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <ThemeProvider theme={customTheme}>
+        <CSSReset />
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
+
+console.log(
+  '👋 This message is being logged by "renderer.js", included via webpack'
+);
