@@ -2,7 +2,10 @@
   "name": "friday",
   "productName": "friday",
   "version": "0.1.0",
-  "author": "Hal Shin <hal.shin@alumni.ubc.ca>",
+  "author": {
+    "name": "Hal Shin",
+    "email": "hal.shin@alumni.ubc.ca"
+  },
   "description": "An electron app for personal productivity",
   "main": ".webpack/main",
   "scripts": {
@@ -13,10 +16,6 @@
     "lint": "eslint --ext .ts ."
   },
   "keywords": [],
-  "author": {
-    "name": "Hal Shin",
-    "email": "hal.shin@alumni.ubc.ca"
-  },
   "license": "MIT",
   "config": {
     "forge": {
@@ -53,7 +52,7 @@
               "entryPoints": [
                 {
                   "html": "./src/index.html",
-                  "js": "./src/renderer.ts",
+                  "js": "./src/renderer.tsx",
                   "name": "main_window"
                 }
               ]
@@ -71,6 +70,8 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.54",
     "@electron-forge/plugin-webpack": "6.0.0-beta.54",
     "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "css-loader": "^4.2.1",
@@ -84,6 +85,9 @@
     "typescript": "^4.0.2"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-hot-loader": "^4.13.0"
   }
 }
