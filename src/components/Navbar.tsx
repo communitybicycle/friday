@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Box, Heading, Image, PseudoBox, Text } from "@chakra-ui/core";
 import { NAVBAR_PHOTO_URL } from "../data/constants";
 import Center from "./Center";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router";
 
 interface IProps {
   isOpen: boolean;
@@ -13,6 +13,8 @@ interface IPropsNavigation {
 }
 
 const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
+  const history = useHistory();
+
   return (
     <PseudoBox
       display="block"
@@ -26,8 +28,10 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
         backgroundColor: "#555",
       }}
       borderRadius={4}
+      cursor="pointer"
+      onClick={() => history.push(to)}
     >
-      <Link to={to}> {children}</Link>
+      <span>{children}</span>
     </PseudoBox>
   );
 };
