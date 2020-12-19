@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, dialog } from "electron";
 import installExtension, { REDUX_DEVTOOLS } from "electron-devtools-installer";
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -55,6 +55,22 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+exports.getFileFromUser = () => {
+  const files = dialog.showOpenDialog({
+    properties: ["openFile"],
+  });
+
+  console.log("Files:", files);
+
+  return files;
+};
+
+const getFolderFromUser = () => {
+  dialog.showOpenDialog({
+    properties: ["openDirectory"],
+  });
+};
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

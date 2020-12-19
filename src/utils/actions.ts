@@ -5,6 +5,10 @@ export const openLink = (url: string) => {
   shell.openExternal(url);
 };
 
+export const openFolder = (path: string) => {
+  shell.showItemInFolder(path);
+};
+
 export const openTerminal = (
   command: string,
   target: string

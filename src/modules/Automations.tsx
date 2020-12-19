@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { Box, Button } from "@chakra-ui/core";
-import { automate } from "../utils/automations";
+import { automate } from "../utils/actions";
 
-interface IProps {
+interface Props {
   data: any;
 }
 
-const Automations: FunctionComponent<IProps> = ({ data }) => {
+const Automations: React.FC<Props> = ({ data }) => {
   return (
     <div>
       {data.automations.map((automation: any, index: number) => (

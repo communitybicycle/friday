@@ -1,4 +1,7 @@
-interface IInitialData {
+import { Actions } from "../types";
+
+interface InitialData {
+  actions: Actions;
   modules: {
     [index: string]: any;
   };
@@ -10,7 +13,8 @@ interface IInitialData {
   };
 }
 
-export const initialData: IInitialData = {
+export const initialData: InitialData = {
+  actions: {},
   modules: {
     "999": {
       type: "notes",
