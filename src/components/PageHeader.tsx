@@ -1,19 +1,28 @@
 import React, { FocusEventHandler, FunctionComponent } from "react";
 import {
   Box,
+  Button,
   Divider,
   Editable,
   EditableInput,
   EditablePreview,
+  Flex,
 } from "@chakra-ui/core";
 import { getItem, setItem } from "../utils/storage";
 
 interface IProps {
   id: string;
   text: string;
+  buttonAction?: () => void;
+  buttonText?: string;
 }
 
-const PageHeader: FunctionComponent<IProps> = ({ id, text }) => {
+const PageHeader: FunctionComponent<IProps> = ({
+  id,
+  text,
+  buttonAction,
+  buttonText,
+}) => {
   const headerId = "header." + id;
 
   const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
@@ -22,14 +31,21 @@ const PageHeader: FunctionComponent<IProps> = ({ id, text }) => {
 
   return (
     <Box mb={8}>
-      <Editable
-        fontSize="5xl"
-        fontWeight="bold"
-        defaultValue={getItem(headerId) || text}
-      >
-        <EditablePreview />
-        <EditableInput onBlur={handleBlur} />
-      </Editable>
+      <Flex align="center" justify="space-between">
+        <Editable
+          fontSize="5xl"
+          fontWeight="bold"
+          defaultValue={getItem(headerId) || text}
+        >
+          <EditablePreview />
+          <EditableInput onBlur={handleBlur} />
+        </Editable>
+        {buttonAction && buttonText && (
+          <Button variantColor="blue" onClick={buttonAction}>
+            {buttonText}
+          </Button>
+        )}
+      </Flex>
       <Divider />
     </Box>
   );

@@ -1,3 +1,12 @@
+export const isValidJSON = (str: string) => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
 export const setItem = (key: string, value: string): [boolean, any] => {
   let success = false;
   let error;
@@ -13,7 +22,13 @@ export const setItem = (key: string, value: string): [boolean, any] => {
 export const getItem = (key: string): string | null => {
   let value = null;
   try {
-    value = JSON.parse(window.localStorage.getItem(key) || "") || null;
+    const item = window.localStorage.getItem(key) || "";
+
+    if (isValidJSON(item)) {
+      value = JSON.parse(item);
+    } else {
+      value = item;
+    }
   } catch (e) {
     console.error(e);
   }

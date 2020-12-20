@@ -77,7 +77,7 @@ const NewAutomation: FunctionComponent = () => {
           {({ getRootProps, getInputProps }) => (
             <section>
               <div {...getRootProps()}>
-                <Input {...getInputProps()} />
+                <input {...getInputProps()} />
                 <p>Drag 'n' drop some files here, or click to select files</p>
               </div>
             </section>

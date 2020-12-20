@@ -14,7 +14,31 @@ interface InitialData {
 }
 
 export const initialData: InitialData = {
-  actions: {},
+  actions: {
+    "111": {
+      id: "111",
+      type: "link",
+      name: "Granular Jira Board",
+      description:
+        "Opens a webpage of the Granular Jira task management board.",
+      path: "https://granularai.atlassian.net/secure/BrowseProjects.jspa",
+    },
+    "222": {
+      id: "222",
+      type: "link",
+      name: "Granular Whimsical",
+      description: "Opens the Granular Whimsical site",
+      path: "https://whimsical.com/main-MSUhkuqUk3qNCdTZiht5PZ",
+    },
+    "333": {
+      id: "333",
+      type: "link",
+      name: "Granular Notion",
+      description: "Opens the Granular Notion page",
+      path:
+        "https://www.notion.so/Granular-Homepage-ee084ff864724f838bdd1d3cc74207ae",
+    },
+  },
   modules: {
     "999": {
       type: "notes",

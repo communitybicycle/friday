@@ -3,10 +3,8 @@ import { Box, Heading, Image, PseudoBox, Text } from "@chakra-ui/core";
 import { NAVBAR_PHOTO_URL } from "../data/constants";
 import Center from "./Center";
 import { useHistory } from "react-router";
-
-interface IProps {
-  isOpen: boolean;
-}
+import { useSelector } from "react-redux";
+import { RootState } from "../reducers/store";
 
 interface IPropsNavigation {
   to: string;
@@ -36,16 +34,18 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
   );
 };
 
-const Navbar: FunctionComponent<IProps> = ({ isOpen }: { isOpen: boolean }) => {
+const Navbar: React.FC = () => {
+  const { isMenuOpen } = useSelector((state: RootState) => state.meta);
+
   return (
     <Box
-      minW={isOpen ? "280px" : "0px"}
-      w={isOpen ? "280px" : "0px"}
+      minW={isMenuOpen ? "280px" : "0px"}
+      w={isMenuOpen ? "280px" : "0px"}
       // w="280px"
-      px={isOpen ? "20px" : "0px"}
+      px={isMenuOpen ? "20px" : "0px"}
       // px="20px"
       transition="0.35s all ease-in"
-      // transform={isOpen ? "translate(0%)" : "translate(-280px)"}
+      // transform={isMenuOpen ? "translate(0%)" : "translate(-280px)"}
     >
       <Box w="100%">
         <Heading color="white" textAlign="center" fontSize="2xl">

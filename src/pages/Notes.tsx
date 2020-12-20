@@ -1,16 +1,15 @@
-import React, {FunctionComponent} from "react";
+import React, { FunctionComponent } from "react";
 import Container from "../components/Container";
-import {Editor} from "@tinymce/tinymce-react";
+import { Editor } from "@tinymce/tinymce-react";
 import PageHeader from "../components/PageHeader";
 
 const Notes: FunctionComponent = () => {
-  console.log(process.env.REACT_APP_TINY_API_KEY);
   return (
     <Container>
       <PageHeader id="notes" text="Notes" />
       <Editor
         initialValue="What a beautiful world!"
-        apiKey=""
+        apiKey={process.env.REACT_APP_TINY_API_KEY}
         init={{
           width: "100%",
           inline: true,

@@ -13,7 +13,7 @@ const dataSlice = createSlice({
     addAction: (state, { payload }: PayloadAction<Action>) => {
       state.actions[payload.id] = payload;
     },
-    removeAction: (state, { payload }: PayloadAction<string>) => {
+    deleteAction: (state, { payload }: PayloadAction<string>) => {
       delete state.actions[payload];
     },
     editAction: (state, { payload }: PayloadAction<Action>) => {
@@ -22,6 +22,6 @@ const dataSlice = createSlice({
   },
 });
 
-export const { addAction, editAction, removeAction } = dataSlice.actions;
+export const { addAction, editAction, deleteAction } = dataSlice.actions;
 
 export default dataSlice.reducer;
