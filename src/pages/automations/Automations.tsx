@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import PageHeader from "../../components/PageHeader";
 import { Flex } from "@chakra-ui/core";
 import { useHistory } from "react-router";
@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducers/store";
 import ActionCard from "../../components/ActionCard";
 
-const Automations: FunctionComponent = () => {
+const Automations: React.FC = () => {
   const history = useHistory();
   const { actions } = useSelector((state: RootState) => state.data);
 

@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 
 interface IProps {
   data: any;
 }
 
-const Text: FunctionComponent<IProps> = ({ data }) => {
+const Text: React.FC<IProps> = ({ data }) => {
   return <div>{data.text}</div>;
 };
 

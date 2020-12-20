@@ -1,4 +1,4 @@
-import React, { FocusEventHandler, FunctionComponent } from "react";
+import React, { FocusEventHandler } from "react";
 import {
   Box,
   Button,
@@ -17,7 +17,7 @@ interface IProps {
   buttonText?: string;
 }
 
-const PageHeader: FunctionComponent<IProps> = ({
+const PageHeader: React.FC<IProps> = ({
   id,
   text,
   buttonAction,

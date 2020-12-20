@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import React, { useState } from "react";
 import PageHeader from "../../components/PageHeader";
 import { Button, Input, Select, Stack } from "@chakra-ui/core";
 import { ActionType } from "../../types";
@@ -9,7 +9,7 @@ import Dropzone from "react-dropzone";
 
 const actions: ActionType[] = ["link", "folder", "app", "run"];
 
-const NewAutomation: FunctionComponent = () => {
+const NewAutomation: React.FC = () => {
   const dispatch = useDispatch();
   // const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
   const [name, setName] = useState("");

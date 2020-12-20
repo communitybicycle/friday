@@ -29,7 +29,11 @@ const Page: React.FC<Props> = ({ noPadding, path, component }) => {
     <Route
       path={path}
       component={() => (
-        <Box position="relative">
+        <Box
+          ml={isMenuOpen ? "calc(280px)" : "0px"}
+          position="relative"
+          overflowY="scroll"
+        >
           <IconButton
             icon={isMenuOpen ? "arrow-left" : "arrow-right"}
             aria-label="open and close menu"

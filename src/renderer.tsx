@@ -27,6 +27,7 @@
  */
 
 window.require("dotenv").config();
+import "react-hot-loader";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -61,8 +62,4 @@ ReactDOM.render(
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
-);
-
-console.log(
-  '👋 This message is being logged by "renderer.js", included via webpack'
 );

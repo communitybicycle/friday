@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import Container from "../components/Container";
 import { Editor } from "@tinymce/tinymce-react";
 import PageHeader from "../components/PageHeader";
 
-const Notes: FunctionComponent = () => {
+const Notes: React.FC = () => {
   return (
     <Container>
       <PageHeader id="notes" text="Notes" />
