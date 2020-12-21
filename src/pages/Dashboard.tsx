@@ -37,7 +37,6 @@ const Dashboard: React.FC = () => {
             </Box>
           ))}
         </Grid>
-        asdfasdf
       </Box>
     </Box>
   );

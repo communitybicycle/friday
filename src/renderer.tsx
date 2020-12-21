@@ -38,6 +38,8 @@ import customTheme from "./theme/theme";
 import { Provider } from "react-redux";
 import { store } from "./reducers/store";
 
+process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
+
 const customTitleBar = window.require("custom-electron-titlebar");
 
 new customTitleBar.Titlebar({

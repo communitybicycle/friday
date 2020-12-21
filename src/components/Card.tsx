@@ -1,8 +1,14 @@
 import React from "react";
-import { PseudoBox } from "@chakra-ui/core";
+import { BoxProps, PseudoBox } from "@chakra-ui/core";
 import { PseudoBoxProps } from "@chakra-ui/core/dist/PseudoBox";
 
-const Card: React.FC<PseudoBoxProps> = ({ children, ...rest }) => {
+interface Props extends PseudoBoxProps {
+  _hover?: BoxProps & {
+    [key: string]: BoxProps;
+  };
+}
+
+const Card: React.FC<Props> = ({ children, _hover, ...rest }) => {
   return (
     <PseudoBox
       maxW="300px"
@@ -11,6 +17,7 @@ const Card: React.FC<PseudoBoxProps> = ({ children, ...rest }) => {
       overflow="hidden"
       py="4"
       px="4"
+      _hover={_hover}
       {...rest}
     >
       {children}
