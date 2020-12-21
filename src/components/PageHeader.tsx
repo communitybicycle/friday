@@ -9,6 +9,7 @@ import {
   EditablePreview,
   Flex,
   IconButton,
+  PseudoBox,
 } from "@chakra-ui/core";
 import { getItem, setItem } from "../utils/storage";
 
@@ -35,7 +36,12 @@ const PageHeader: React.FC<IProps> = ({
 
   return (
     <Box mb={8}>
-      <Flex align="center" justify="space-between">
+      <PseudoBox
+        display="flex"
+        alignItems="center"
+        justifyContent="space-between"
+        _hover={{ "& > div > button#page-action": { opacity: 1 } } as any}
+      >
         <Editable
           fontSize="5xl"
           fontWeight="bold"
@@ -52,14 +58,17 @@ const PageHeader: React.FC<IProps> = ({
           )}
           {pageAction && (
             <IconButton
+              id="page-action"
               aria-label="edit page"
               icon="settings"
               onClick={pageAction}
+              variantColor="blue"
               variant="ghost"
+              opacity="0"
             />
           )}
         </Box>
-      </Flex>
+      </PseudoBox>
       <Divider />
     </Box>
   );
