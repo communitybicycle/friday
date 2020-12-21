@@ -1,9 +1,10 @@
 import { Actions } from "../types";
+import { ModulesType } from "../types/modules";
 
 interface InitialData {
   actions: Actions;
   modules: {
-    [index: string]: any;
+    [index: string]: ModulesType;
   };
   pages: {
     dashboard: {
@@ -41,11 +42,13 @@ export const initialData: InitialData = {
   },
   modules: {
     "999": {
+      id: "999",
       type: "notes",
       header: "Notes",
       text: "Your notes can go here!",
     },
     "123": {
+      id: "123",
       type: "automations",
       header: "Automations",
       automations: [
@@ -97,6 +100,7 @@ export const initialData: InitialData = {
       ],
     },
     "234": {
+      id: "234",
       type: "text",
       header: "Quick Start",
       text:

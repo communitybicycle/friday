@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import { hot } from "react-hot-loader";
 import {
   Button,
-  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -10,41 +9,82 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from "@chakra-ui/core";
+import TextEdit from "../modules/Text/TextEdit";
+import NotesEdit from "../modules/Notes/NotesEdit";
+import { useDispatch, useSelector } from "react-redux";
+import { closeEditModuleModal } from "../reducers/metaReducer";
+import { RootState } from "../reducers/store";
 
-interface Props {
-  module: any;
+interface Props {}
+
+interface EditModalContentProps {
+  onSubmit: () => void;
 }
 
-const EditModuleModal: React.FC<Props> = ({ module }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export type ChildHandle = React.ElementRef<typeof TextEdit | typeof NotesEdit>;
+
+export const EditModalContent: React.FC<EditModalContentProps> = ({
+  onSubmit,
+  children,
+}) => {
+  const dispatch = useDispatch();
+
+  const handleClose = () => {
+    dispatch(closeEditModuleModal());
+  };
+
+  const handleClick = () => {
+    onSubmit();
+    handleClose();
+  };
+
+  return (
+    <ModalContent>
+      <ModalHeader>Edit Module</ModalHeader>
+      <ModalCloseButton />
+      <ModalBody>{children}</ModalBody>
+
+      <ModalFooter>
+        <Button variantColor="blue" mr={3} onClick={handleClose}>
+          Close
+        </Button>
+        <Button variant="ghost" onClick={handleClick}>
+          Save
+        </Button>
+      </ModalFooter>
+    </ModalContent>
+  );
+};
+
+const EditModuleModal: React.FC<Props> = () => {
+  const dispatch = useDispatch();
+  const { isEditModuleModalOpen, editModuleModal: module } = useSelector(
+    (state: RootState) => state.meta
+  );
+
+  const handleClose = () => {
+    dispatch(closeEditModuleModal());
+  };
+
+  const renderEditModule = () => {
+    if (!module) return;
+
+    switch (module.type) {
+      case "text":
+        return <TextEdit module={module} />;
+      case "notes":
+        return <NotesEdit module={module} />;
+      default:
+        break;
+    }
+  };
 
   return (
     <Fragment>
-      <IconButton
-        id="page-action"
-        aria-label="edit module"
-        icon="settings"
-        onClick={onOpen}
-        variantColor="ghostGray"
-        variant="ghost"
-        opacity="0"
-      />
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+      <Modal isOpen={isEditModuleModalOpen} onClose={handleClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>BOdy goes here</ModalBody>
-
-          <ModalFooter>
-            <Button variantColor="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant="ghost">Secondary Action</Button>
-          </ModalFooter>
-        </ModalContent>
+        {renderEditModule()}
       </Modal>
     </Fragment>
   );

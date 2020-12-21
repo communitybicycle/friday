@@ -11,18 +11,3 @@ export interface Action {
 export interface Actions {
   [key: string]: Action;
 }
-
-export interface Module {
-  id: string;
-  type: string;
-  header?: string;
-  text?: string;
-}
-
-export interface Modules {
-  [key: string]: Module;
-}
-
-export interface ActionModule extends Module {
-  actions: Action[];
-}

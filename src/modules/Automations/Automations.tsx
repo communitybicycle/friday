@@ -1,16 +1,16 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 import { Box, Button } from "@chakra-ui/core";
-import { automate } from "../utils/actions";
+import { automate } from "../../utils/actions";
 
 interface Props {
-  data: any;
+  module: any;
 }
 
-const Automations: React.FC<Props> = ({ data }) => {
+const Automations: React.FC<Props> = ({ module }) => {
   return (
     <div>
-      {data.automations.map((automation: any, index: number) => (
+      {module.automations.map((automation: any, index: number) => (
         <Box key={index}>
           <Button
             variantColor="blue"

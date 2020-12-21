@@ -1,12 +1,13 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-import { Box, Grid, Image } from "@chakra-ui/core";
+import { Box, Grid, Image, PseudoBox } from "@chakra-ui/core";
 import PageHeader from "../components/PageHeader";
 import { useSelector } from "react-redux";
 import Module from "../components/Module";
 import { RootState } from "../reducers/store";
 import { DEFAULT_IMAGE_URL } from "../data/constants";
 import { useHistory } from "react-router";
+import EditModuleModal from "../components/EditModuleModal";
 
 const Dashboard: React.FC = () => {
   const history = useHistory();
@@ -39,12 +40,13 @@ const Dashboard: React.FC = () => {
           {dashboard.columns.map((column: any, index: number) => (
             <Box key={index}>
               {column.map((moduleId: string, index: number) => (
-                <Module data={modules[moduleId]} key={index} />
+                <Module module={modules[moduleId]} key={index} />
               ))}
             </Box>
           ))}
         </Grid>
       </Box>
+      <EditModuleModal />
     </Box>
   );
 };
