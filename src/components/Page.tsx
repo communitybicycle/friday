@@ -40,7 +40,7 @@ const Page: React.FC<Props> = ({ noPadding, path, component }) => {
             top={2}
             left={2}
           />
-          <Box mt={noPadding ? "0px" : "50px"} px={noPadding ? "0px" : "50px"}>
+          <Box pt={noPadding ? "0px" : "50px"} px={noPadding ? "0px" : "50px"}>
             {render(component)}
           </Box>
         </Box>

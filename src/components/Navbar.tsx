@@ -44,14 +44,11 @@ const Navbar: React.FC = () => {
       transform={isMenuOpen ? "translate(0, 0)" : "translate(-280px, 0)"}
       minW="280px"
       w="280px"
-      // minW={isMenuOpen ? "280px" : "0px"}
-      // w={isMenuOpen ? "280px" : "0px"}
       px={isMenuOpen ? "20px" : "0px"}
       transition="0.25s all ease-in"
       position="fixed"
-      top={0}
+      top="30px"
       left={0}
-      // transform={isMenuOpen ? "translate(0%)" : "translate(-280px)"}
     >
       <Box w="100%">
         <Heading color="white" textAlign="center" fontSize="2xl">
