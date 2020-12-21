@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { hot } from "react-hot-loader";
 import { Box, Heading, Image, PseudoBox, Text } from "@chakra-ui/core";
 import { NAVBAR_PHOTO_URL } from "../data/constants";
 import Center from "./Center";
@@ -74,4 +75,4 @@ const Navbar: React.FC = () => {
   );
 };
 
-export default Navbar;
+export default hot(module)(Navbar);

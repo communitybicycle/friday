@@ -1,4 +1,5 @@
 import React, { FocusEventHandler } from "react";
+import { hot } from "react-hot-loader";
 import {
   Box,
   Button,
@@ -7,6 +8,7 @@ import {
   EditableInput,
   EditablePreview,
   Flex,
+  IconButton,
 } from "@chakra-ui/core";
 import { getItem, setItem } from "../utils/storage";
 
@@ -15,6 +17,7 @@ interface IProps {
   text: string;
   buttonAction?: () => void;
   buttonText?: string;
+  pageAction?: () => void;
 }
 
 const PageHeader: React.FC<IProps> = ({
@@ -22,6 +25,7 @@ const PageHeader: React.FC<IProps> = ({
   text,
   buttonAction,
   buttonText,
+  pageAction,
 }) => {
   const headerId = "header." + id;
 
@@ -40,15 +44,25 @@ const PageHeader: React.FC<IProps> = ({
           <EditablePreview />
           <EditableInput onBlur={handleBlur} />
         </Editable>
-        {buttonAction && buttonText && (
-          <Button variantColor="blue" onClick={buttonAction}>
-            {buttonText}
-          </Button>
-        )}
+        <Box>
+          {buttonAction && buttonText && (
+            <Button variantColor="blue" onClick={buttonAction}>
+              {buttonText}
+            </Button>
+          )}
+          {pageAction && (
+            <IconButton
+              aria-label="edit page"
+              icon="settings"
+              onClick={pageAction}
+              variant="ghost"
+            />
+          )}
+        </Box>
       </Flex>
       <Divider />
     </Box>
   );
 };
 
-export default PageHeader;
+export default hot(module)(PageHeader);

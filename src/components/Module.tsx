@@ -1,4 +1,5 @@
-import React, { Fragment, FunctionComponent } from "react";
+import React, { Fragment } from "react";
+import { hot } from "react-hot-loader";
 import { Box, Divider, Heading } from "@chakra-ui/core";
 import Text from "../modules/Text";
 import Notes from "../modules/Notes";
@@ -8,7 +9,7 @@ interface IProps {
   data: any;
 }
 
-const Module: FunctionComponent<IProps> = ({ data }) => {
+const Module: React.FC<IProps> = ({ data }) => {
   const renderModule = () => {
     switch (data.type) {
       case "text":
@@ -35,4 +36,4 @@ const Module: FunctionComponent<IProps> = ({ data }) => {
   );
 };
 
-export default Module;
+export default hot(module)(Module);

@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { hot } from "react-hot-loader";
 import { Box, Flex, Heading, Text } from "@chakra-ui/core";
 
 const Header: FunctionComponent = () => {
@@ -19,4 +20,4 @@ const Header: FunctionComponent = () => {
   );
 };
 
-export default Header;
+export default hot(module)(Header);

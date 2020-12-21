@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import Container from "../components/Container";
 import { Editor } from "@tinymce/tinymce-react";
 import PageHeader from "../components/PageHeader";
@@ -30,4 +31,4 @@ const Notes: React.FC = () => {
   );
 };
 
-export default Notes;
+export default hot(module)(Notes);

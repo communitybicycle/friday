@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { hot } from "react-hot-loader";
 import { Box } from "@chakra-ui/core";
 
 const Container: FunctionComponent = ({ children, ...rest }) => {
@@ -9,4 +10,4 @@ const Container: FunctionComponent = ({ children, ...rest }) => {
   );
 };
 
-export default Container;
+export default hot(module)(Container);

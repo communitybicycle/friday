@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import { Box, Button } from "@chakra-ui/core";
 import { automate } from "../utils/actions";
 
@@ -23,4 +24,4 @@ const Automations: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default Automations;
+export default hot(module)(Automations);

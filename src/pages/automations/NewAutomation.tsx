@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { hot } from "react-hot-loader";
 import PageHeader from "../../components/PageHeader";
 import { Button, Input, Select, Stack } from "@chakra-ui/core";
 import { ActionType } from "../../types";
@@ -91,4 +92,4 @@ const NewAutomation: React.FC = () => {
   );
 };
 
-export default NewAutomation;
+export default hot(module)(NewAutomation);

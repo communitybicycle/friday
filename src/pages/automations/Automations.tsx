@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import PageHeader from "../../components/PageHeader";
 import { Flex } from "@chakra-ui/core";
 import { useHistory } from "react-router";
@@ -27,4 +28,4 @@ const Automations: React.FC = () => {
   );
 };
 
-export default Automations;
+export default hot(module)(Automations);

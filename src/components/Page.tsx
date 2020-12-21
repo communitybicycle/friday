@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import { Box, IconButton } from "@chakra-ui/core";
 import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -49,4 +50,4 @@ const Page: React.FC<Props> = ({ noPadding, path, component }) => {
   );
 };
 
-export default Page;
+export default hot(module)(Page);

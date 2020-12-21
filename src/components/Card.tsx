@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import { BoxProps, PseudoBox } from "@chakra-ui/core";
 import { PseudoBoxProps } from "@chakra-ui/core/dist/PseudoBox";
 
@@ -25,4 +26,4 @@ const Card: React.FC<Props> = ({ children, _hover, ...rest }) => {
   );
 };
 
-export default Card;
+export default hot(module)(Card);

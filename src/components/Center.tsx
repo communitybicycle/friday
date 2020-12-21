@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+import { hot } from "react-hot-loader";
 import { BoxProps, Flex } from "@chakra-ui/core";
 
 const Center: FunctionComponent<BoxProps> = ({ children, ...rest }) => {
@@ -9,4 +10,4 @@ const Center: FunctionComponent<BoxProps> = ({ children, ...rest }) => {
   );
 };
 
-export default Center;
+export default hot(module)(Center);

@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import { Textarea } from "@chakra-ui/core";
 
 interface IProps {
@@ -9,4 +10,4 @@ const Notes: React.FC<IProps> = ({ data }) => {
   return <Textarea placeholder={data.text}></Textarea>;
 };
 
-export default Notes;
+export default hot(module)(Notes);

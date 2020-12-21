@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import {
   Box,
   Button,
@@ -14,6 +15,7 @@ import { Action } from "../types";
 import { deleteAction } from "../reducers/dataReducer";
 import { runAction } from "../utils/actions";
 import { useDispatch } from "react-redux";
+import Delete from "./Delete";
 
 interface Props {
   action: Action;
@@ -57,16 +59,26 @@ const ActionCard: React.FC<Props> = ({ action }) => {
         </Button>
         <PseudoBox opacity={0}>
           <IconButton
-            variantColor="red"
-            aria-label="delete"
-            icon="delete"
-            variant="link"
-            onClick={() => handleDelete(action.id)}
+            aria-label="edit"
+            icon="edit"
+            variant="ghost"
+            onClick={() => console.log("Edit")}
           />
+          <Delete>
+            {(confirm) => (
+              <IconButton
+                variantColor="red"
+                aria-label="delete"
+                icon="delete"
+                variant="ghost"
+                onClick={confirm(() => handleDelete(action.id))}
+              />
+            )}
+          </Delete>
         </PseudoBox>
       </Flex>
     </Card>
   );
 };
 
-export default ActionCard;
+export default hot(module)(ActionCard);
