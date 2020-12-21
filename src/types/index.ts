@@ -11,3 +11,8 @@ export interface Action {
 export interface Actions {
   [key: string]: Action;
 }
+
+export interface Automation {
+  name: string;
+  instructions: Action[];
+}
