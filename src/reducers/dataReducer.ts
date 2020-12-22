@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialData } from "../data/initial";
-import { Action } from "../types";
+import { Action, Columns, Dashboard } from "../types";
 import { ModulesType } from "../types/modules";
 
 const dataSlice = createSlice({
@@ -29,6 +29,15 @@ const dataSlice = createSlice({
     deleteModule: (state, { payload: id }: PayloadAction<string>) => {
       delete state.modules[id];
     },
+    setColumns: (
+      state,
+      { payload }: PayloadAction<{ id: string; columns: Columns }>
+    ) => {
+      const pageIndex = state.pages.dashboards.findIndex(
+        (dashboard) => dashboard.id === payload.id
+      );
+      state.pages.dashboards[pageIndex].columns = payload.columns;
+    },
   },
 });
 
@@ -39,6 +48,7 @@ export const {
   addModule,
   editModule,
   deleteModule,
+  setColumns,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

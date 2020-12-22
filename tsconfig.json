@@ -14,10 +14,9 @@
     "resolveJsonModule": true,
     "target": "ES5",
     "paths": {
-      "*": ["node_modules/*"],
-      "src/*": ["./src/*"]
+      "*": ["node_modules/*"]
     },
     "jsx": "react"
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*"]
 }

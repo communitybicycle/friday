@@ -30,8 +30,11 @@ export interface Page {
   header: string;
   type: PageType;
 }
+
+export type Columns = string[][];
+
 export interface Dashboard extends Page {
-  columns: string[][];
+  columns: Columns;
   type: "dashboard";
 }
 export interface Notes extends Page {

@@ -1,6 +1,13 @@
-import React, { Fragment } from "react";
+import React, { CSSProperties, Fragment } from "react";
 import { hot } from "react-hot-loader";
-import { Box, Divider, Heading, IconButton, PseudoBox } from "@chakra-ui/core";
+import {
+  Box,
+  Divider,
+  Flex,
+  Heading,
+  IconButton,
+  PseudoBox,
+} from "@chakra-ui/core";
 import Text from "../modules/Text/Text";
 import Notes from "../modules/Notes/Notes";
 import Automations from "../modules/Automations/Automations";
@@ -10,18 +17,48 @@ import {
   openEditModuleModal,
   setEditModuleModal,
 } from "../reducers/metaReducer";
+import {
+  Draggable,
+  DraggableProvided,
+  DraggableStateSnapshot,
+  DraggingStyle,
+  NotDraggingStyle,
+} from "react-beautiful-dnd";
+import { useDraggableInPortal } from "../hooks";
 
 interface Props {
   module: ModulesType;
+  index: number;
 }
 
-const Module: React.FC<Props> = ({ module }) => {
+const Module: React.FC<Props> = ({ module, index }) => {
   const dispatch = useDispatch();
+  const renderDraggable = useDraggableInPortal();
 
   const handleOpen = () => {
     dispatch(setEditModuleModal(module));
     dispatch(openEditModuleModal());
   };
+
+  const getItemStyle = (
+    isDragging: boolean,
+    draggableStyle: DraggingStyle | NotDraggingStyle | undefined
+  ): CSSProperties => ({
+    // some basic styles to make the items look a bit nicer
+    // width: isDragging ? "400px" : "100%",
+    overflow: "visible",
+    minHeight: "100px",
+    borderRadius: "8px",
+    userSelect: "none",
+    // border: isDragging ? "1px solid #efefef" : "none",
+    padding: isDragging ? "16px" : "0",
+    boxShadow: isDragging ? "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" : "none",
+    // change background colour if dragging
+    background: "#fff",
+
+    // styles we need to apply on draggables
+    ...draggableStyle,
+  });
 
   const renderModule = () => {
     switch (module.type) {
@@ -37,31 +74,54 @@ const Module: React.FC<Props> = ({ module }) => {
   };
 
   return (
-    <Box mb={4}>
-      {!module.hideHeader && (
-        <Fragment>
-          <PseudoBox
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-            _hover={{ "& > button#page-action": { opacity: 1 } } as any}
+    <Draggable draggableId={module.id} index={index}>
+      {renderDraggable(
+        (provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
+          <Flex
+            direction="column"
+            mb={4}
+            ref={provided.innerRef}
+            {...provided.draggableProps}
+            style={getItemStyle(
+              snapshot.isDragging,
+              provided.draggableProps.style
+            )}
           >
-            <Heading fontSize="2xl">{module.header}</Heading>
-            <IconButton
-              id="page-action"
-              aria-label="edit module"
-              icon="settings"
-              onClick={handleOpen}
-              variantColor="ghostGray"
-              variant="ghost"
-              opacity="0"
-            />
-          </PseudoBox>
-          <Divider />
-        </Fragment>
+            {!module.hideHeader && (
+              <Fragment>
+                <PseudoBox
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                  _hover={{ "& > button#page-action": { opacity: 1 } } as any}
+                >
+                  <Flex align="center">
+                    <IconButton
+                      aria-label="drag module"
+                      variant="ghost"
+                      icon="drag-handle"
+                      {...provided.dragHandleProps}
+                    />
+                    <Heading fontSize="2xl">{module.header}</Heading>
+                  </Flex>
+                  <IconButton
+                    id="page-action"
+                    aria-label="edit module"
+                    icon="settings"
+                    onClick={handleOpen}
+                    variantColor="ghostGray"
+                    variant="ghost"
+                    opacity="0"
+                  />
+                </PseudoBox>
+                <Divider />
+              </Fragment>
+            )}
+            {renderModule()}
+          </Flex>
+        )
       )}
-      {renderModule()}
-    </Box>
+    </Draggable>
   );
 };
 
