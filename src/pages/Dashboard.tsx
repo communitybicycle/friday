@@ -1,6 +1,6 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-import { Box, Grid, Image, PseudoBox } from "@chakra-ui/core";
+import { Box, Grid, Image } from "@chakra-ui/core";
 import PageHeader from "../components/PageHeader";
 import { useSelector } from "react-redux";
 import Module from "../components/Module";
@@ -8,17 +8,22 @@ import { RootState } from "../reducers/store";
 import { DEFAULT_IMAGE_URL } from "../data/constants";
 import { useHistory } from "react-router";
 import EditModuleModal from "../components/EditModuleModal";
+import { useParams } from "react-router-dom";
 
 const Dashboard: React.FC = () => {
   const history = useHistory();
+  const { id } = useParams<{ id: string }>();
   const {
-    pages: { dashboard },
+    pages: { dashboards },
     modules,
   } = useSelector((state: RootState) => state.data);
+  const dashboard = dashboards.find((el) => el.id === id);
 
   const editPage = () => {
     history.push("/dashboard/edit");
   };
+
+  if (!dashboard) return <></>;
 
   return (
     <Box>

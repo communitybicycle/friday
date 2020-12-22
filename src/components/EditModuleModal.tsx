@@ -46,10 +46,10 @@ export const EditModalContent: React.FC<EditModalContentProps> = ({
       <ModalBody>{children}</ModalBody>
 
       <ModalFooter>
-        <Button variantColor="blue" mr={3} onClick={handleClose}>
+        <Button variant="ghost" mr={3} onClick={handleClose}>
           Close
         </Button>
-        <Button variant="ghost" onClick={handleClick}>
+        <Button variantColor="blue" onClick={handleClick}>
           Save
         </Button>
       </ModalFooter>

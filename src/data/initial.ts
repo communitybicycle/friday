@@ -1,4 +1,4 @@
-import { Actions } from "../types";
+import { Actions, Pages } from "../types";
 import { ModulesType } from "../types/modules";
 
 interface InitialData {
@@ -6,12 +6,7 @@ interface InitialData {
   modules: {
     [index: string]: ModulesType;
   };
-  pages: {
-    dashboard: {
-      header: string;
-      columns: string[][];
-    };
-  };
+  pages: Pages;
 }
 
 export const initialData: InitialData = {
@@ -108,9 +103,24 @@ export const initialData: InitialData = {
     },
   },
   pages: {
-    dashboard: {
-      header: "Welcome, Hal!",
-      columns: [["234", "123"], ["999"]],
-    },
+    dashboards: [
+      {
+        id: "abc",
+        title: "Personal Dashboard",
+        header: "Welcome, Hal!",
+        type: "dashboard",
+
+        columns: [["234", "123"], ["999"]],
+      },
+    ],
+    notes: [
+      {
+        id: "bce",
+        title: "General Notes",
+        header: "Notes Page Here",
+        type: "notes",
+        notes: "Notes placeholder here",
+      },
+    ],
   },
 };

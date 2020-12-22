@@ -37,6 +37,9 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
 
 const Navbar: React.FC = () => {
   const { isMenuOpen } = useSelector((state: RootState) => state.meta);
+  const {
+    pages: { dashboards, notes },
+  } = useSelector((state: RootState) => state.data);
 
   return (
     <Box
@@ -65,11 +68,29 @@ const Navbar: React.FC = () => {
       <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
         Home
       </Heading>
-      <Box>
-        <Navigation to="/">Dashboard</Navigation>
+      <Box mb={3}>
+        {dashboards.map((dashboard) => (
+          <Navigation to={`/dashboard/${dashboard.id}`} key={dashboard.id}>
+            {dashboard.title}
+          </Navigation>
+        ))}
+      </Box>
+      <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
+        Others
+      </Heading>
+      <Box mb={3}>
         <Navigation to="/automations">Automations</Navigation>
-        <Navigation to="/notes">Notes</Navigation>
-        <Navigation to="/weather">Weather</Navigation>
+      </Box>
+
+      <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
+        Notes
+      </Heading>
+      <Box>
+        {notes.map((notePage) => (
+          <Navigation to={`/notes/${notePage.id}`} key={notePage.id}>
+            {notePage.title}
+          </Navigation>
+        ))}
       </Box>
     </Box>
   );

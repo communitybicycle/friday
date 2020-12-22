@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Automations from "./pages/automations/Automations";
 import NewAutomation from "./pages/automations/NewAutomation";
 import Page from "./components/Page";
+import Welcome from "./pages/Welcome";
 
 const Router: FunctionComponent = () => {
   return (
@@ -12,7 +13,8 @@ const Router: FunctionComponent = () => {
       <Page path="/notes" component={Notes} />
       <Page path="/automations/new" component={NewAutomation} />
       <Page path="/automations" component={Automations} />
-      <Page path="/" component={Dashboard} noPadding />
+      <Page path="/dashboard/:id" component={Dashboard} noPadding />
+      <Page path="/" component={Welcome} />
     </Switch>
   );
 };
