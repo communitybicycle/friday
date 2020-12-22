@@ -1,22 +1,12 @@
-import React, { CSSProperties, Fragment } from "react";
-import { hot } from "react-hot-loader";
-import {
-  Box,
-  Divider,
-  Flex,
-  Heading,
-  IconButton,
-  PseudoBox,
-} from "@chakra-ui/core";
+import React, {CSSProperties, Fragment} from "react";
+import {hot} from "react-hot-loader";
+import {Divider, Flex, Heading, Icon, IconButton, PseudoBox,} from "@chakra-ui/core";
 import Text from "../modules/Text/Text";
 import Notes from "../modules/Notes/Notes";
 import Automations from "../modules/Automations/Automations";
-import { ModulesType } from "../types/modules";
-import { useDispatch } from "react-redux";
-import {
-  openEditModuleModal,
-  setEditModuleModal,
-} from "../reducers/metaReducer";
+import {ModulesType} from "../types/modules";
+import {useDispatch} from "react-redux";
+import {openEditModuleModal, setEditModuleModal,} from "../reducers/metaReducer";
 import {
   Draggable,
   DraggableProvided,
@@ -24,7 +14,7 @@ import {
   DraggingStyle,
   NotDraggingStyle,
 } from "react-beautiful-dnd";
-import { useDraggableInPortal } from "../hooks";
+import {useDraggableInPortal} from "../hooks";
 
 interface Props {
   module: ModulesType;
@@ -96,12 +86,14 @@ const Module: React.FC<Props> = ({ module, index }) => {
                   _hover={{ "& > button#page-action": { opacity: 1 } } as any}
                 >
                   <Flex align="center">
-                    <IconButton
-                      aria-label="drag module"
-                      variant="ghost"
-                      icon="drag-handle"
+                    <Flex
                       {...provided.dragHandleProps}
-                    />
+                      align="center"
+                      px={2}
+                      color="grey"
+                    >
+                      <Icon name="drag-handle" />
+                    </Flex>
                     <Heading fontSize="2xl">{module.header}</Heading>
                   </Flex>
                   <IconButton
