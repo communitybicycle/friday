@@ -15,6 +15,7 @@ import NotesEdit from "../modules/Notes/NotesEdit";
 import { useDispatch, useSelector } from "react-redux";
 import { closeEditModuleModal } from "../reducers/metaReducer";
 import { RootState } from "../reducers/store";
+import AutomationsEdit from "../modules/Automations/AutomationsEdit";
 
 interface Props {}
 
@@ -75,6 +76,8 @@ const EditModuleModal: React.FC<Props> = () => {
         return <TextEdit module={module} />;
       case "notes":
         return <NotesEdit module={module} />;
+      case "automations":
+        return <AutomationsEdit module={module} />;
       default:
         break;
     }

@@ -26,9 +26,16 @@ export type ModulesType =
   | NotesModule
   | AutomationModule;
 
+interface Automation {
+  id: string;
+  name: string;
+  description?: string;
+  instructions: Action[];
+}
+
 export interface AutomationModule extends Module {
   type: "automations";
-  automations: any[];
+  automations: Automation[];
 }
 
 export interface ActionModule extends Module {
