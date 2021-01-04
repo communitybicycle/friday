@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialData } from "../data/initial";
-import { Action, Columns, Dashboard } from "../types";
 import { ModulesType } from "../types/modules";
+import { Action } from "../types/action";
+import { Columns } from "../types/page";
 
 const dataSlice = createSlice({
   name: "data",

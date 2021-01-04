@@ -108,6 +108,7 @@
     "custom-electron-titlebar": "^3.2.5",
     "dotenv": "^8.2.0",
     "electron-squirrel-startup": "^1.0.0",
+    "electron-store": "^6.0.1",
     "emotion-theming": "^10.0.27",
     "fontsource-open-sans": "^3.0.9",
     "react": "^17.0.1",

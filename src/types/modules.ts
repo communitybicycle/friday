@@ -1,4 +1,4 @@
-import { Action } from "./index";
+import { Action } from "./action";
 
 type ModuleTypes =
   | "text"
@@ -51,4 +51,18 @@ export interface TextModule extends Module {
 export interface NotesModule extends Module {
   type: "notes";
   text: string;
+}
+
+export interface PhotoModule extends Module {
+  src: string;
+}
+
+export interface CalendarModule extends Module {
+  apiKey?: string;
+}
+
+export interface WeatherModule extends Module {
+  city: string;
+  numberOfDays: number;
+  apiKey?: string;
 }

@@ -11,11 +11,11 @@ import {
   Text,
 } from "@chakra-ui/core";
 import Card from "./Card";
-import { Action } from "../types";
 import { deleteAction } from "../reducers/dataReducer";
 import { runAction } from "../utils/actions";
 import { useDispatch } from "react-redux";
 import Delete from "./Delete";
+import { Action } from "../types/action";
 
 interface Props {
   action: Action;

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { hot } from "react-hot-loader";
 import PageHeader from "../../components/PageHeader";
 import { Button, Input, Select, Stack } from "@chakra-ui/core";
-import { ActionType } from "../../types";
 import { capitalize, uuid } from "../../utils";
 import { useDispatch } from "react-redux";
 import { addAction } from "../../reducers/dataReducer";
 import Dropzone from "react-dropzone";
+import { ActionType } from "../../types/action";
 
 const actions: ActionType[] = ["link", "folder", "app", "run"];
 

@@ -1,5 +1,6 @@
-import { Actions, Pages } from "../types";
 import { ModulesType } from "../types/modules";
+import { Actions } from "../types/action";
+import { Pages } from "../types/page";
 
 interface InitialData {
   actions: Actions;

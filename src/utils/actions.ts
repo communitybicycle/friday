@@ -1,6 +1,6 @@
 import { shell } from "electron";
 import { exec } from "child_process";
-import { Action } from "../types";
+import { Action } from "../types/action";
 
 export const openLink = (url: string) => {
   shell.openExternal(url);
