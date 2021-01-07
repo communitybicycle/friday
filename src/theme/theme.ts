@@ -1,6 +1,35 @@
 import { ITheme, theme } from "@chakra-ui/core";
+import { ColorHues } from "@chakra-ui/core/dist/theme";
 
-const customTheme: ITheme = {
+interface CustomTheme extends ITheme {
+  colors: {
+    transparent: string;
+    current: string;
+    black: string;
+    white: string;
+    whiteAlpha: ColorHues;
+    blackAlpha: ColorHues;
+    gray: ColorHues;
+    red: ColorHues;
+    orange: ColorHues;
+    yellow: ColorHues;
+    green: ColorHues;
+    teal: ColorHues;
+    blue: ColorHues;
+    cyan: ColorHues;
+    purple: ColorHues;
+    pink: ColorHues;
+    linkedin: ColorHues;
+    facebook: ColorHues;
+    messenger: ColorHues;
+    whatsapp: ColorHues;
+    twitter: ColorHues;
+    telegram: ColorHues;
+    ghostGray: ColorHues;
+  };
+}
+
+const customTheme: CustomTheme = {
   ...theme,
   fonts: {
     body: "Open Sans, sans-serif",
@@ -10,6 +39,7 @@ const customTheme: ITheme = {
   colors: {
     ...theme.colors,
     ghostGray: {
+      50: "#718096",
       100: "#718096",
       200: "#718096",
       300: "#718096",

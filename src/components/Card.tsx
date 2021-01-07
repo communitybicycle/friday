@@ -1,15 +1,16 @@
+import { HeadingProps } from "@chakra-ui/core/dist/Heading";
 import React from "react";
 import { hot } from "react-hot-loader";
-import { BoxProps, PseudoBox } from "@chakra-ui/core";
+import { BoxProps, Heading, PseudoBox } from "@chakra-ui/core";
 import { PseudoBoxProps } from "@chakra-ui/core/dist/PseudoBox";
 
-interface Props extends PseudoBoxProps {
+interface CardProps extends PseudoBoxProps {
   _hover?: BoxProps & {
     [key: string]: BoxProps;
   };
 }
 
-const Card: React.FC<Props> = ({ children, _hover, ...rest }) => {
+export const Card: React.FC<CardProps> = ({ children, _hover, ...rest }) => {
   return (
     <PseudoBox
       maxW="300px"
@@ -26,4 +27,16 @@ const Card: React.FC<Props> = ({ children, _hover, ...rest }) => {
   );
 };
 
-export default hot(module)(Card);
+export const CardTitle: React.FC<HeadingProps> = ({
+  size,
+  children,
+  ...rest
+}) => {
+  return (
+    <Heading size={size || "lg"} mb={1} {...rest}>
+      {children}
+    </Heading>
+  );
+};
+
+export default hot(module)({ Card, CardTitle });

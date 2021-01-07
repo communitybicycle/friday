@@ -1,9 +1,10 @@
 import React, { FunctionComponent } from "react";
 import { Switch } from "react-router-dom";
+import Instructions from "./pages/instructions/Instructions";
 import Notes from "./pages/Notes";
 import Dashboard from "./pages/Dashboard";
-import Automations from "./pages/automations/Automations";
-import NewAutomation from "./pages/automations/NewAutomation";
+import Actions from "./pages/actions/Actions";
+import NewAction from "./pages/actions/NewAction";
 import Page from "./components/Page";
 import Welcome from "./pages/Welcome";
 
@@ -11,8 +12,9 @@ const Router: FunctionComponent = () => {
   return (
     <Switch>
       <Page path="/notes" component={Notes} />
-      <Page path="/automations/new" component={NewAutomation} />
-      <Page path="/automations" component={Automations} />
+      <Page path="/actions/new" component={NewAction} />
+      <Page path="/actions" component={Actions} />
+      <Page path="/instructions" component={Instructions} />
       <Page path="/dashboard/:id" component={Dashboard} noPadding />
       <Page path="/" component={Welcome} />
     </Switch>

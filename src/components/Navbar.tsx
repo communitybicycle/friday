@@ -79,7 +79,8 @@ const Navbar: React.FC = () => {
         Others
       </Heading>
       <Box mb={3}>
-        <Navigation to="/automations">Automations</Navigation>
+        <Navigation to="/actions">Actions</Navigation>
+        <Navigation to="/instructions">Instructions</Navigation>
       </Box>
 
       <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>

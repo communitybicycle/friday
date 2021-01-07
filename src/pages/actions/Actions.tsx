@@ -7,16 +7,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../reducers/store";
 import ActionCard from "../../components/ActionCard";
 
-const Automations: React.FC = () => {
+const Actions: React.FC = () => {
   const history = useHistory();
   const { actions } = useSelector((state: RootState) => state.data);
 
   return (
     <div>
       <PageHeader
-        id="automations"
-        text="Automations"
-        buttonAction={() => history.push("/automations/new")}
+        id="actions"
+        text="Actions"
+        buttonAction={() => history.push("/actions/new")}
         buttonText="Add New"
       />
       <Flex flexWrap="wrap">
@@ -28,4 +28,4 @@ const Automations: React.FC = () => {
   );
 };
 
-export default hot(module)(Automations);
+export default hot(module)(Actions);

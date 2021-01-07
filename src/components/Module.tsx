@@ -117,7 +117,7 @@ const Module: React.FC<Props> = ({ module, index }) => {
                       align="center"
                       px={2}
                       color="grey"
-                      opacity="0"
+                      opacity={0}
                     >
                       <Icon name="drag-handle" />
                     </Flex>
@@ -130,7 +130,7 @@ const Module: React.FC<Props> = ({ module, index }) => {
                     onClick={handleOpen}
                     variantColor="ghostGray"
                     variant="ghost"
-                    opacity="0"
+                    opacity={0}
                   />
                 </PseudoBox>
                 <Divider />
@@ -142,6 +142,6 @@ const Module: React.FC<Props> = ({ module, index }) => {
       )}
     </Draggable>
   );
-};
+}
 
 export default hot(module)(Module);

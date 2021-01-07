@@ -1,4 +1,4 @@
-export type ActionType = "link" | "folder" | "app" | "run";
+export type ActionType = "link" | "folder" | "app" | "cmd";
 
 export interface Action {
   id: string;
@@ -6,6 +6,7 @@ export interface Action {
   description?: string;
   type: ActionType;
   path?: string;
+  address?: string;
 }
 
 export interface Actions {

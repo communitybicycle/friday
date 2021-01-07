@@ -1,5 +1,3 @@
-import React, { FocusEventHandler } from "react";
-import { hot } from "react-hot-loader";
 import {
   Box,
   Button,
@@ -7,10 +5,11 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
-  Flex,
   IconButton,
   PseudoBox,
 } from "@chakra-ui/core";
+import React, { FocusEventHandler } from "react";
+import { hot } from "react-hot-loader";
 import { getItem, setItem } from "../utils/storage";
 
 interface IProps {
@@ -64,7 +63,7 @@ const PageHeader: React.FC<IProps> = ({
               onClick={pageAction}
               variantColor="blue"
               variant="ghost"
-              opacity="0"
+              opacity={0}
             />
           )}
         </Box>

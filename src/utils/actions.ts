@@ -59,16 +59,16 @@ export const automate = (instructions: any) => {
 };
 
 export const runAction = (action: Action): void => {
-  if (!action.path) {
-    return;
-  }
-
   switch (action.type) {
     case "link":
-      openLink(action.path);
+      if (action.address) {
+        openLink(action.address);
+      }
       break;
     case "folder":
-      openFolder(action.path);
+      if (action.path) {
+        openFolder(action.path);
+      }
       break;
     default:
       break;

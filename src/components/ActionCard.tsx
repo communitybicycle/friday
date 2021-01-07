@@ -10,7 +10,7 @@ import {
   PseudoBox,
   Text,
 } from "@chakra-ui/core";
-import Card from "./Card";
+import { Card } from "./Card";
 import { deleteAction } from "../reducers/dataReducer";
 import { runAction } from "../utils/actions";
 import { useDispatch } from "react-redux";
@@ -34,6 +34,8 @@ const ActionCard: React.FC<Props> = ({ action }) => {
 
   return (
     <Card
+      minW="286px"
+      maxW="286px"
       key={action.id}
       mb={4}
       mr={4}
