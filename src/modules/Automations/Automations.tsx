@@ -1,22 +1,33 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 import { Box, Button } from "@chakra-ui/core";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers/store";
+import { AutomationModule } from "../../types/modules";
 import { automate } from "../../utils/actions";
 
 interface Props {
-  module: any;
+  module: AutomationModule;
 }
 
 const Automations: React.FC<Props> = ({ module }) => {
+  const { instructions, actions } = useSelector(
+    (state: RootState) => state.data
+  );
+
   return (
     <div>
-      {module.automations.map((automation: any, index: number) => (
+      {module.automations.map((automation, index: number) => (
         <Box key={index}>
           <Button
             variantColor="blue"
-            onClick={() => automate(automation.instructions)}
+            // TODO
+            // Need to identify type and automate accordingly
+            // onClick={() => automate(automation.automations)}
           >
-            {automation.name}
+            {automation.type === "action"
+              ? actions[automation.automationId].name
+              : instructions[automation.automationId].name}
           </Button>
         </Box>
       ))}
