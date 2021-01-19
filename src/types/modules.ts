@@ -27,10 +27,8 @@ export type ModulesType =
   | AutomationModule;
 
 interface Automation {
-  id: string;
-  name: string;
-  description?: string;
-  instructions: Action[];
+  type: "action" | "instruction";
+  automationId: string;
 }
 
 export interface AutomationModule extends Module {

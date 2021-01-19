@@ -1,6 +1,7 @@
 import { shell } from "electron";
 import { exec } from "child_process";
-import { Action } from "../types/action";
+import { Action, Actions } from "../types/action";
+import { Instruction } from "../types/instructions";
 
 export const openLink = (url: string) => {
   shell.openExternal(url);
@@ -61,8 +62,8 @@ export const automate = (instructions: any) => {
 export const runAction = (action: Action): void => {
   switch (action.type) {
     case "link":
-      if (action.address) {
-        openLink(action.address);
+      if (action.url) {
+        openLink(action.url);
       }
       break;
     case "folder":
@@ -73,4 +74,11 @@ export const runAction = (action: Action): void => {
     default:
       break;
   }
+};
+
+export const runInstruction = (
+  instruction: Instruction,
+  actions: Actions
+): void => {
+  instruction.instructions.forEach((actionId) => runAction(actions[actionId]));
 };

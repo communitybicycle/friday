@@ -16,7 +16,7 @@ const LinkForm: React.FC<Props> = ({ name, description, reset }) => {
   const toast = useToast();
   const history = useHistory();
   const dispatch = useDispatch();
-  const [address, setAddress] = useState("");
+  const [url, setUrl] = useState("");
 
   const handleSubmit = () => {
     dispatch(
@@ -25,7 +25,7 @@ const LinkForm: React.FC<Props> = ({ name, description, reset }) => {
         name,
         description,
         type: "link",
-        address,
+        url,
       })
     );
     history.push("/actions");
@@ -38,12 +38,12 @@ const LinkForm: React.FC<Props> = ({ name, description, reset }) => {
 
   return (
     <Fragment>
-      <FormLabel htmlFor="linkAddress">URL</FormLabel>
+      <FormLabel htmlFor="linkUrl">URL</FormLabel>
       <Input
-        id="linkAddress"
-        value={address}
+        id="linkUrl"
+        value={url}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          setAddress(e.target.value)
+          setUrl(e.target.value)
         }
         placeholder="E. g. https://example.com"
       />

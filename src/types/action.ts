@@ -5,8 +5,11 @@ export interface Action {
   name?: string;
   description?: string;
   type: ActionType;
+  command?: string;
+  target?: string;
+  detached?: boolean;
   path?: string;
-  address?: string;
+  url?: string;
 }
 
 export interface Actions {

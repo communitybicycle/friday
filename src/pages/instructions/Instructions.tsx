@@ -1,15 +1,15 @@
+import { Flex } from "@chakra-ui/core";
 import React from "react";
 import { hot } from "react-hot-loader";
-import PageHeader from "../../components/PageHeader";
-import { Flex } from "@chakra-ui/core";
-import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router";
+import InstructionCard from "../../components/InstructionCard";
+import PageHeader from "../../components/PageHeader";
 import { RootState } from "../../reducers/store";
-import ActionCard from "../../components/ActionCard";
 
 const Instructions: React.FC = () => {
   const history = useHistory();
-  const { actions } = useSelector((state: RootState) => state.data);
+  const { instructions } = useSelector((state: RootState) => state.data);
 
   return (
     <div>
@@ -20,8 +20,8 @@ const Instructions: React.FC = () => {
         buttonText="Add New"
       />
       <Flex flexWrap="wrap">
-        {Object.values(actions).map((action) => (
-          <ActionCard action={action} key={action.id} />
+        {Object.values(instructions).map((instruction) => (
+          <InstructionCard instruction={instruction} key={instruction.id} />
         ))}
       </Flex>
     </div>
