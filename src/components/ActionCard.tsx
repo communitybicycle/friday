@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/core";
 import { Card } from "./Card";
 import { deleteAction } from "../reducers/dataReducer";
-import { runAction } from "../utils/actions";
+import { runAction } from "../utils/automations";
 import { useDispatch } from "react-redux";
 import Delete from "./Delete";
 import { Action } from "../types/action";

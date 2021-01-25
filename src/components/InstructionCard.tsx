@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteAction } from "../reducers/dataReducer";
 import { RootState } from "../reducers/store";
 import { Instruction } from "../types/instructions";
-import { runInstruction } from "../utils/actions";
+import { runInstruction } from "../utils/automations";
 import { Card } from "./Card";
 import Delete from "./Delete";
 

@@ -44,7 +44,7 @@ export const initialData: InitialData = {
       type: "link",
       name: "Fast AI",
       description: "Course page for learning ML.",
-      url: "",
+      url: "https://course.fast.ai/",
     },
     "5": {
       id: "5",
@@ -55,6 +55,13 @@ export const initialData: InitialData = {
       command: "jupyter notebook",
       target: "C:\\Users\\Hal\\Desktop\\fastbook",
       detached: true,
+    },
+    "6": {
+      id: "6",
+      type: "app",
+      name: "Anytime Fitness Booking",
+      description: "Opens the Anytime Fitness booking page.",
+      path: "C:\\Users\\Hal\\Desktop\\Scripts\\anytime.py",
     },
   },
   instructions: {

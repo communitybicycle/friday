@@ -17,7 +17,7 @@ const App: React.FC = () => {
         borderRadius={isMenuOpen ? "25px 0 0 0" : "0"}
         w={isMenuOpen ? "calc(100% - 280px)" : "100%"}
         maxW={isMenuOpen ? "calc(100% - 280px)" : "100%"}
-        transition="0.25s all ease-in"
+        transition="0.25s transform ease-in"
         transform={isMenuOpen ? "translate(280px, 0)" : "translate(0, 0)"}
       >
         <Router />

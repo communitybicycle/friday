@@ -4,7 +4,7 @@ import { Box, Button } from "@chakra-ui/core";
 import { useSelector } from "react-redux";
 import { RootState } from "../../reducers/store";
 import { AutomationModule } from "../../types/modules";
-import { automate } from "../../utils/actions";
+import { automate } from "../../utils/automations";
 
 interface Props {
   module: AutomationModule;

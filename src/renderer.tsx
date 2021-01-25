@@ -26,7 +26,9 @@
  * ```
  */
 
-window.require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
+
 import "react-hot-loader";
 import React from "react";
 import ReactDOM from "react-dom";
@@ -37,13 +39,12 @@ import { BrowserRouter } from "react-router-dom";
 import customTheme from "./theme/theme";
 import { Provider } from "react-redux";
 import { store } from "./reducers/store";
+import { Color, Titlebar } from "custom-electron-titlebar";
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
-const customTitleBar = window.require("custom-electron-titlebar");
-
-new customTitleBar.Titlebar({
-  backgroundColor: customTitleBar.Color.fromHex("#333"),
+new Titlebar({
+  backgroundColor: Color.fromHex("#333"),
   // menu: null,
   titleHorizontalAlignment: "left",
   unfocusEffect: false,

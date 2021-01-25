@@ -20,9 +20,11 @@ const Actions: React.FC = () => {
         buttonText="Add New"
       />
       <Flex flexWrap="wrap">
-        {Object.values(actions).map((action) => (
-          <ActionCard action={action} key={action.id} />
-        ))}
+        {Object.values(actions)
+          .sort((a, b) => (a.name && b.name && a.name > b.name ? 1 : -1))
+          .map((action) => (
+            <ActionCard action={action} key={action.id} />
+          ))}
       </Flex>
     </div>
   );

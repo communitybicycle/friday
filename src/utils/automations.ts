@@ -11,23 +11,32 @@ export const openFolder = (path: string) => {
   shell.showItemInFolder(path);
 };
 
+export const openApp = (path: string) => {
+  exec(path);
+};
+
 export const openTerminal = (
   command: string,
-  target: string
-  // detached = true
+  target: string,
+  detached = true
 ) => {
   console.log("Opening terminal...", target);
+  console.log("Command:", command);
+  console.log("Target:", target);
 
-  const terminal = exec(
-    `start cmd /k ${command}`,
-    {
-      // detached,
-      cwd: target,
-    },
-    (err: any) => {
-      console.log("Errrorrrr:", err);
-    }
-  );
+  console.log("PATH:", process.env.PATH);
+
+  const options = {
+    detached,
+  } as any;
+
+  if (target !== "default") {
+    options.cwd = target;
+  }
+
+  const terminal = exec(`start cmd /k ${command}`, options, (err: any) => {
+    console.log("Error:", err);
+  });
 
   console.log("Terminal: ", terminal);
 
@@ -69,6 +78,17 @@ export const runAction = (action: Action): void => {
     case "folder":
       if (action.path) {
         openFolder(action.path);
+      }
+      break;
+    case "app":
+      if (action.path) {
+        openApp(action.path);
+      }
+      break;
+    case "cmd":
+      if (action.command) {
+        const target = action.target || "default";
+        openTerminal(action.command, target, action.detached);
       }
       break;
     default:
