@@ -40,6 +40,7 @@ import customTheme from "./theme/theme";
 import { Provider } from "react-redux";
 import { store } from "./reducers/store";
 import { Color, Titlebar } from "custom-electron-titlebar";
+import "react-dropzone-uploader/dist/styles.css";
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 

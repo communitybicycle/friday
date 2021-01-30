@@ -1,14 +1,21 @@
-import {Box, FormLabel, Input, SimpleGrid, Text, Textarea,} from "@chakra-ui/core";
-import React, {useState} from "react";
-import {hot} from "react-hot-loader";
+import {
+  Box,
+  FormLabel,
+  Input,
+  SimpleGrid,
+  Text,
+  Textarea,
+} from "@chakra-ui/core";
+import React, { useState } from "react";
+import { hot } from "react-hot-loader";
 import ApplicationForm from "../../components/automations/ApplicationForm";
 import CommandForm from "../../components/automations/CommandForm";
 import FolderForm from "../../components/automations/FolderForm";
 import LinkForm from "../../components/automations/LinkForm";
-import {Card, CardTitle} from "../../components/Card";
+import { Card, CardTitle } from "../../components/Card";
 import Center from "../../components/Center";
 import PageHeader from "../../components/PageHeader";
-import {ActionType} from "../../types/action";
+import { ActionType } from "../../types/action";
 
 // const actions: ActionType[] = ["link", "folder", "app", "cmd"];
 
@@ -129,56 +136,6 @@ const NewAction: React.FC = () => {
         </SimpleGrid>
 
         {renderForm()}
-
-        {/*<Stack>*/}
-        {/*  <Select*/}
-        {/*    value={type}*/}
-        {/*    onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>*/}
-        {/*      setType(e.target.value)*/}
-        {/*    }*/}
-        {/*  >*/}
-        {/*    {actions.map((action) => (*/}
-        {/*      <option value={action} key={action}>*/}
-        {/*        {capitalize(action)}*/}
-        {/*      </option>*/}
-        {/*    ))}*/}
-        {/*  </Select>*/}
-        {/*  <Input*/}
-        {/*    value={name}*/}
-        {/*    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>*/}
-        {/*      setName(e.target.value)*/}
-        {/*    }*/}
-        {/*    placeholder="Add a name for your action!"*/}
-        {/*  />*/}
-        {/*  <Input*/}
-        {/*    value={description}*/}
-        {/*    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>*/}
-        {/*      setDescription(e.target.value)*/}
-        {/*    }*/}
-        {/*    placeholder="Give a brief description for your action."*/}
-        {/*  />*/}
-        {/*  <Input*/}
-        {/*    value={path}*/}
-        {/*    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>*/}
-        {/*      setPath(e.target.value)*/}
-        {/*    }*/}
-        {/*    placeholder="Provide a path for this action."*/}
-        {/*  />*/}
-        {/*  <Input type="file" name="file" onChange={handleFileChange} />*/}
-        {/*  <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)}>*/}
-        {/*    {({ getRootProps, getInputProps }) => (*/}
-        {/*      <section>*/}
-        {/*        <div {...getRootProps()}>*/}
-        {/*          <input {...getInputProps()} />*/}
-        {/*          <p>Drag 'n' drop some files here, or click to select files</p>*/}
-        {/*        </div>*/}
-        {/*      </section>*/}
-        {/*    )}*/}
-        {/*  </Dropzone>*/}
-        {/*  <Button variantColor="blue" onClick={handleSubmit}>*/}
-        {/*    Submit*/}
-        {/*  </Button>*/}
-        {/*</Stack>*/}
       </Box>
     </Center>
   );

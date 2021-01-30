@@ -63,6 +63,33 @@ export const initialData: InitialData = {
       description: "Opens the Anytime Fitness booking page.",
       path: "C:\\Users\\Hal\\Desktop\\Scripts\\anytime.py",
     },
+    "7": {
+      id: "7",
+      type: "cmd",
+      name: "Run Terracotta",
+      description:
+        "Runs a Docker instance of Granular's terracotta on port 3000.",
+      command: "docker-compose up",
+      target: "C:\\Users\\Hal\\Desktop\\Work\\granular.ai\\terracotta",
+      detached: true,
+    },
+    "8": {
+      id: "8",
+      type: "cmd",
+      name: "Run Titan API",
+      description:
+        "Runs a Docker instance of Granular's Titan API on port 5000.",
+      command: "docker-compose up",
+      target: "C:\\Users\\Hal\\Desktop\\Work\\granular.ai\\titan-api",
+      detached: true,
+    },
+    "9": {
+      id: "9",
+      type: "folder",
+      name: "Open Titan UI Folder",
+      description: "Opens a folder at the Granular Titan UI location.",
+      path: "C:\\Users\\Hal\\Desktop\\Work\\granular.ai\\titan-ui",
+    },
   },
   instructions: {
     "1": {

@@ -1,10 +1,18 @@
-import { Button, FormLabel, Input, useToast } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Divider,
+  FormLabel,
+  Input,
+  useToast,
+} from "@chakra-ui/core";
 import React, { Fragment, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { addAction } from "../../reducers/dataReducer";
 import { uuid } from "../../utils";
+import Dropzone from "react-dropzone-uploader";
 
 interface Props {
   name: string;
@@ -17,6 +25,7 @@ const ApplicationForm: React.FC<Props> = ({ name, description, reset }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [path, setPath] = useState("");
+  const [fileName, setFileName] = useState("");
 
   const handleSubmit = () => {
     dispatch(
@@ -36,8 +45,24 @@ const ApplicationForm: React.FC<Props> = ({ name, description, reset }) => {
     reset();
   };
 
+  const handleChangeStatus = ({ file }: { file: any }) => {
+    if (file) {
+      setPath(file.path);
+      setFileName(file.name);
+    }
+  };
+
   return (
     <Fragment>
+      <Dropzone
+        onChangeStatus={handleChangeStatus}
+        PreviewComponent={() => (
+          <Box h="100%" alignSelf="center">
+            {fileName}
+          </Box>
+        )}
+        maxFiles={1}
+      />
       <FormLabel htmlFor="path">Path</FormLabel>
       <Input
         id="path"

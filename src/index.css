@@ -18,3 +18,15 @@ code {
 #root {
   height: 100%;
 }
+
+.dzu-dropzone {
+  overflow: hidden !important;
+  border: 1px solid #e2e8f0 !important;
+  justify-content: center !important;
+  font-weight: normal !important;
+}
+
+.dzu-inputLabel {
+  font-weight: normal !important;
+  color: black !important;
+}
