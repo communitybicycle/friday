@@ -126,7 +126,7 @@ const Navbar: React.FC = () => {
           variantColor="veryWhite"
           _hover={{ background: "none" }}
           _active={{ background: "none" }}
-          mr={2}
+          mr={1}
         >
           + New Note
         </Button>
