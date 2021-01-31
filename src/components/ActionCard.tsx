@@ -65,6 +65,7 @@ const ActionCard: React.FC<Props> = ({ action }) => {
             icon="edit"
             variant="ghost"
             onClick={() => console.log("Edit")}
+            mr={1}
           />
           <Delete>
             {(confirm) => (

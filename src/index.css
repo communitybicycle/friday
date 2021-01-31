@@ -17,6 +17,7 @@ code {
 
 #root {
   height: 100%;
+  overflow-x: hidden;
 }
 
 .dzu-dropzone {

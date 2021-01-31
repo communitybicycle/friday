@@ -55,7 +55,7 @@ const Module: React.FC<Props> = ({ module, index }) => {
     padding: isDragging ? "16px" : "0",
     boxShadow: isDragging ? "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px" : "none",
     // change background colour if dragging
-    background: "#fff",
+    // background: "#fff",
 
     // styles we need to apply on draggables
     ...draggableStyle,
@@ -142,6 +142,6 @@ const Module: React.FC<Props> = ({ module, index }) => {
       )}
     </Draggable>
   );
-}
+};
 
 export default hot(module)(Module);

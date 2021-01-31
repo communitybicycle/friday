@@ -9,6 +9,7 @@ import {
   ListItem,
   PseudoBox,
   Text,
+  useColorMode,
 } from "@chakra-ui/core";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -25,8 +26,10 @@ interface Props {
 }
 
 const InstructionCard: React.FC<Props> = ({ instruction }) => {
+  const { colorMode } = useColorMode();
   const dispatch = useDispatch();
   const { actions } = useSelector((state: RootState) => state.data);
+  const greyFont = colorMode === "light" ? "grey" : "white";
 
   const handleClick = () => {
     runInstruction(instruction, actions);
@@ -54,7 +57,7 @@ const InstructionCard: React.FC<Props> = ({ instruction }) => {
       <Box>
         <Heading size="lg">{instruction.name}</Heading>
         <Divider />
-        <Text color="grey" mb={2}>
+        <Text color={greyFont} mb={2}>
           {instruction.description}
         </Text>
         <Box
@@ -65,7 +68,7 @@ const InstructionCard: React.FC<Props> = ({ instruction }) => {
         >
           <List as="ol" styleType="decimal">
             {instruction.instructions.map((actionId) => (
-              <ListItem key={actionId} color="grey">
+              <ListItem key={actionId} color={greyFont}>
                 {actions[actionId].name}
               </ListItem>
             ))}

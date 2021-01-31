@@ -9,6 +9,7 @@ import {
   Image,
   PseudoBox,
   Text,
+  useColorMode,
 } from "@chakra-ui/core";
 import { NAVBAR_PHOTO_URL } from "../data/constants";
 import Center from "./Center";
@@ -48,10 +49,12 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
 
 const Navbar: React.FC = () => {
   const dispatch = useDispatch();
+  const { colorMode } = useColorMode();
   const { isMenuOpen } = useSelector((state: RootState) => state.meta);
   const {
     pages: { dashboards, notes },
   } = useSelector((state: RootState) => state.data);
+  const bgColor = { light: "#333", dark: "gray.800" };
 
   const handleOpenSettings = () => {
     dispatch(openSettings());
@@ -59,7 +62,7 @@ const Navbar: React.FC = () => {
 
   return (
     <Flex
-      backgroundColor="#333"
+      bg={bgColor[colorMode]}
       height="calc(100vh - 30px)"
       transform={isMenuOpen ? "translate(0, 0)" : "translate(-280px, 0)"}
       minW="280px"
@@ -70,6 +73,9 @@ const Navbar: React.FC = () => {
       left={0}
       flexDir="column"
       justifyContent="space-between"
+      borderRight={
+        colorMode === "dark" ? (isMenuOpen ? "1px solid #555" : "none") : "none"
+      }
     >
       <Box px={isMenuOpen ? "20px" : "0px"}>
         <Box w="100%">

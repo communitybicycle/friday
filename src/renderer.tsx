@@ -34,22 +34,34 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { CSSReset, ThemeProvider } from "@chakra-ui/core";
+import { ColorModeProvider, CSSReset, ThemeProvider } from "@chakra-ui/core";
 import { BrowserRouter } from "react-router-dom";
 import customTheme from "./theme/theme";
 import { Provider } from "react-redux";
 import { store } from "./reducers/store";
 import { Color, Titlebar } from "custom-electron-titlebar";
 import "react-dropzone-uploader/dist/styles.css";
+import { eStore } from "./utils/eStore";
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
-new Titlebar({
-  backgroundColor: Color.fromHex("#333"),
+const colorMode = eStore.get("colorMode");
+const color = colorMode && colorMode === "dark" ? "#1A202C" : "#333";
+
+const titleBar = new Titlebar({
+  backgroundColor: Color.fromHex(color || "#333"),
   // menu: null,
   titleHorizontalAlignment: "left",
   unfocusEffect: false,
   closeable: true,
+});
+
+eStore.onDidChange("colorMode", (value) => {
+  if (value === "dark") {
+    titleBar.updateBackground(Color.fromHex("#1A202C"));
+  } else {
+    titleBar.updateBackground(Color.fromHex("#333"));
+  }
 });
 
 // myTitleBar.updateTitle("Friday - Your Personal Assistant");
@@ -58,10 +70,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ThemeProvider theme={customTheme}>
-        <CSSReset />
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <ColorModeProvider>
+          <CSSReset />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ColorModeProvider>
       </ThemeProvider>
     </Provider>
   </React.StrictMode>,
