@@ -27,7 +27,7 @@ const dataSlice = createSlice({
       state.instructions[payload.id] = payload;
     },
     deleteInstruction: (state, { payload: id }: PayloadAction<string>) => {
-      delete state.actions[id];
+      delete state.instructions[id];
     },
     editInstruction: (state, { payload }: PayloadAction<Instruction>) => {
       state.instructions[payload.id] = payload;

@@ -28,6 +28,7 @@ const Page: React.FC<Props> = ({ noPadding, path, component }) => {
 
   return (
     <Route
+      exact
       path={path}
       component={() => (
         <Box position="relative">

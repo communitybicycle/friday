@@ -13,7 +13,7 @@ import {
 import React from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAction } from "../reducers/dataReducer";
+import { deleteInstruction } from "../reducers/dataReducer";
 import { RootState } from "../reducers/store";
 import { Instruction } from "../types/instructions";
 import { runInstruction } from "../utils/automations";
@@ -33,7 +33,7 @@ const InstructionCard: React.FC<Props> = ({ instruction }) => {
   };
 
   const handleDelete = (id: string) => {
-    dispatch(deleteAction(id));
+    dispatch(deleteInstruction(id));
   };
 
   return (

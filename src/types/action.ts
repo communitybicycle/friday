@@ -2,7 +2,7 @@ export type ActionType = "link" | "folder" | "app" | "cmd";
 
 export interface Action {
   id: string;
-  name?: string;
+  name: string;
   description?: string;
   type: ActionType;
   command?: string;
