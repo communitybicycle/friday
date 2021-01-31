@@ -1,6 +1,10 @@
 import { app, BrowserWindow, dialog } from "electron";
+import debug from "electron-debug";
+import isDev from "electron-is-dev";
 import installExtension, { REDUX_DEVTOOLS } from "electron-devtools-installer";
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
+
+debug();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -33,7 +37,9 @@ const createWindow = (): void => {
   });
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 
   mainWindow.webContents.once("dom-ready", () => {
     mainWindow.show();
