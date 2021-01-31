@@ -46,6 +46,7 @@ const TextEdit: React.FC<Props> = ({ module }) => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setText(e.target.value)
             }
+            minH={150}
           />
         </FormControl>
       </Stack>
