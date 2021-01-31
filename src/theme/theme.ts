@@ -26,6 +26,7 @@ interface CustomTheme extends ITheme {
     twitter: ColorHues;
     telegram: ColorHues;
     ghostGray: ColorHues;
+    veryWhite: ColorHues;
   };
 }
 
@@ -38,6 +39,18 @@ const customTheme: CustomTheme = {
   },
   colors: {
     ...theme.colors,
+    veryWhite: {
+      50: "#ffffff",
+      100: "#ffffff",
+      200: "#ffffff",
+      300: "#ffffff",
+      400: "#ffffff",
+      500: "#ffffff",
+      600: "#ffffff",
+      700: "#ffffff",
+      800: "#ffffff",
+      900: "#ffffff",
+    },
     ghostGray: {
       50: "#718096",
       100: "#718096",

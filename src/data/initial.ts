@@ -1,20 +1,6 @@
-import { Instruction } from "../types/instructions";
-import { ModulesType } from "../types/modules";
-import { Actions } from "../types/action";
-import { Pages } from "../types/page";
+import { DataState } from "../types";
 
-interface InitialData {
-  actions: Actions;
-  modules: {
-    [index: string]: ModulesType;
-  };
-  instructions: {
-    [index: string]: Instruction;
-  };
-  pages: Pages;
-}
-
-export const initialData: InitialData = {
+export const initialData: DataState = {
   actions: {
     "1": {
       id: "1",

@@ -12,13 +12,13 @@ import Welcome from "./pages/Welcome";
 const Router: FunctionComponent = () => {
   return (
     <Switch>
-      <Page path="/notes" component={Notes} />
+      <Page path="/notes/:id" component={Notes} />
       <Page path="/actions/new" component={NewAction} />
       <Page path="/actions" component={Actions} />
       <Page path="/instructions/new" component={NewInstruction} />
       <Page path="/instructions" component={Instructions} />
       <Page path="/dashboard/:id" component={Dashboard} noPadding />
-      <Page path="/" component={Welcome} />
+      <Page path="/" component={Welcome} notExact />
     </Switch>
   );
 };

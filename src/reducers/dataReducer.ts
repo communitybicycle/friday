@@ -1,18 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialData } from "../data/initial";
+import { DataState } from "../types";
 import { Instruction } from "../types/instructions";
 import { ModulesType } from "../types/modules";
 import { Action } from "../types/action";
 import { Columns } from "../types/page";
+import { eStore } from "../utils/eStore";
 
 const dataSlice = createSlice({
   name: "data",
-  initialState: {
-    actions: initialData.actions,
-    instructions: initialData.instructions,
-    pages: initialData.pages,
-    modules: initialData.modules,
-  },
+  initialState: (eStore.get("data") as DataState) || initialData,
   reducers: {
     addAction: (state, { payload }: PayloadAction<Action>) => {
       state.actions[payload.id] = payload;
@@ -50,6 +47,9 @@ const dataSlice = createSlice({
       );
       state.pages.dashboards[pageIndex].columns = payload.columns;
     },
+    reinitializeDataReducer: () => {
+      return initialData;
+    },
   },
 });
 
@@ -64,6 +64,7 @@ export const {
   editModule,
   deleteModule,
   setColumns,
+  reinitializeDataReducer,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

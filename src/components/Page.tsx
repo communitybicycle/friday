@@ -10,9 +10,10 @@ interface Props {
   path: string;
   component: React.FC;
   noPadding?: boolean;
+  notExact?: boolean;
 }
 
-const Page: React.FC<Props> = ({ noPadding, path, component }) => {
+const Page: React.FC<Props> = ({ noPadding, path, component, notExact }) => {
   const dispatch = useDispatch();
   const { isMenuOpen } = useSelector((state: RootState) => state.meta);
 
@@ -28,7 +29,7 @@ const Page: React.FC<Props> = ({ noPadding, path, component }) => {
 
   return (
     <Route
-      exact
+      exact={!notExact}
       path={path}
       component={() => (
         <Box position="relative">

@@ -1,6 +1,7 @@
 import React from "react";
 import { hot } from "react-hot-loader";
 import { Box, Flex } from "@chakra-ui/core";
+import ElectronStoreSynchronizer from "./components/ElectronStoreSynchronizer";
 import Navbar from "./components/Navbar";
 import Router from "./Router";
 import { useSelector } from "react-redux";
@@ -22,6 +23,7 @@ const App: React.FC = () => {
       >
         <Router />
       </Box>
+      <ElectronStoreSynchronizer />
     </Flex>
   );
 };
