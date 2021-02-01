@@ -20,6 +20,8 @@ const createWindow = (): void => {
     show: false,
     width: 1280,
     height: 800,
+    minWidth: 1080,
+    minHeight: 720,
     titleBarStyle: "hidden",
     frame: false,
     webPreferences: {
