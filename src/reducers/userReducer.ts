@@ -26,6 +26,9 @@ const userSlice = createSlice({
     setName: (state, { payload }: PayloadAction<string>) => {
       state.name = payload;
     },
+    reinitializeUserReducer: () => {
+      return initialState;
+    },
   },
 });
 
@@ -33,6 +36,7 @@ export const {
   setProfilePicture,
   deleteProfilePicture,
   setName,
+  reinitializeUserReducer,
 } = userSlice.actions;
 
 export default userSlice.reducer;
