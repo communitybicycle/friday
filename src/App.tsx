@@ -1,5 +1,6 @@
 import { Box, Flex, useColorMode } from "@chakra-ui/core";
 import React from "react";
+import { Scrollbars } from "react-custom-scrollbars";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
 import ElectronStoreSynchronizer from "./components/ElectronStoreSynchronizer";
@@ -23,7 +24,9 @@ const App: React.FC = () => {
         transition="0.25s transform ease-in"
         transform={isMenuOpen ? "translate(280px, 0)" : "translate(0, 0)"}
       >
-        <Router />
+        <Scrollbars style={{ width: "100%", height: "100%" }}>
+          <Router />
+        </Scrollbars>
       </Box>
       <ElectronStoreSynchronizer />
     </Flex>

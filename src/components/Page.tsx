@@ -1,10 +1,10 @@
+import { Box, IconButton, useColorMode } from "@chakra-ui/core";
 import React from "react";
 import { hot } from "react-hot-loader";
-import { Box, IconButton, useColorMode } from "@chakra-ui/core";
-import { Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../reducers/store";
+import { Route } from "react-router-dom";
 import { closeMenu, openMenu } from "../reducers/metaReducer";
+import { RootState } from "../reducers/store";
 
 interface Props {
   path: string;

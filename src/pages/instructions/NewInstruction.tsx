@@ -23,7 +23,6 @@ import { BG_COLOR } from "../../data/constants";
 import useQuery from "../../hooks/useQuery";
 import { addInstruction, editInstruction } from "../../reducers/dataReducer";
 import { RootState } from "../../reducers/store";
-import {Instruction} from "../../types/instructions";
 import { uuid } from "../../utils";
 
 const NewInstruction: React.FC = () => {
@@ -160,7 +159,7 @@ const NewInstruction: React.FC = () => {
                 setFilter(e.target.value)
               }
               placeholder="Filter actions"
-              mb={2}
+              mb={3}
             />
             <Box
               borderWidth={filteredActions.length > 0 ? 1 : 0}
