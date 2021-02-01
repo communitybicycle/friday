@@ -45,6 +45,7 @@ const Page: React.FC<Props> = ({ noPadding, path, component, notExact }) => {
             position="absolute"
             top={2}
             left={2}
+            zIndex={50}
           />
           <Box
             pt={noPadding ? "0px" : "50px"}
