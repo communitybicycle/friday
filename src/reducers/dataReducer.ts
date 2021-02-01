@@ -4,7 +4,7 @@ import { DataState } from "../types";
 import { Instruction } from "../types/instructions";
 import { ModulesType } from "../types/modules";
 import { Action } from "../types/action";
-import { Columns } from "../types/page";
+import { Columns, PageType } from "../types/page";
 import { eStore } from "../utils/eStore";
 
 const dataSlice = createSlice({
@@ -42,13 +42,16 @@ const dataSlice = createSlice({
       state,
       { payload }: PayloadAction<{ id: string; columns: Columns }>
     ) => {
-      const pageIndex = state.pages.dashboards.findIndex(
-        (dashboard) => dashboard.id === payload.id
-      );
-      state.pages.dashboards[pageIndex].columns = payload.columns;
+      state.pages.dashboards[payload.id].columns = payload.columns;
     },
     reinitializeDataReducer: () => {
       return initialData;
+    },
+    updateFeatureImage: (
+      state,
+      { payload }: PayloadAction<{ imgSrc: string; id: string; type: PageType }>
+    ) => {
+      state.pages[payload.type][payload.id].featureImage = payload.imgSrc;
     },
   },
 });
@@ -65,6 +68,7 @@ export const {
   deleteModule,
   setColumns,
   reinitializeDataReducer,
+  updateFeatureImage,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

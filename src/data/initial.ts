@@ -112,24 +112,24 @@ export const initialData: DataState = {
     },
   },
   pages: {
-    dashboards: [
-      {
+    dashboards: {
+      abc: {
         id: "abc",
         title: "Personal Dashboard",
         header: "Welcome, Hal!",
-        type: "dashboard",
+        type: "dashboards",
 
         columns: [["234", "123"], ["999"]],
       },
-    ],
-    notes: [
-      {
+    },
+    notes: {
+      bce: {
         id: "bce",
         title: "General Notes",
         header: "Notes Page Here",
         type: "notes",
         notes: "Notes placeholder here",
       },
-    ],
+    },
   },
 };

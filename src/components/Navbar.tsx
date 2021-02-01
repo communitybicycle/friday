@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
           Home
         </Heading>
         <Box mb={3}>
-          {dashboards.map((dashboard) => (
+          {Object.values(dashboards).map((dashboard) => (
             <Navigation to={`/dashboard/${dashboard.id}`} key={dashboard.id}>
               {dashboard.title}
             </Navigation>
@@ -113,7 +113,7 @@ const Navbar: React.FC = () => {
           Notes
         </Heading>
         <Box>
-          {notes.map((notePage) => (
+          {Object.values(notes).map((notePage) => (
             <Navigation to={`/notes/${notePage.id}`} key={notePage.id}>
               {notePage.title}
             </Navigation>

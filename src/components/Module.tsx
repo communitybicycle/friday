@@ -1,14 +1,5 @@
-import {
-  Divider,
-  Flex,
-  Heading,
-  Icon,
-  IconButton,
-  PseudoBox,
-  Text,
-  useColorMode,
-} from "@chakra-ui/core";
-import React, { CSSProperties, Fragment } from "react";
+import {Divider, Flex, Heading, Icon, IconButton, PseudoBox, useColorMode,} from "@chakra-ui/core";
+import React, {CSSProperties, Fragment} from "react";
 import {
   Draggable,
   DraggableProvided,
@@ -16,17 +7,14 @@ import {
   DraggingStyle,
   NotDraggingStyle,
 } from "react-beautiful-dnd";
-import { hot } from "react-hot-loader";
-import { useDispatch } from "react-redux";
-import { useDraggableInPortal } from "../hooks";
-import TextModule from "../modules/Text/Text";
+import {hot} from "react-hot-loader";
+import {useDispatch} from "react-redux";
+import {useDraggableInPortal} from "../hooks";
 import Automations from "../modules/Automations/Automations";
 import Notes from "../modules/Notes/Notes";
-import {
-  openEditModuleModal,
-  setEditModuleModal,
-} from "../reducers/metaReducer";
-import { ModulesType } from "../types/modules";
+import TextModule from "../modules/Text/Text";
+import {openEditModuleModal, setEditModuleModal,} from "../reducers/metaReducer";
+import {ModulesType} from "../types/modules";
 import Center from "./Center";
 
 interface Props {

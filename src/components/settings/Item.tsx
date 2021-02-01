@@ -1,6 +1,6 @@
-import { Box, PseudoBox, Text } from "@chakra-ui/core";
+import {Box, PseudoBox, Text, useColorMode} from "@chakra-ui/core";
 import React from "react";
-import { hot } from "react-hot-loader";
+import {hot} from "react-hot-loader";
 
 interface Props {
   name: string;
@@ -8,13 +8,15 @@ interface Props {
 }
 
 const Item: React.FC<Props> = ({ name, description, children }) => {
+  const { colorMode } = useColorMode();
+
   return (
     <PseudoBox
       d="flex"
       justifyContent="space-between"
       alignItems="center"
       py={2}
-      borderTop="1px solid #efefef"
+      borderTop={`1px solid ${colorMode === "light" ? "#efefef" : "#555"}`}
       _first={{ borderTop: "none" }}
     >
       <Box>

@@ -1,11 +1,11 @@
 import React from "react";
 import { hot } from "react-hot-loader";
-import { Box, Grid, Image } from "@chakra-ui/core";
+import { Box, Grid } from "@chakra-ui/core";
+import FeatureImage from "../components/FeatureImage";
 import PageHeader from "../components/PageHeader";
 import { useDispatch, useSelector } from "react-redux";
 import Module from "../components/Module";
 import { RootState } from "../reducers/store";
-import { DEFAULT_IMAGE_URL } from "../data/constants";
 import { useHistory } from "react-router";
 import EditModuleModal from "../components/EditModuleModal";
 import { useParams } from "react-router-dom";
@@ -53,7 +53,7 @@ const Dashboard: React.FC = () => {
     pages: { dashboards },
     modules,
   } = useSelector((state: RootState) => state.data);
-  const dashboard = dashboards.find((el) => el.id === id);
+  const dashboard = dashboards[id];
 
   const editPage = () => {
     history.push("/dashboard/edit");
@@ -101,15 +101,7 @@ const Dashboard: React.FC = () => {
 
   return (
     <Box>
-      <Box>
-        <Image
-          height="300px"
-          width="100%"
-          objectFit="cover"
-          src={DEFAULT_IMAGE_URL}
-          alt=""
-        />
-      </Box>
+      <FeatureImage imgSrc={dashboard.featureImage} id={id} />
       <Box px="50px" mt="20px">
         <PageHeader id="dashboard" text="Welcome, Hal!" pageAction={editPage} />
         <DragDropContext onDragEnd={onDragEnd}>
