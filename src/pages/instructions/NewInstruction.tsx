@@ -20,20 +20,33 @@ import { useHistory } from "react-router";
 import Center from "../../components/Center";
 import PageHeader from "../../components/PageHeader";
 import { BG_COLOR } from "../../data/constants";
-import { addInstruction } from "../../reducers/dataReducer";
+import useQuery from "../../hooks/useQuery";
+import { addInstruction, editInstruction } from "../../reducers/dataReducer";
 import { RootState } from "../../reducers/store";
+import {Instruction} from "../../types/instructions";
 import { uuid } from "../../utils";
 
 const NewInstruction: React.FC = () => {
   const toast = useToast();
+  const query = useQuery();
+  const instructionId = query.get("id");
   const history = useHistory();
   const dispatch = useDispatch();
   const { colorMode } = useColorMode();
-  const { actions } = useSelector((state: RootState) => state.data);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [instructions, setInstructions] = useState<string[]>([]);
+  const { actions, instructions: allInstructions } = useSelector(
+    (state: RootState) => state.data
+  );
+  const [name, setName] = useState(
+    instructionId ? allInstructions[instructionId].name : ""
+  );
+  const [description, setDescription] = useState(
+    instructionId ? allInstructions[instructionId].description : ""
+  );
+  const [instructions, setInstructions] = useState<string[]>(
+    instructionId ? allInstructions[instructionId].instructions : []
+  );
   const [filter, setFilter] = useState("");
+  const instruction = instructionId && allInstructions[instructionId];
 
   useEffect(() => {
     return () => reset();
@@ -58,20 +71,35 @@ const NewInstruction: React.FC = () => {
   }, [actions, filter]);
 
   const handleSubmit = () => {
-    dispatch(
-      addInstruction({
-        id: uuid(),
-        name,
-        description,
-        instructions,
-      })
-    );
-    history.push("/instructions");
-    toast({
-      title: "Action successfully created!",
-      status: "success",
-    });
+    if (instruction) {
+      dispatch(
+        editInstruction({
+          ...instruction,
+          name,
+          description,
+          instructions,
+        })
+      );
+      toast({
+        title: "Instruction successfully edited!",
+        status: "success",
+      });
+    } else {
+      dispatch(
+        addInstruction({
+          id: uuid(),
+          name,
+          description,
+          instructions,
+        })
+      );
+      toast({
+        title: "Instruction successfully created!",
+        status: "success",
+      });
+    }
     reset();
+    history.push("/instructions");
   };
 
   const reset = () => {
@@ -92,7 +120,10 @@ const NewInstruction: React.FC = () => {
   return (
     <Center>
       <Box w="720px">
-        <PageHeader id="newInstruction" text="New Instruction" />
+        <PageHeader
+          id="newInstruction"
+          text={`${instructionId ? "Edit" : "New"} Instruction`}
+        />
 
         <FormLabel htmlFor="name">Name</FormLabel>
         <Input
@@ -119,23 +150,7 @@ const NewInstruction: React.FC = () => {
           mb={8}
         />
         <Flex>
-          <Box flexBasis="33%">
-            <Heading size="lg" mb={2}>
-              Selected
-            </Heading>
-            <List as="ol" styleType="decimal">
-              {instructions.map((actionId, actionIndex) => (
-                <ListItem
-                  key={actionId}
-                  cursor="pointer"
-                  onClick={() => removeAction(actionIndex)}
-                >
-                  {actions[actionId].name}
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-          <Box flexBasis="67%">
+          <Box flexBasis="67%" mr={6}>
             <Heading size="lg" mb={2}>
               Choose Actions
             </Heading>
@@ -188,11 +203,27 @@ const NewInstruction: React.FC = () => {
               })}
             </Box>
           </Box>
+          <Box flexBasis="33%">
+            <Heading size="lg" mb={2}>
+              Selected
+            </Heading>
+            <List as="ol" styleType="decimal">
+              {instructions.map((actionId, actionIndex) => (
+                <ListItem
+                  key={actionId}
+                  cursor="pointer"
+                  onClick={() => removeAction(actionIndex)}
+                >
+                  {actions[actionId].name}
+                </ListItem>
+              ))}
+            </List>
+          </Box>
         </Flex>
         <Button
           variantColor="blue"
           onClick={handleSubmit}
-          mt={4}
+          mt={8}
           isDisabled={!name || !description || instructions.length === 0}
         >
           Submit

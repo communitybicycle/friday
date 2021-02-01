@@ -14,6 +14,7 @@ import {
 import React from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { deleteInstruction } from "../reducers/dataReducer";
 import { RootState } from "../reducers/store";
 import { Instruction } from "../types/instructions";
@@ -26,6 +27,7 @@ interface Props {
 }
 
 const InstructionCard: React.FC<Props> = ({ instruction }) => {
+  const history = useHistory();
   const { colorMode } = useColorMode();
   const dispatch = useDispatch();
   const { actions } = useSelector((state: RootState) => state.data);
@@ -84,7 +86,9 @@ const InstructionCard: React.FC<Props> = ({ instruction }) => {
             aria-label="edit"
             icon="edit"
             variant="ghost"
-            onClick={() => console.log("Edit")}
+            onClick={() =>
+              history.push(`/instructions/new?id=${instruction.id}`)
+            }
           />
           <Delete>
             {(confirm) => (
