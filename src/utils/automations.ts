@@ -8,11 +8,18 @@ export const openLink = (url: string) => {
 };
 
 export const openFolder = (path: string) => {
-  shell.showItemInFolder(path);
+  shell.openExternal("file://" + path);
 };
 
 export const openApp = (path: string) => {
-  exec(path);
+  console.log("HERE!", path);
+  try {
+    exec(`start cmd /k "${path}"`, { detached: true } as any, (err: any) => {
+      console.log("Open App error:", err);
+    });
+  } catch (e) {
+    console.log("Open App error:", e);
+  }
 };
 
 export const openTerminal = (
