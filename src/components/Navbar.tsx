@@ -132,8 +132,9 @@ const Navbar: React.FC = () => {
           w="100%"
           variant="ghost"
           variantColor="veryWhite"
-          _hover={{ background: "none" }}
+          _hover={{ background: "none", backgroundColor: "#555" }}
           _active={{ background: "none" }}
+          transition="none"
           mr={1}
         >
           + New Note
@@ -145,6 +146,8 @@ const Navbar: React.FC = () => {
           variantColor="veryWhite"
           h="40px"
           onClick={onOpen}
+          transition="none"
+          _hover={{ background: "none", backgroundColor: "#555" }}
         />
       </Flex>
       <Settings isOpen={isOpen} onClose={onClose} />
