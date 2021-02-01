@@ -10,41 +10,62 @@ import React, { Fragment, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { addAction } from "../../reducers/dataReducer";
+import { addAction, editAction } from "../../reducers/dataReducer";
+import { Action } from "../../types/action";
 import { uuid } from "../../utils";
 
 interface Props {
   name: string;
-  description: string;
+  description?: string;
   reset: () => void;
+  action?: Action;
 }
 
-const CommandForm: React.FC<Props> = ({ name, description, reset }) => {
+const CommandForm: React.FC<Props> = ({ name, description, reset, action }) => {
   const toast = useToast();
   const history = useHistory();
   const dispatch = useDispatch();
-  const [command, setCommand] = useState("");
-  const [target, setTarget] = useState("");
-  const [detached, setDetached] = useState(true);
+  const [command, setCommand] = useState(action ? action.command : "");
+  const [target, setTarget] = useState(action ? action.target : "");
+  const [detached, setDetached] = useState(action ? action.detached : true);
 
   const handleSubmit = () => {
-    dispatch(
-      addAction({
-        id: uuid(),
-        name,
-        description,
-        type: "cmd",
-        command,
-        target,
-        detached,
-      })
-    );
-    history.push("/actions");
-    toast({
-      title: "Action successfully created!",
-      status: "success",
-    });
+    if (action) {
+      dispatch(
+        editAction({
+          ...action,
+          name,
+          description,
+          type: "cmd",
+          command,
+          target,
+          detached,
+        })
+      );
+
+      toast({
+        title: "Action successfully edited!",
+        status: "success",
+      });
+    } else {
+      dispatch(
+        addAction({
+          id: uuid(),
+          name,
+          description,
+          type: "cmd",
+          command,
+          target,
+          detached,
+        })
+      );
+      toast({
+        title: "Action successfully created!",
+        status: "success",
+      });
+    }
     reset();
+    history.push("/actions");
   };
 
   return (

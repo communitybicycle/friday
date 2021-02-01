@@ -18,6 +18,7 @@ interface IProps {
   buttonAction?: () => void;
   buttonText?: string;
   pageAction?: () => void;
+  isDisabled?: boolean;
 }
 
 const PageHeader: React.FC<IProps> = ({
@@ -26,6 +27,7 @@ const PageHeader: React.FC<IProps> = ({
   buttonAction,
   buttonText,
   pageAction,
+  isDisabled,
 }) => {
   const headerId = "header." + id;
 
@@ -44,7 +46,9 @@ const PageHeader: React.FC<IProps> = ({
         <Editable
           fontSize="5xl"
           fontWeight="bold"
-          defaultValue={getItem(headerId) || text}
+          defaultValue={text}
+          isDisabled={isDisabled}
+          isPreviewFocusable={!isDisabled}
         >
           <EditablePreview />
           <EditableInput onBlur={handleBlur} />

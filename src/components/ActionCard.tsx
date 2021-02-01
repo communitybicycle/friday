@@ -10,6 +10,7 @@ import {
   PseudoBox,
   Text,
 } from "@chakra-ui/core";
+import { useHistory } from "react-router";
 import { Card } from "./Card";
 import { deleteAction } from "../reducers/dataReducer";
 import { runAction } from "../utils/automations";
@@ -22,6 +23,7 @@ interface Props {
 }
 
 const ActionCard: React.FC<Props> = ({ action }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
 
   const handleClick = (action: Action) => {
@@ -64,7 +66,9 @@ const ActionCard: React.FC<Props> = ({ action }) => {
             aria-label="edit"
             icon="edit"
             variant="ghost"
-            onClick={() => console.log("Edit")}
+            onClick={() =>
+              history.push(`/actions/new?isEdit=true&id=${action.id}`)
+            }
             mr={1}
           />
           <Delete>
