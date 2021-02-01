@@ -66,9 +66,7 @@ const ActionCard: React.FC<Props> = ({ action }) => {
             aria-label="edit"
             icon="edit"
             variant="ghost"
-            onClick={() =>
-              history.push(`/actions/new?isEdit=true&id=${action.id}`)
-            }
+            onClick={() => history.push(`/actions/new?id=${action.id}`)}
             mr={1}
           />
           <Delete>

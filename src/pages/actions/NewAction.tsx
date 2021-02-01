@@ -5,11 +5,11 @@ import {
   SimpleGrid,
   Text,
   Textarea,
+  useColorMode,
 } from "@chakra-ui/core";
 import React, { useState } from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 import ApplicationForm from "../../components/automations/ApplicationForm";
 import CommandForm from "../../components/automations/CommandForm";
 import FolderForm from "../../components/automations/FolderForm";
@@ -21,16 +21,10 @@ import useQuery from "../../hooks/useQuery";
 import { RootState } from "../../reducers/store";
 import { ActionType } from "../../types/action";
 
-// const actions: ActionType[] = ["link", "folder", "app", "cmd"];
-
-interface Props {
-  isEdit?: boolean;
-}
-
-const NewAction: React.FC<Props> = () => {
+const NewAction: React.FC = () => {
   const query = useQuery();
-  const isEdit = query.get("isEdit");
   const actionId = query.get("id");
+  const { colorMode } = useColorMode();
   const { actions } = useSelector((state: RootState) => state.data);
   const [selected, setSelected] = useState<ActionType | "">(
     actionId ? actions[actionId].type : ""
@@ -94,7 +88,7 @@ const NewAction: React.FC<Props> = () => {
       <Box w="720px">
         <PageHeader
           id="newAction"
-          text={`${isEdit ? "Edit" : "New"} Action`}
+          text={`${actionId ? "Edit" : "New"} Action`}
           isDisabled
         />
 
@@ -128,6 +122,13 @@ const NewAction: React.FC<Props> = () => {
             cursor={selected === "link" ? "default" : "pointer"}
             onClick={() => setSelected("link")}
             opacity={selected === "link" ? 1 : 0.6}
+            borderColor={
+              colorMode === "light"
+                ? "#E2E8F0"
+                : selected === "link"
+                ? "#FFF"
+                : "rgba(255,255,255,0.16)"
+            }
           >
             <CardTitle size="md">Link</CardTitle>
             <Text color="grey">
@@ -139,6 +140,13 @@ const NewAction: React.FC<Props> = () => {
             cursor={selected === "folder" ? "default" : "pointer"}
             onClick={() => setSelected("folder")}
             opacity={selected === "folder" ? 1 : 0.6}
+            borderColor={
+              colorMode === "light"
+                ? "#E2E8F0"
+                : selected === "folder"
+                ? "#FFF"
+                : "rgba(255,255,255,0.16)"
+            }
           >
             <CardTitle size="md">Folder</CardTitle>
             <Text color="grey">Opens a folder at the specified address.</Text>
@@ -148,6 +156,13 @@ const NewAction: React.FC<Props> = () => {
             cursor={selected === "app" ? "default" : "pointer"}
             onClick={() => setSelected("app")}
             opacity={selected === "app" ? 1 : 0.6}
+            borderColor={
+              colorMode === "light"
+                ? "#E2E8F0"
+                : selected === "app"
+                ? "#FFF"
+                : "rgba(255,255,255,0.16)"
+            }
           >
             <CardTitle size="md">Application</CardTitle>
             <Text color="grey">
@@ -159,6 +174,13 @@ const NewAction: React.FC<Props> = () => {
             cursor={selected === "cmd" ? "default" : "pointer"}
             onClick={() => setSelected("cmd")}
             opacity={selected === "cmd" ? 1 : 0.6}
+            borderColor={
+              colorMode === "light"
+                ? "#E2E8F0"
+                : selected === "cmd"
+                ? "#FFF"
+                : "rgba(255,255,255,0.16)"
+            }
           >
             <CardTitle size="md">Command</CardTitle>
             <Text color="grey">
