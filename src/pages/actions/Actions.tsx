@@ -18,6 +18,7 @@ const Actions: React.FC = () => {
         text="Actions"
         buttonAction={() => history.push("/actions/new")}
         buttonText="Add New"
+        isDisabled
       />
       <Flex flexWrap="wrap">
         {Object.values(actions)

@@ -120,6 +120,7 @@ const Module: React.FC<Props> = ({ module, index }) => {
                             transform: "translate(0, 0)",
                           },
                           "& > div > div": {
+                            visibility: "visible",
                             opacity: 1,
                           },
                           "& > button#page-action": { opacity: 1 },
@@ -128,7 +129,7 @@ const Module: React.FC<Props> = ({ module, index }) => {
                     >
                       <Flex
                         align="center"
-                        transform="translate(-16px, 0)"
+                        transform="translate(-32px, 0)"
                         transition="all 0.16s linear"
                       >
                         <Flex
@@ -136,7 +137,9 @@ const Module: React.FC<Props> = ({ module, index }) => {
                           align="center"
                           px={2}
                           color="grey"
+                          visibility="hidden"
                           opacity={0}
+                          transition="all 0.16s linear"
                         >
                           <Icon name="drag-handle" />
                         </Flex>
