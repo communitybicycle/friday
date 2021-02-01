@@ -25,6 +25,12 @@ interface IPropsNavigation {
 const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
   const history = useHistory();
 
+  const handleClick = () => {
+    if (history.location.pathname !== to) {
+      history.push(to);
+    }
+  };
+
   return (
     <PseudoBox
       display="block"
@@ -39,7 +45,7 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
       }}
       borderRadius={4}
       cursor="pointer"
-      onClick={() => history.push(to)}
+      onClick={handleClick}
     >
       <span>{children}</span>
     </PseudoBox>

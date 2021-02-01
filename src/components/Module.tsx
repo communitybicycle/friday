@@ -1,5 +1,13 @@
-import {Divider, Flex, Heading, Icon, IconButton, PseudoBox, useColorMode,} from "@chakra-ui/core";
-import React, {CSSProperties, Fragment} from "react";
+import {
+  Divider,
+  Flex,
+  Heading,
+  Icon,
+  IconButton,
+  PseudoBox,
+  useColorMode,
+} from "@chakra-ui/core";
+import React, { CSSProperties, Fragment } from "react";
 import {
   Draggable,
   DraggableProvided,
@@ -7,14 +15,17 @@ import {
   DraggingStyle,
   NotDraggingStyle,
 } from "react-beautiful-dnd";
-import {hot} from "react-hot-loader";
-import {useDispatch} from "react-redux";
-import {useDraggableInPortal} from "../hooks";
+import { hot } from "react-hot-loader";
+import { useDispatch } from "react-redux";
+import { useDraggableInPortal } from "../hooks";
 import Automations from "../modules/Automations/Automations";
 import Notes from "../modules/Notes/Notes";
 import TextModule from "../modules/Text/Text";
-import {openEditModuleModal, setEditModuleModal,} from "../reducers/metaReducer";
-import {ModulesType} from "../types/modules";
+import {
+  openEditModuleModal,
+  setEditModuleModal,
+} from "../reducers/metaReducer";
+import { ModulesType } from "../types/modules";
 import Center from "./Center";
 
 interface Props {
@@ -137,8 +148,9 @@ const Module: React.FC<Props> = ({ module, index }) => {
                         icon="settings"
                         onClick={handleOpen}
                         variantColor="ghostGray"
-                        variant="ghost"
+                        variant="link"
                         opacity={0}
+                        height="40px"
                       />
                     </PseudoBox>
                     <Divider />
