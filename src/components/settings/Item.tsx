@@ -9,7 +9,14 @@ interface Props {
 
 const Item: React.FC<Props> = ({ name, description, children }) => {
   return (
-    <PseudoBox d="flex" justifyContent="space-between" alignItems="center">
+    <PseudoBox
+      d="flex"
+      justifyContent="space-between"
+      alignItems="center"
+      py={2}
+      borderTop="1px solid #efefef"
+      _first={{ borderTop: "none" }}
+    >
       <Box>
         <Text fontWeight="bold">{name}</Text>
         {description && <Text color="gray">{description}</Text>}

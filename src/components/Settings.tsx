@@ -21,7 +21,7 @@ interface Props {
 
 const Settings: React.FC<Props> = ({ onClose, isOpen }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size="2xl" isCentered>
       <ModalOverlay />
       <ModalContent borderRadius={8} p={4} minH="600px">
         <Heading size="lg" mb={3}>

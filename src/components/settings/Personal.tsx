@@ -4,11 +4,9 @@ import React, { Fragment, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../reducers/store";
-import {
-  deleteProfilePicture,
-  setProfilePicture,
-} from "../../reducers/userReducer";
+import { setProfilePicture } from "../../reducers/userReducer";
 import { eStore } from "../../utils/eStore";
+import Center from "../Center";
 import Item from "./Item";
 
 const PersonalSettings: React.FC = () => {
@@ -40,17 +38,26 @@ const PersonalSettings: React.FC = () => {
 
   return (
     <Fragment>
-      <Image src={image} alt="" height={image ? 200 : 0} mb={image ? 2 : 0} />
-      <Flex>
-        <Button onClick={handleUploadImage} mr={2}>
-          Upload New Image
-        </Button>
-        {image && (
-          <Button variantColor="red" onClick={handleDeleteImage}>
-            Delete
+      <Item
+        name="Change profile picture"
+        description="Uploading a new picture replaces the image in the navbar."
+      >
+        <Flex>
+          <Button onClick={handleUploadImage} mr={2}>
+            Upload
           </Button>
-        )}
-      </Flex>
+          {image && (
+            <Button variantColor="red" onClick={handleDeleteImage}>
+              Delete
+            </Button>
+          )}
+        </Flex>
+      </Item>
+      {image && (
+        <Center>
+          <Image src={image} alt="" height={200} mb={2} />
+        </Center>
+      )}
       <Item
         name="Dark Mode"
         description="Switches the application between light mode and dark mode."
