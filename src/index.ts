@@ -1,7 +1,9 @@
-import { app, BrowserWindow, dialog } from "electron";
+import { app, BrowserWindow, dialog, ipcMain, protocol } from "electron";
 import debug from "electron-debug";
 import isDev from "electron-is-dev";
 import installExtension, { REDUX_DEVTOOLS } from "electron-devtools-installer";
+import * as fs from "fs";
+import path from "path";
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 debug();
@@ -24,6 +26,7 @@ const createWindow = (): void => {
       nodeIntegration: true,
       enableRemoteModule: true,
       contextIsolation: false,
+      // webSecurity: false,
     },
   });
 
@@ -68,6 +71,21 @@ app.on("activate", () => {
   }
 });
 
+app.on("ready", async () => {
+  // Name the protocol whatever you want
+  const protocolName = "safe-file-protocol";
+
+  protocol.registerFileProtocol(protocolName, (request, callback) => {
+    const url = request.url.replace(`${protocolName}://`, "");
+    try {
+      return callback(decodeURIComponent(url));
+    } catch (error) {
+      // Handle the error as needed
+      console.error(error);
+    }
+  });
+});
+
 exports.getFileFromUser = () => {
   const files = dialog.showOpenDialog({
     properties: ["openFile"],
@@ -78,11 +96,40 @@ exports.getFileFromUser = () => {
   return files;
 };
 
-const getFolderFromUser = () => {
-  dialog.showOpenDialog({
-    properties: ["openDirectory"],
+ipcMain.handle("store-image-file", async (event, arg) => {
+  const result = await dialog.showOpenDialog({
+    properties: ["openFile"],
+    filters: [
+      { name: "Image (.png, .jpg, .gif)", extensions: ["png", "jpg", "gif"] },
+    ],
   });
-};
+
+  // checks if window was closed
+  if (result.canceled) {
+    const message = "No file selected!";
+    console.log(message);
+    return message;
+  } else {
+    // get first element in array which is path to file selected
+    const filePath = result.filePaths[0];
+
+    // get file name
+    const fileName = path.basename(filePath);
+
+    // path to app data + fileName = "C:\Users\John\AppData\Roaming\app_name\picture.png"
+    const imgFolderPath = path.join(app.getPath("userData"), fileName);
+
+    // copy file from original location to app data folder
+    fs.copyFile(filePath, imgFolderPath, (err) => {
+      if (err) throw err;
+      console.log(fileName + " uploaded.");
+
+      return imgFolderPath;
+    });
+
+    return imgFolderPath;
+  }
+});
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

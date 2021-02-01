@@ -1,5 +1,3 @@
-import React, { FunctionComponent } from "react";
-import { hot } from "react-hot-loader";
 import {
   Box,
   Button,
@@ -10,13 +8,14 @@ import {
   PseudoBox,
   Text,
   useColorMode,
+  useDisclosure,
 } from "@chakra-ui/core";
-import { NAVBAR_PHOTO_URL } from "../data/constants";
-import Center from "./Center";
+import React, { FunctionComponent } from "react";
+import { hot } from "react-hot-loader";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../reducers/store";
-import { openSettings } from "../reducers/metaReducer";
+import Center from "./Center";
 import Settings from "./Settings";
 
 interface IPropsNavigation {
@@ -48,17 +47,14 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
 };
 
 const Navbar: React.FC = () => {
-  const dispatch = useDispatch();
   const { colorMode } = useColorMode();
-  const { isMenuOpen } = useSelector((state: RootState) => state.meta);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     pages: { dashboards, notes },
   } = useSelector((state: RootState) => state.data);
+  const { isMenuOpen } = useSelector((state: RootState) => state.meta);
+  const { profilePicture } = useSelector((state: RootState) => state.user);
   const bgColor = { light: "#333", dark: "gray.800" };
-
-  const handleOpenSettings = () => {
-    dispatch(openSettings());
-  };
 
   return (
     <Flex
@@ -87,7 +83,13 @@ const Navbar: React.FC = () => {
           </Text>
         </Box>
         <Center py={6}>
-          <Image size="160px" src={NAVBAR_PHOTO_URL} borderRadius="100%" />
+          <Image
+            size="160px"
+            src={profilePicture}
+            borderRadius="100%"
+            alt=""
+            objectFit="cover"
+          />
         </Center>
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
           Home
@@ -136,10 +138,10 @@ const Navbar: React.FC = () => {
           variant="link"
           variantColor="veryWhite"
           h="40px"
-          onClick={handleOpenSettings}
+          onClick={onOpen}
         />
       </Flex>
-      <Settings />
+      <Settings isOpen={isOpen} onClose={onClose} />
     </Flex>
   );
 };

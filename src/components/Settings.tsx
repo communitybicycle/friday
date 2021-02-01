@@ -1,5 +1,4 @@
 import {
-  Divider,
   Heading,
   Modal,
   ModalContent,
@@ -12,22 +11,17 @@ import {
 } from "@chakra-ui/core";
 import React from "react";
 import { hot } from "react-hot-loader";
-import { useDispatch, useSelector } from "react-redux";
-import { closeSettings } from "../reducers/metaReducer";
-import { RootState } from "../reducers/store";
 import DataSettings from "./settings/Data";
 import PersonalSettings from "./settings/Personal";
 
-const Settings: React.FC = () => {
-  const dispatch = useDispatch();
-  const { isSettingsOpen } = useSelector((state: RootState) => state.meta);
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+}
 
-  const handleClose = () => {
-    dispatch(closeSettings());
-  };
-
+const Settings: React.FC<Props> = ({ onClose, isOpen }) => {
   return (
-    <Modal isOpen={isSettingsOpen} onClose={handleClose} size="xl" isCentered>
+    <Modal isOpen={isOpen} onClose={onClose} size="xl" isCentered>
       <ModalOverlay />
       <ModalContent borderRadius={8} p={4} minH="600px">
         <Heading size="lg" mb={3}>
