@@ -3,3 +3,6 @@ export const NAVBAR_PHOTO_URL =
 
 export const DEFAULT_IMAGE_URL =
   "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=2550&q=80";
+
+export const BG_COLOR = { light: "white", dark: "gray.800" };
+export const TEXT_GRAY_COLOR = { light: "gray", dark: "white" };

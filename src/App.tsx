@@ -1,19 +1,19 @@
+import { Box, Flex, useColorMode } from "@chakra-ui/core";
 import React from "react";
 import { hot } from "react-hot-loader";
-import { Box, Flex, useColorMode } from "@chakra-ui/core";
+import { useSelector } from "react-redux";
 import ElectronStoreSynchronizer from "./components/ElectronStoreSynchronizer";
 import Navbar from "./components/Navbar";
-import Router from "./Router";
-import { useSelector } from "react-redux";
+import { BG_COLOR } from "./data/constants";
 import { RootState } from "./reducers/store";
+import Router from "./Router";
 
 const App: React.FC = () => {
   const { colorMode } = useColorMode();
   const { isMenuOpen } = useSelector((state: RootState) => state.meta);
-  const bgColor = { light: "white", dark: "gray.800" };
 
   return (
-    <Flex h="100%" bg={bgColor[colorMode]}>
+    <Flex h="100%" bg={BG_COLOR[colorMode]}>
       <Navbar />
       <Box
         flex={1}

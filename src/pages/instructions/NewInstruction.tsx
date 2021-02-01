@@ -10,6 +10,7 @@ import {
   PseudoBox,
   Text,
   Textarea,
+  useColorMode,
   useToast,
 } from "@chakra-ui/core";
 import React, { useEffect, useMemo, useState } from "react";
@@ -18,6 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import Center from "../../components/Center";
 import PageHeader from "../../components/PageHeader";
+import { BG_COLOR } from "../../data/constants";
 import { addInstruction } from "../../reducers/dataReducer";
 import { RootState } from "../../reducers/store";
 import { uuid } from "../../utils";
@@ -26,6 +28,7 @@ const NewInstruction: React.FC = () => {
   const toast = useToast();
   const history = useHistory();
   const dispatch = useDispatch();
+  const { colorMode } = useColorMode();
   const { actions } = useSelector((state: RootState) => state.data);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -159,10 +162,18 @@ const NewInstruction: React.FC = () => {
                     px={4}
                     borderBottomWidth={1}
                     cursor={isSelected ? "default" : "pointer"}
-                    backgroundColor={isSelected ? "#efefef" : "#fff"}
+                    backgroundColor={
+                      isSelected
+                        ? colorMode === "light"
+                          ? "#efefef"
+                          : "gray.700"
+                        : colorMode === "light"
+                        ? "#fff"
+                        : BG_COLOR[colorMode]
+                    }
                     _last={{ border: "none" }}
                     _hover={{
-                      background: "#efefef",
+                      background: colorMode === "light" ? "#efefef" : "#2D3748",
                     }}
                     onClick={() => {
                       if (!isSelected) {
