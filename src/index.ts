@@ -14,7 +14,9 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
-const createWindow = (): void => {
+let myWindow: BrowserWindow | null = null;
+
+const createWindow = (): BrowserWindow => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     show: false,
@@ -49,12 +51,16 @@ const createWindow = (): void => {
   mainWindow.webContents.once("dom-ready", () => {
     mainWindow.show();
   });
+
+  return mainWindow;
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow);
+app.on("ready", () => {
+  myWindow = createWindow;
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -62,6 +68,20 @@ app.on("ready", createWindow);
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
+  }
+});
+
+/** Check if single instance, if not, simply quit new instance */
+const isSingleInstance = app.requestSingleInstanceLock();
+if (!isSingleInstance) {
+  app.quit();
+}
+
+// Behaviour on second instance for parent process- Pretty much optional
+app.on("second-instance", (event, argv, cwd) => {
+  if (myWindow) {
+    if (myWindow.isMinimized()) myWindow.restore();
+    myWindow.focus();
   }
 });
 
