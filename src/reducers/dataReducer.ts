@@ -16,6 +16,12 @@ const dataSlice = createSlice({
     },
     deleteAction: (state, { payload: id }: PayloadAction<string>) => {
       delete state.actions[id];
+      Object.keys(state.instructions).forEach((instructionId) => {
+        const instructions = state.instructions[instructionId].instructions;
+        state.instructions[instructionId].instructions = instructions.filter(
+          (actionId) => actionId !== id
+        );
+      });
     },
     editAction: (state, { payload }: PayloadAction<Action>) => {
       state.actions[payload.id] = payload;

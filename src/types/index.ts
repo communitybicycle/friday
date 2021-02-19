@@ -8,8 +8,6 @@ export interface DataState {
   modules: {
     [index: string]: ModulesType;
   };
-  instructions: {
-    [index: string]: Instruction;
-  };
+  instructions: Record<string, Instruction>;
   pages: Pages;
 }
