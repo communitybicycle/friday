@@ -50,8 +50,11 @@ const dataSlice = createSlice({
     ) => {
       state.pages.dashboards[payload.id].columns = payload.columns;
     },
-    reinitializeDataReducer: () => {
-      return initialData;
+    reinitializeDataReducer: (
+      _,
+      { payload }: PayloadAction<DataState | undefined>
+    ) => {
+      return payload || initialData;
     },
     updateFeatureImage: (
       state,

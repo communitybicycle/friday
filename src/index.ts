@@ -1,9 +1,10 @@
 import { app, BrowserWindow, dialog, ipcMain, protocol } from "electron";
 import debug from "electron-debug";
-import isDev from "electron-is-dev";
 import installExtension, { REDUX_DEVTOOLS } from "electron-devtools-installer";
+import isDev from "electron-is-dev";
 import * as fs from "fs";
 import path from "path";
+
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
 debug();
@@ -78,7 +79,7 @@ if (!isSingleInstance) {
 }
 
 // Behaviour on second instance for parent process- Pretty much optional
-app.on("second-instance", (event, argv, cwd) => {
+app.on("second-instance", () => {
   if (myWindow) {
     if (myWindow.isMinimized()) myWindow.restore();
     myWindow.focus();
@@ -118,7 +119,7 @@ exports.getFileFromUser = () => {
   return files;
 };
 
-ipcMain.handle("store-image-file", async (event, arg) => {
+ipcMain.handle("store-image-file", async () => {
   const result = await dialog.showOpenDialog({
     properties: ["openFile"],
     filters: [
@@ -153,5 +154,53 @@ ipcMain.handle("store-image-file", async (event, arg) => {
   }
 });
 
+ipcMain.handle("save-file", async (event, arg) => {
+  const { canceled, filePath } = await dialog.showSaveDialog({
+    title: "Save your data in JSON",
+    filters: [
+      { name: "JavaScript Object Notation (JSON)", extensions: ["json"] },
+    ],
+  });
+
+  if (!canceled && filePath) {
+    fs.writeFile(filePath, arg, "utf8", (err) => {
+      if (err) {
+        console.log("Unable to write file:", err);
+        return { success: false };
+      }
+    });
+
+    return { success: true };
+  }
+});
+
+ipcMain.handle("upload-file", async () => {
+  const { canceled, filePaths } = await dialog.showOpenDialog({
+    properties: ["openFile"],
+    filters: [
+      { name: "JavaScript Object Notation (JSON)", extensions: ["json"] },
+    ],
+  });
+
+  // checks if window was closed
+  if (canceled) {
+    const message = "No file selected!";
+    console.log(message);
+    return message;
+  } else {
+    // get first element in array which is path to file selected
+    const filePath = filePaths[0];
+
+    const data = fs.readFileSync(filePath, "utf8");
+
+    if (data) {
+      return { success: true, data };
+    } else {
+      return { success: false };
+    }
+
+    // return { success: false };
+  }
+});
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
