@@ -24,6 +24,6 @@ export interface Dashboard extends Page {
 }
 
 export interface Note extends Page {
-  notes: any;
+  content: any;
   type: "notes";
 }

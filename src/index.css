@@ -30,3 +30,8 @@ code {
 .dzu-inputLabel {
   font-weight: normal !important;
 }
+
+.ql-container.ql-snow,
+.ql-toolbar.ql-snow {
+  border: none;
+}

@@ -7,14 +7,23 @@
     "noImplicitAny": true,
     "lib": ["dom", "dom.iterable", "esnext"],
     "sourceMap": true,
-    "baseUrl": ".",
     "strict": true,
     "outDir": "dist",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "target": "ES5",
+    "baseUrl": "./",
     "paths": {
-      "*": ["node_modules/*"]
+      "components/*": ["./src/components/*"],
+      "data/*": ["./src/data/*"],
+      "hooks/*": ["./src/hooks/*"],
+      "modules/*": ["./src/modules/*"],
+      "pages/*": ["./src/pages/*"],
+      "reducers/*": ["./src/reducers/*"],
+      "theme/*": ["./src/theme/*"],
+      "types/*": ["./src/types/*"],
+      "utils/*": ["./src/utils/*"],
+      "*": ["./src/node_modules/*"]
     },
     "jsx": "react"
   },

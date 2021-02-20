@@ -26,22 +26,23 @@
  * ```
  */
 
+import { ColorModeProvider, CSSReset, ThemeProvider } from "@chakra-ui/core";
+import { Color, Titlebar } from "custom-electron-titlebar";
 import dotenv from "dotenv";
-dotenv.config();
-
-import "react-hot-loader";
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import { eStore } from "./utils/eStore";
-import { ColorModeProvider, CSSReset, ThemeProvider } from "@chakra-ui/core";
-import { BrowserRouter } from "react-router-dom";
-import customTheme from "./theme/theme";
-import { Provider } from "react-redux";
-import { store } from "./reducers/store";
-import { Color, Titlebar } from "custom-electron-titlebar";
 import "react-dropzone-uploader/dist/styles.css";
+import "react-hot-loader";
+import "react-quill/dist/quill.snow.css";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { store } from "reducers/store";
+import customTheme from "theme/theme";
+import { eStore } from "utils/eStore";
+import App from "./App";
 import "./index.css";
+
+dotenv.config();
 
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 

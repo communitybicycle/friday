@@ -1,49 +1,18 @@
-import React from "react";
-import { hot } from "react-hot-loader";
 import { Box, Grid } from "@chakra-ui/core";
-import FeatureImage from "../components/FeatureImage";
-import PageHeader from "../components/PageHeader";
+import React from "react";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
-import Module from "../components/Module";
-import { RootState } from "../reducers/store";
 import { useHistory } from "react-router";
-import EditModuleModal from "../components/EditModuleModal";
 import { useParams } from "react-router-dom";
-import {
-  DragDropContext,
-  DraggableLocation,
-  Droppable,
-  DropResult,
-} from "react-beautiful-dnd";
-import { setColumns } from "../reducers/dataReducer";
-import { uuid } from "../utils";
-
-const reorder = (list: any[], startIndex: number, endIndex: number) => {
-  const result = Array.from(list);
-  const [removed] = result.splice(startIndex, 1);
-  result.splice(endIndex, 0, removed);
-
-  return result;
-};
-
-const move = (
-  source: any[],
-  destination: any[],
-  droppableSource: DraggableLocation,
-  droppableDestination: DraggableLocation
-) => {
-  const sourceClone = Array.from(source);
-  const destClone = Array.from(destination);
-  const [removed] = sourceClone.splice(droppableSource.index, 1);
-
-  destClone.splice(droppableDestination.index, 0, removed);
-
-  const result: any = {};
-  result[droppableSource.droppableId] = sourceClone;
-  result[droppableDestination.droppableId] = destClone;
-
-  return result;
-};
+import EditModuleModal from "components/EditModuleModal";
+import FeatureImage from "components/FeatureImage";
+import Module from "components/Module";
+import PageHeader from "components/PageHeader";
+import { setColumns } from "reducers/dataReducer";
+import { RootState } from "reducers/store";
+import { uuid } from "utils/index";
+import { move, reorder } from "utils/dnd";
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -111,7 +80,7 @@ const Dashboard: React.FC = () => {
           >
             {dashboard.columns.map((column: any, index: number) => (
               <Droppable droppableId={index.toString()} key={uuid()}>
-                {(provided, snapshot) => (
+                {(provided) => (
                   <Box
                     ref={provided.innerRef}
                     {...provided.droppableProps}

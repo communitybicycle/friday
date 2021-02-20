@@ -62,6 +62,12 @@ const dataSlice = createSlice({
     ) => {
       state.pages[payload.type][payload.id].featureImage = payload.imgSrc;
     },
+    setNoteContent: (
+      state,
+      { payload }: PayloadAction<{ id: string; content: string }>
+    ) => {
+      state.pages.notes[payload.id].content = payload.content;
+    },
   },
 });
 
@@ -78,6 +84,7 @@ export const {
   setColumns,
   reinitializeDataReducer,
   updateFeatureImage,
+  setNoteContent,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

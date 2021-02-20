@@ -128,7 +128,7 @@ export const initialData: DataState = {
         title: "General Notes",
         header: "Notes Page Here",
         type: "notes",
-        notes: "Notes placeholder here",
+        content: "Notes placeholder here",
       },
     },
   },
