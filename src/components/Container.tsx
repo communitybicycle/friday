@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/core";
 
 const Container: FunctionComponent = ({ children, ...rest }) => {
   return (
-    <Box w="1020px" mx="auto" px="50px" {...rest}>
+    <Box maxW="1020px" w="100%" mx="auto" px="50px" {...rest}>
       {children}
     </Box>
   );
