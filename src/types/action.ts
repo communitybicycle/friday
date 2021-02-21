@@ -10,6 +10,7 @@ export interface Action {
   detached?: boolean;
   path?: string;
   url?: string;
+  dataType?: "action" | undefined;
 }
 
 export interface Actions {

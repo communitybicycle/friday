@@ -21,3 +21,7 @@ export const uuid = (): string => {
 // const fileTypeIsSupported = (file) => {
 //   return ["text/plain", "text/markdown"].includes(file.type);
 // };
+
+export const addDataTypeField = (arr: any[], value: string) => {
+  return arr.map((item) => ({ ...item, dataType: value }));
+};

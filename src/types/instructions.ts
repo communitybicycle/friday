@@ -3,4 +3,5 @@ export interface Instruction {
   name: string;
   description?: string;
   instructions: string[];
+  dataType?: "instruction" | undefined;
 }

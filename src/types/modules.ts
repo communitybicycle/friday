@@ -26,7 +26,7 @@ export type ModulesType =
   | NotesModule
   | AutomationModule;
 
-interface Automation {
+export interface Automation {
   type: "action" | "instruction";
   automationId: string;
 }
