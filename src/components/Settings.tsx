@@ -9,6 +9,7 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/core";
+import PluginsSettings from "components/settings/Plugins";
 import React from "react";
 import { hot } from "react-hot-loader";
 import DataSettings from "./settings/Data";
@@ -30,11 +31,15 @@ const Settings: React.FC<Props> = ({ onClose, isOpen }) => {
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">
             <Tab>Personal</Tab>
+            <Tab>Plugins</Tab>
             <Tab>Data</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
               <PersonalSettings />
+            </TabPanel>
+            <TabPanel>
+              <PluginsSettings />
             </TabPanel>
             <TabPanel>
               <DataSettings />
