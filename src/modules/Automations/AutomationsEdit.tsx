@@ -1,7 +1,10 @@
 import {
   Box,
   Flex,
+  Heading,
   Input,
+  List,
+  ListItem,
   PseudoBox,
   Text,
   useColorMode,
@@ -54,28 +57,33 @@ const AutomationsEdit: React.FC<Props> = ({ module }) => {
     }
   };
 
+  const removeAction = (actionIndex: number) => {
+    const newSelected = [...selected];
+    newSelected.splice(actionIndex, 1);
+    setSelected(newSelected);
+  };
+
   const update = () => {
     console.log("Update clicked");
   };
 
   return (
-    <EditModalContent onSubmit={update}>
+    <EditModalContent onSubmit={update} width="720px">
       <Flex>
-        <Box h="100%">
-          <Scrollbars style={{ width: "100%", height: "100%" }}>
-            <Input
-              value={search}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSearch(e.target.value)
-              }
-              placeholder="Search actions..."
-              mb={4}
-            />
+        <Box flex={1} pr={2}>
+          <Input
+            value={search}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setSearch(e.target.value)
+            }
+            placeholder="Search actions..."
+            mb={4}
+          />
+          <Scrollbars style={{ height: 400 }}>
             <Box
               borderWidth={filteredActions.length > 0 ? 1 : 0}
               borderRadius={4}
               maxH={400}
-              overflowY="scroll"
             >
               {filteredActions.map((action) => {
                 const isSelected = selected.some(
@@ -114,6 +122,22 @@ const AutomationsEdit: React.FC<Props> = ({ module }) => {
               })}
             </Box>
           </Scrollbars>
+        </Box>
+        <Box flex={1} pl={2}>
+          <Heading size="lg" mb={2}>
+            Selected
+          </Heading>
+          <List as="ol" styleType="decimal">
+            {selected.map((automation, actionIndex) => (
+              <ListItem
+                key={`${automation.type}-${automation.automationId}`}
+                cursor="pointer"
+                onClick={() => removeAction(actionIndex)}
+              >
+                {actions[automation.automationId].name}
+              </ListItem>
+            ))}
+          </List>
         </Box>
       </Flex>
     </EditModalContent>

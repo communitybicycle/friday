@@ -1,5 +1,3 @@
-import React, { Fragment } from "react";
-import { hot } from "react-hot-loader";
 import {
   Button,
   Modal,
@@ -10,16 +8,17 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/core";
-import TextEdit from "../modules/Text/TextEdit";
-import NotesEdit from "../modules/Notes/NotesEdit";
+import AutomationsEdit from "modules/Automations/AutomationsEdit";
+import NotesEdit from "modules/Notes/NotesEdit";
+import TextEdit from "modules/Text/TextEdit";
+import React, { Fragment } from "react";
+import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
-import { closeEditModuleModal } from "../reducers/metaReducer";
-import { RootState } from "../reducers/store";
-import AutomationsEdit from "../modules/Automations/AutomationsEdit";
-
-interface Props {}
+import { closeEditModuleModal } from "reducers/metaReducer";
+import { RootState } from "reducers/store";
 
 interface EditModalContentProps {
+  width?: string | number;
   onSubmit: () => void;
 }
 
@@ -27,6 +26,7 @@ export type ChildHandle = React.ElementRef<typeof TextEdit | typeof NotesEdit>;
 
 export const EditModalContent: React.FC<EditModalContentProps> = ({
   onSubmit,
+  width,
   children,
 }) => {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ export const EditModalContent: React.FC<EditModalContentProps> = ({
   };
 
   return (
-    <ModalContent>
+    <ModalContent maxW={width || 400}>
       <ModalHeader>Edit Module</ModalHeader>
       <ModalCloseButton />
       <ModalBody>{children}</ModalBody>
@@ -57,6 +57,8 @@ export const EditModalContent: React.FC<EditModalContentProps> = ({
     </ModalContent>
   );
 };
+
+interface Props {}
 
 const EditModuleModal: React.FC<Props> = () => {
   const dispatch = useDispatch();
