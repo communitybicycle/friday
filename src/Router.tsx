@@ -1,3 +1,4 @@
+import Terminal from "pages/Terminal";
 import React, { FunctionComponent } from "react";
 import { Switch } from "react-router-dom";
 import Instructions from "./pages/instructions/Instructions";
@@ -13,6 +14,7 @@ const Router: FunctionComponent = () => {
   return (
     <Switch>
       <Page path="/notes/:id" component={Notes} />
+      <Page path="/terminal" component={Terminal} />
       <Page path="/actions/new" component={NewAction} />
       <Page path="/actions" component={Actions} />
       <Page path="/instructions/new" component={NewInstruction} />
