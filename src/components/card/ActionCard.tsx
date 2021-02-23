@@ -20,9 +20,10 @@ import { runAction } from "utils/automations";
 
 interface Props {
   action: Action;
+  readOnly?: boolean;
 }
 
-const ActionCard: React.FC<Props> = ({ action }) => {
+const ActionCard: React.FC<Props> = ({ action, readOnly }) => {
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -61,26 +62,28 @@ const ActionCard: React.FC<Props> = ({ action }) => {
         <Button variantColor="blue" onClick={() => handleClick(action)}>
           Run
         </Button>
-        <PseudoBox opacity={0}>
-          <IconButton
-            aria-label="edit"
-            icon="edit"
-            variant="ghost"
-            onClick={() => history.push(`/actions/new?id=${action.id}`)}
-            mr={1}
-          />
-          <Delete>
-            {(confirm: any) => (
-              <IconButton
-                variantColor="red"
-                aria-label="delete"
-                icon="delete"
-                variant="ghost"
-                onClick={confirm(() => handleDelete(action.id))}
-              />
-            )}
-          </Delete>
-        </PseudoBox>
+        {!readOnly && (
+          <PseudoBox opacity={0}>
+            <IconButton
+              aria-label="edit"
+              icon="edit"
+              variant="ghost"
+              onClick={() => history.push(`/actions/new?id=${action.id}`)}
+              mr={1}
+            />
+            <Delete>
+              {(confirm: any) => (
+                <IconButton
+                  variantColor="red"
+                  aria-label="delete"
+                  icon="delete"
+                  variant="ghost"
+                  onClick={confirm(() => handleDelete(action.id))}
+                />
+              )}
+            </Delete>
+          </PseudoBox>
+        )}
       </Flex>
     </Card>
   );

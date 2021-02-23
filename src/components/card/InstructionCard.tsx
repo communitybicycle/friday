@@ -24,9 +24,10 @@ import Delete from "components/Delete";
 
 interface Props {
   instruction: Instruction;
+  readOnly?: boolean;
 }
 
-const InstructionCard: React.FC<Props> = ({ instruction }) => {
+const InstructionCard: React.FC<Props> = ({ instruction, readOnly }) => {
   const history = useHistory();
   const { colorMode } = useColorMode();
   const dispatch = useDispatch();
@@ -81,27 +82,29 @@ const InstructionCard: React.FC<Props> = ({ instruction }) => {
         <Button variantColor="blue" onClick={() => handleClick()}>
           Run
         </Button>
-        <PseudoBox opacity={0}>
-          <IconButton
-            aria-label="edit"
-            icon="edit"
-            variant="ghost"
-            onClick={() =>
-              history.push(`/instructions/new?id=${instruction.id}`)
-            }
-          />
-          <Delete>
-            {(confirm: any) => (
-              <IconButton
-                variantColor="red"
-                aria-label="delete"
-                icon="delete"
-                variant="ghost"
-                onClick={confirm(() => handleDelete(instruction.id))}
-              />
-            )}
-          </Delete>
-        </PseudoBox>
+        {!readOnly && (
+          <PseudoBox opacity={0}>
+            <IconButton
+              aria-label="edit"
+              icon="edit"
+              variant="ghost"
+              onClick={() =>
+                history.push(`/instructions/new?id=${instruction.id}`)
+              }
+            />
+            <Delete>
+              {(confirm: any) => (
+                <IconButton
+                  variantColor="red"
+                  aria-label="delete"
+                  icon="delete"
+                  variant="ghost"
+                  onClick={confirm(() => handleDelete(instruction.id))}
+                />
+              )}
+            </Delete>
+          </PseudoBox>
+        )}
       </Flex>
     </Card>
   );
