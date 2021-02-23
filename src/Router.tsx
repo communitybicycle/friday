@@ -7,7 +7,7 @@ import Notes from "./pages/Notes";
 import Dashboard from "./pages/Dashboard";
 import Actions from "./pages/actions/Actions";
 import NewAction from "./pages/actions/NewAction";
-import Page from "./components/Page";
+import Page from "components/page/Page";
 import Welcome from "./pages/Welcome";
 
 const Router: FunctionComponent = () => {

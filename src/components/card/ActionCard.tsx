@@ -1,5 +1,3 @@
-import React from "react";
-import { hot } from "react-hot-loader";
 import {
   Box,
   Button,
@@ -10,13 +8,15 @@ import {
   PseudoBox,
   Text,
 } from "@chakra-ui/core";
-import { useHistory } from "react-router";
-import { Card } from "./Card";
-import { deleteAction } from "../reducers/dataReducer";
-import { runAction } from "../utils/automations";
+import { Card } from "components/card/Card";
+import Delete from "components/Delete";
+import React from "react";
+import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
-import Delete from "./Delete";
-import { Action } from "../types/action";
+import { useHistory } from "react-router";
+import { deleteAction } from "reducers/dataReducer";
+import { Action } from "types/action";
+import { runAction } from "utils/automations";
 
 interface Props {
   action: Action;
@@ -70,7 +70,7 @@ const ActionCard: React.FC<Props> = ({ action }) => {
             mr={1}
           />
           <Delete>
-            {(confirm) => (
+            {(confirm: any) => (
               <IconButton
                 variantColor="red"
                 aria-label="delete"

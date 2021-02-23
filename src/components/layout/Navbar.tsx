@@ -15,8 +15,8 @@ import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { RootState } from "reducers/store";
-import Center from "./Center";
-import Settings from "./Settings";
+import Center from "components/layout/Center";
+import Settings from "components/settings/Settings";
 
 interface IPropsNavigation {
   to: string;

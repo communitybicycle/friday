@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/core";
 import React, { FocusEventHandler } from "react";
 import { hot } from "react-hot-loader";
-import { getItem, setItem } from "../utils/storage";
+import { setItem } from "utils/storage";
 
 interface IProps {
   id: string;

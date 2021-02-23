@@ -1,7 +1,7 @@
-import { BoxProps, Heading, List, ListItem, Text } from "@chakra-ui/core";
+import { BoxProps, Heading, Text } from "@chakra-ui/core";
 import React from "react";
 import { hot } from "react-hot-loader";
-import Container from "../components/Container";
+import Container from "components/layout/Container";
 
 interface ParagraphProps {
   bold?: boolean;

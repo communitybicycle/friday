@@ -15,12 +15,12 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { deleteInstruction } from "../reducers/dataReducer";
-import { RootState } from "../reducers/store";
-import { Instruction } from "../types/instructions";
-import { runInstruction } from "../utils/automations";
-import { Card } from "./Card";
-import Delete from "./Delete";
+import { deleteInstruction } from "reducers/dataReducer";
+import { RootState } from "reducers/store";
+import { Instruction } from "types/instructions";
+import { runInstruction } from "utils/automations";
+import { Card } from "components/card/Card";
+import Delete from "components/Delete";
 
 interface Props {
   instruction: Instruction;
@@ -91,7 +91,7 @@ const InstructionCard: React.FC<Props> = ({ instruction }) => {
             }
           />
           <Delete>
-            {(confirm) => (
+            {(confirm: any) => (
               <IconButton
                 variantColor="red"
                 aria-label="delete"

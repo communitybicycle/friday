@@ -1,11 +1,11 @@
 import { Flex } from "@chakra-ui/core";
+import InstructionCard from "components/card/InstructionCard";
+import PageHeader from "components/page/PageHeader";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import InstructionCard from "../../components/InstructionCard";
-import PageHeader from "../../components/PageHeader";
-import { RootState } from "../../reducers/store";
+import { RootState } from "reducers/store";
 
 const Instructions: React.FC = () => {
   const history = useHistory();

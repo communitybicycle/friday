@@ -13,17 +13,17 @@ import {
   useColorMode,
   useToast,
 } from "@chakra-ui/core";
+import Center from "components/layout/Center";
+import PageHeader from "components/page/PageHeader";
+import { BG_COLOR } from "data/constants";
+import useQuery from "hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import Center from "../../components/Center";
-import PageHeader from "../../components/PageHeader";
-import { BG_COLOR } from "../../data/constants";
-import useQuery from "../../hooks/useQuery";
-import { addInstruction, editInstruction } from "../../reducers/dataReducer";
-import { RootState } from "../../reducers/store";
-import { uuid } from "../../utils";
+import { addInstruction, editInstruction } from "reducers/dataReducer";
+import { RootState } from "reducers/store";
+import { uuid } from "utils/index";
 
 const NewInstruction: React.FC = () => {
   const toast = useToast();
@@ -61,6 +61,7 @@ const NewInstruction: React.FC = () => {
         return true;
       }
 
+      // noinspection RedundantIfStatementJS
       if (descString && descString.includes(filterString)) {
         return true;
       }

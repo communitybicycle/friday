@@ -7,6 +7,7 @@ import {
   PseudoBox,
   useColorMode,
 } from "@chakra-ui/core";
+import Center from "components/layout/Center";
 import React, { CSSProperties, Fragment } from "react";
 import {
   Draggable,
@@ -17,16 +18,12 @@ import {
 } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
+import { openEditModuleModal, setEditModuleModal } from "reducers/metaReducer";
+import { ModulesType } from "types/modules";
 import { useDraggableInPortal } from "../hooks";
-import Automations from "../modules/Automations/Automations";
-import Notes from "../modules/Notes/Notes";
-import TextModule from "../modules/Text/Text";
-import {
-  openEditModuleModal,
-  setEditModuleModal,
-} from "../reducers/metaReducer";
-import { ModulesType } from "../types/modules";
-import Center from "./Center";
+import Automations from "modules/Automations/Automations";
+import Notes from "modules/Notes/Notes";
+import TextModule from "modules/Text/Text";
 
 interface Props {
   module: ModulesType;

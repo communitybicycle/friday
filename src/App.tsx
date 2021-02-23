@@ -1,12 +1,12 @@
 import { Box, Flex, useColorMode } from "@chakra-ui/core";
+import Navbar from "components/layout/Navbar";
+import { BG_COLOR } from "data/constants";
 import React from "react";
 import { Scrollbars } from "react-custom-scrollbars";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
+import { RootState } from "reducers/store";
 import ElectronStoreSynchronizer from "./components/ElectronStoreSynchronizer";
-import Navbar from "./components/Navbar";
-import { BG_COLOR } from "./data/constants";
-import { RootState } from "./reducers/store";
 import Router from "./Router";
 
 const App: React.FC = () => {

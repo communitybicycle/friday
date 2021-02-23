@@ -1,6 +1,6 @@
 import { Flex, Input } from "@chakra-ui/core";
-import ActionCard from "components/ActionCard";
-import PageHeader from "components/PageHeader";
+import ActionCard from "components/card/ActionCard";
+import PageHeader from "components/page/PageHeader";
 import React, { useMemo, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";

@@ -3,8 +3,8 @@ import React from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { Route } from "react-router-dom";
-import { closeMenu, openMenu } from "../reducers/metaReducer";
-import { RootState } from "../reducers/store";
+import { closeMenu, openMenu } from "reducers/metaReducer";
+import { RootState } from "reducers/store";
 
 interface Props {
   path: string;

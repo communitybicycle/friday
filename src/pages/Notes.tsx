@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setNoteContent } from "reducers/dataReducer";
 import { RootState } from "reducers/store";
-import Container from "components/Container";
-import PageHeader from "components/PageHeader";
+import Container from "components/layout/Container";
+import PageHeader from "components/page/PageHeader";
 
 const Notes: React.FC = () => {
   const dispatch = useDispatch();

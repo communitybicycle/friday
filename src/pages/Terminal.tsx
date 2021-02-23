@@ -1,4 +1,4 @@
-import Container from "components/Container";
+import Container from "components/layout/Container";
 import React, { useEffect, useRef, useState } from "react";
 import { hot } from "react-hot-loader";
 import { XTerm } from "xterm-for-react";

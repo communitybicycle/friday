@@ -9,11 +9,11 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/core";
-import PluginsSettings from "components/settings/Plugins";
 import React from "react";
 import { hot } from "react-hot-loader";
-import DataSettings from "./settings/Data";
-import PersonalSettings from "./settings/Personal";
+import DataSettings from "./Data";
+import PersonalSettings from "./Personal";
+import PluginsSettings from "./Plugins";
 
 interface Props {
   isOpen: boolean;

@@ -1,12 +1,12 @@
 import { Button, Flex, Image, Switch, useColorMode } from "@chakra-ui/core";
+import Center from "components/layout/Center";
 import { ipcRenderer } from "electron";
 import React, { Fragment, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../reducers/store";
-import { setProfilePicture } from "../../reducers/userReducer";
-import { eStore } from "../../utils/eStore";
-import Center from "../Center";
+import { RootState } from "reducers/store";
+import { setProfilePicture } from "reducers/userReducer";
+import { eStore } from "utils/eStore";
 import Item from "./Item";
 
 const PersonalSettings: React.FC = () => {

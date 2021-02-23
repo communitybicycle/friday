@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import EditModuleModal from "components/EditModuleModal";
 import FeatureImage from "components/FeatureImage";
 import Module from "components/Module";
-import PageHeader from "components/PageHeader";
+import PageHeader from "components/page/PageHeader";
 import { setColumns } from "reducers/dataReducer";
 import { RootState } from "reducers/store";
 import { uuid } from "utils/index";

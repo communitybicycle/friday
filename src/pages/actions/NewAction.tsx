@@ -7,19 +7,19 @@ import {
   Textarea,
   useColorMode,
 } from "@chakra-ui/core";
+import ApplicationForm from "components/automations/ApplicationForm";
+import CommandForm from "components/automations/CommandForm";
+import FolderForm from "components/automations/FolderForm";
+import LinkForm from "components/automations/LinkForm";
+import { Card, CardTitle } from "components/card/Card";
+import Center from "components/layout/Center";
+import PageHeader from "components/page/PageHeader";
+import useQuery from "hooks/useQuery";
 import React, { useState } from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
-import ApplicationForm from "../../components/automations/ApplicationForm";
-import CommandForm from "../../components/automations/CommandForm";
-import FolderForm from "../../components/automations/FolderForm";
-import LinkForm from "../../components/automations/LinkForm";
-import { Card, CardTitle } from "../../components/Card";
-import Center from "../../components/Center";
-import PageHeader from "../../components/PageHeader";
-import useQuery from "../../hooks/useQuery";
-import { RootState } from "../../reducers/store";
-import { ActionType } from "../../types/action";
+import { RootState } from "reducers/store";
+import { ActionType } from "types/action";
 
 const NewAction: React.FC = () => {
   const query = useQuery();
