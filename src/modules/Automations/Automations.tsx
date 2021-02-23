@@ -17,7 +17,7 @@ const Automations: React.FC<Props> = ({ module }) => {
   );
 
   return (
-    <Flex>
+    <Flex flexWrap="wrap">
       {module.automations.map((automation, index: number) => {
         const { automationId } = automation;
 

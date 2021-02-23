@@ -70,7 +70,6 @@ const AutomationsEdit: React.FC<Props> = ({ module }) => {
   };
 
   const update = () => {
-    console.log("Update clicked");
     dispatch(editModule({ ...module, automations: selected }));
   };
 
@@ -159,7 +158,9 @@ const AutomationsEdit: React.FC<Props> = ({ module }) => {
                     cursor="pointer"
                     onClick={() => removeAction(actionIndex)}
                   >
-                    {actions[automation.automationId].name}
+                    {automation.type === "action"
+                      ? actions[automation.automationId].name
+                      : instructions[automation.automationId].name}
                   </ListItem>
                 ))}
               </List>
