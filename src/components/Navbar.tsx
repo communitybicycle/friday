@@ -14,7 +14,7 @@ import React, { FunctionComponent } from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { RootState } from "../reducers/store";
+import { RootState } from "reducers/store";
 import Center from "./Center";
 import Settings from "./Settings";
 
@@ -113,6 +113,7 @@ const Navbar: React.FC = () => {
         <Box mb={3}>
           <Navigation to="/actions">Actions</Navigation>
           <Navigation to="/instructions">Instructions</Navigation>
+          <Navigation to="/terminal">Terminal</Navigation>
         </Box>
 
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
