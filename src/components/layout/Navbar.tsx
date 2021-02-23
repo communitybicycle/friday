@@ -55,6 +55,7 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
 const Navbar: React.FC = () => {
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { settings } = useSelector((state: RootState) => state);
   const {
     pages: { dashboards, notes },
   } = useSelector((state: RootState) => state.data);
@@ -113,7 +114,12 @@ const Navbar: React.FC = () => {
         <Box mb={3}>
           <Navigation to="/actions">Actions</Navigation>
           <Navigation to="/instructions">Instructions</Navigation>
-          <Navigation to="/terminal">Terminal</Navigation>
+          {settings.calendarPlugin && (
+            <Navigation to="/calendar">Calendar</Navigation>
+          )}
+          {settings.terminalPlugin && (
+            <Navigation to="/terminal">Terminal</Navigation>
+          )}
         </Box>
 
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>

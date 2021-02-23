@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import dataReducer from "./dataReducer";
-import metaReducer from "./metaReducer";
-import userReducer from "./userReducer";
+import settingReducer from "reducers/settingReducer";
+import dataReducer from "reducers/dataReducer";
+import metaReducer from "reducers/metaReducer";
+import userReducer from "reducers/userReducer";
 
 export const rootReducer = combineReducers({
   data: dataReducer,
   meta: metaReducer,
   user: userReducer,
+  settings: settingReducer,
 });

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ModulesType } from "../types/modules";
-import { eStore } from "../utils/eStore";
+import { ModulesType } from "types/modules";
+import { eStore } from "utils/eStore";
 
 interface MetaState {
   isMenuOpen: boolean;

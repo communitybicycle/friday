@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialData } from "../data/initial";
-import { DataState } from "../types";
-import { Instruction } from "../types/instructions";
-import { ModulesType } from "../types/modules";
-import { Action } from "../types/action";
-import { Columns, PageType } from "../types/page";
-import { eStore } from "../utils/eStore";
+import { initialData } from "data/initial";
+import { DataState } from "types/index";
+import { Instruction } from "types/instructions";
+import { ModulesType } from "types/modules";
+import { Action } from "types/action";
+import { Columns, PageType } from "types/page";
+import { eStore } from "utils/eStore";
 
 const dataSlice = createSlice({
   name: "data",

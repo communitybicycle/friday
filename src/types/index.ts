@@ -11,3 +11,5 @@ export interface DataState {
   instructions: Record<string, Instruction>;
   pages: Pages;
 }
+
+export type Plugins = "calendar" | "terminal";

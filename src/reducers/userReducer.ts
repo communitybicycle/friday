@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { eStore } from "../utils/eStore";
+import { eStore } from "utils/eStore";
 
 interface UserState {
   name: string;
