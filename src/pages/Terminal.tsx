@@ -20,9 +20,7 @@ import { XTerm } from "xterm-for-react";
 // ptyProcess.resize(100, 40);
 // ptyProcess.write("ls\r");
 
-interface Props {}
-
-const Terminal: React.FC<Props> = (props) => {
+const Terminal: React.FC = () => {
   const [input, setInput] = useState("");
   const xtermRef = useRef<XTerm | null>(null);
 
@@ -40,17 +38,17 @@ const Terminal: React.FC<Props> = (props) => {
           const code = data.charCodeAt(0);
           // If the user hits empty and there is something typed echo it.
           if (code === 13 && input.length > 0) {
-            xtermRef.current.terminal.write(
+            xtermRef.current?.terminal.write(
               "\r\nYou typed: '" + input + "'\r\n"
             );
-            xtermRef.current.terminal.write("echo> ");
+            xtermRef.current?.terminal.write("echo> ");
             setInput("");
           } else if (code < 32 || code === 127) {
             // Disable control Keys such as arrow keys
             return;
           } else {
             // Add general key press characters to the terminal
-            xtermRef.current.terminal.write(data);
+            xtermRef.current?.terminal.write(data);
             setInput(input + data);
           }
         }}
