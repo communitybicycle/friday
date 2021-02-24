@@ -6,3 +6,5 @@ export const DEFAULT_IMAGE_URL =
 
 export const BG_COLOR = { light: "white", dark: "gray.800" };
 export const TEXT_GRAY_COLOR = { light: "gray", dark: "white" };
+
+export const NAVBAR_WIDTH = "260";

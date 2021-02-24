@@ -35,7 +35,7 @@ const Dashboard: React.FC = () => {
     pages: { dashboards },
     modules,
   } = useSelector((state: RootState) => state.data);
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
   const dashboard = dashboards[id];
 
   const editPage = () => {

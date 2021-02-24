@@ -10,6 +10,7 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/core";
+import { NAVBAR_WIDTH } from "data/constants";
 import React, { FunctionComponent } from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
@@ -67,9 +68,11 @@ const Navbar: React.FC = () => {
     <Flex
       bg={bgColor[colorMode]}
       height="calc(100vh - 30px)"
-      transform={isMenuOpen ? "translate(0, 0)" : "translate(-280px, 0)"}
-      minW="280px"
-      w="280px"
+      transform={
+        isMenuOpen ? "translate(0, 0)" : `translate(-${NAVBAR_WIDTH}px, 0)`
+      }
+      minW={`${NAVBAR_WIDTH}px`}
+      w={`${NAVBAR_WIDTH}px`}
       transition="0.25s transform ease-in"
       position="fixed"
       top="30px"
