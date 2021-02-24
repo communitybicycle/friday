@@ -18,10 +18,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteModule } from "reducers/dataReducer";
 import { closeEditModuleModal } from "reducers/metaReducer";
 import { RootState } from "reducers/store";
+import { Module } from "types/modules";
 
 interface EditModalContentProps {
   width?: string | number;
-  id: string;
+  module: Module;
   onSubmit: () => void;
 }
 
@@ -30,7 +31,7 @@ export type ChildHandle = React.ElementRef<typeof TextEdit | typeof NotesEdit>;
 export const EditModalContent: React.FC<EditModalContentProps> = ({
   onSubmit,
   width,
-  id,
+  module,
   children,
 }) => {
   const dispatch = useDispatch();
@@ -45,7 +46,9 @@ export const EditModalContent: React.FC<EditModalContentProps> = ({
   };
 
   const handleDelete = () => {
-    dispatch(deleteModule(id));
+    dispatch(
+      deleteModule({ moduleId: module.id, dashboardId: module.dashboardId })
+    );
   };
 
   return (

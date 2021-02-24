@@ -88,12 +88,14 @@ export const initialData: DataState = {
   modules: {
     "999": {
       id: "999",
+      dashboardId: "abc",
       type: "notes",
       header: "Notes",
       text: "Your notes can go here!",
     },
     "123": {
       id: "123",
+      dashboardId: "abc",
       type: "automations",
       header: "Helper",
       automations: [
@@ -105,6 +107,7 @@ export const initialData: DataState = {
     },
     "234": {
       id: "234",
+      dashboardId: "abc",
       type: "text",
       header: "Quick Start",
       text:
@@ -118,7 +121,6 @@ export const initialData: DataState = {
         title: "Personal Dashboard",
         header: "Welcome, Hal!",
         type: "dashboards",
-
         columns: [["234", "123"], ["999"]],
       },
     },

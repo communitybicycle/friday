@@ -22,6 +22,27 @@ export const uuid = (): string => {
 //   return ["text/plain", "text/markdown"].includes(file.type);
 // };
 
-export const addDataTypeField = (arr: any[], value: string) => {
+export const addDataTypeField = (arr: any[], value: string): any[] => {
   return arr.map((item) => ({ ...item, dataType: value }));
+};
+
+export const deleteStringInNestedArray = (
+  arr: string[][],
+  value: string
+): string[][] => {
+  const output: string[][] = [];
+
+  arr.forEach((col) => {
+    const newCol: string[] = [];
+
+    col.forEach((item) => {
+      if (item !== value) {
+        newCol.push(item);
+      }
+    });
+
+    output.push(newCol);
+  });
+
+  return output;
 };

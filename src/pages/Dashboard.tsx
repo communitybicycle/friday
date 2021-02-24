@@ -1,4 +1,11 @@
-import { Box, Grid, PseudoBox, useColorMode } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  PseudoBox,
+  useColorMode,
+} from "@chakra-ui/core";
 import ModuleCard from "components/card/ModuleCard";
 import EditModuleModal from "components/EditModuleModal";
 import FeatureImage from "components/FeatureImage";
@@ -16,6 +23,8 @@ import { ModuleTypes } from "types/modules";
 import { move, reorder } from "utils/dnd";
 import { uuid } from "utils/index";
 import { createModule } from "utils/module";
+
+const moduleCards: ModuleTypes[] = ["text", "notes"];
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -35,16 +44,13 @@ const Dashboard: React.FC = () => {
   const onDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;
 
-    console.log("Result:", result);
-    console.log("Source:", source);
-    console.log("Destination:", destination);
-
     if (!destination || !dashboard) {
       return;
     }
 
     if (source.droppableId === destination.droppableId) {
       // same column
+      if (source.droppableId === "new-modules") return;
       const columnIndex = parseInt(source.droppableId);
       const items = reorder(
         dashboard.columns[columnIndex],
@@ -62,7 +68,7 @@ const Dashboard: React.FC = () => {
       const newColumns = [...dashboard.columns];
       const newColumn = Array.from(newColumns[destinationColumnIndex]);
 
-      const newModule = createModule(draggableId as ModuleTypes);
+      const newModule = createModule(draggableId as ModuleTypes, id);
 
       if (newModule) {
         dispatch(addModule(newModule));
@@ -96,27 +102,37 @@ const Dashboard: React.FC = () => {
     <Box>
       <DragDropContext onDragEnd={onDragEnd}>
         {isEditing && (
-          <Droppable droppableId="new-modules" isDropDisabled={true}>
-            {(provided) => (
-              <PseudoBox
-                ref={provided.innerRef}
-                borderRadius={4}
-                width="90vw"
-                position="fixed"
-                top="60px"
-                right="5vw"
-                p="16px"
-                zIndex={100}
-                boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
-                bg={BG_COLOR[colorMode]}
-                d="flex"
-              >
-                <ModuleCard type="text" index={0} />
-                <ModuleCard type="notes" index={1} />
-                {provided.placeholder}
-              </PseudoBox>
-            )}
-          </Droppable>
+          <PseudoBox
+            borderRadius={4}
+            width="90vw"
+            position="fixed"
+            top="16px"
+            right="5vw"
+            p="16px"
+            zIndex={100}
+            boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
+            bg={BG_COLOR[colorMode]}
+            d="flex"
+          >
+            <Flex justify="space-between" flex={1}>
+              <Droppable droppableId="new-modules" isDropDisabled>
+                {(provided) => (
+                  <Flex ref={provided.innerRef}>
+                    {moduleCards.map((type, index) => (
+                      <ModuleCard type={type} index={index} key={index} />
+                    ))}
+                    {provided.placeholder}
+                  </Flex>
+                )}
+              </Droppable>
+
+              <Flex flex={1} justifyContent="flex-end" align="flex-end">
+                <Button variantColor="blue" onClick={() => setIsEditing(false)}>
+                  Close
+                </Button>
+              </Flex>
+            </Flex>
+          </PseudoBox>
         )}
         <FeatureImage imgSrc={dashboard.featureImage} id={id} />
         <Box px="50px" mt="20px">

@@ -1,5 +1,6 @@
-import { Box, Heading } from "@chakra-ui/core";
+import { Box, Heading, PseudoBox, useColorMode } from "@chakra-ui/core";
 import Center from "components/layout/Center";
+import { BG_COLOR } from "data/constants";
 import React, { Fragment } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
@@ -11,22 +12,23 @@ interface Props {
 }
 
 const ModuleCard: React.FC<Props> = ({ type, index }) => {
+  const { colorMode } = useColorMode();
+
   return (
     <Draggable draggableId={type} index={index}>
       {(provided, snapshot) => (
         <Fragment>
           <Box
             ref={provided.innerRef}
-            {...provided.draggableProps}
-            {...provided.dragHandleProps}
             borderRadius="8px"
-            maxW={240}
-            w={240}
-            h={100}
+            minW={240}
             minH={100}
             p="16px"
             borderWidth={1}
+            bg={BG_COLOR[colorMode]}
             mr={4}
+            {...provided.dragHandleProps}
+            {...provided.draggableProps}
           >
             <Center alignItems="center" height="100%">
               <Heading
@@ -40,16 +42,16 @@ const ModuleCard: React.FC<Props> = ({ type, index }) => {
             </Center>
           </Box>
           {snapshot.isDragging && (
-            <Box
+            <PseudoBox
               borderRadius="8px"
-              maxW={240}
-              w={240}
-              h={100}
+              minW={240}
               minH={100}
               p="16px"
               borderWidth={1}
+              bg={BG_COLOR[colorMode]}
               mr={4}
               transform="none"
+              style={{ "& + div": { display: "none !important" } } as any}
             >
               <Center alignItems="center" height="100%">
                 <Heading
@@ -61,7 +63,7 @@ const ModuleCard: React.FC<Props> = ({ type, index }) => {
                   {type} Module
                 </Heading>
               </Center>
-            </Box>
+            </PseudoBox>
           )}
         </Fragment>
       )}

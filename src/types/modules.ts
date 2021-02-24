@@ -11,6 +11,7 @@ export type ModuleTypes =
 
 export interface Module {
   id: string;
+  dashboardId: string;
   type: ModuleTypes;
   header: string;
   hideHeader?: boolean;

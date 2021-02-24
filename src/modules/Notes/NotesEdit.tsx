@@ -13,7 +13,7 @@ const NotesEdit: React.FC<Props> = ({ module }) => {
   };
 
   return (
-    <EditModalContent id={module.id} onSubmit={update}>
+    <EditModalContent module={module} onSubmit={update}>
       Edit Notes
     </EditModalContent>
   );

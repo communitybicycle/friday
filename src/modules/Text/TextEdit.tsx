@@ -26,7 +26,7 @@ const TextEdit: React.FC<Props> = ({ module }) => {
   };
 
   return (
-    <EditModalContent id={module.id} onSubmit={update}>
+    <EditModalContent module={module} onSubmit={update}>
       <Stack spacing={2}>
         <FormControl>
           <FormLabel htmlFor="module-header">Name</FormLabel>

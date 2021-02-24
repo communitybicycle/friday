@@ -6,6 +6,7 @@ import { ModulesType } from "types/modules";
 import { Action } from "types/action";
 import { Columns, PageType } from "types/page";
 import { eStore } from "utils/eStore";
+import { deleteStringInNestedArray } from "utils/index";
 
 const dataSlice = createSlice({
   name: "data",
@@ -16,6 +17,8 @@ const dataSlice = createSlice({
     },
     deleteAction: (state, { payload: id }: PayloadAction<string>) => {
       delete state.actions[id];
+
+      // delete any references ot action in an instruction
       Object.keys(state.instructions).forEach((instructionId) => {
         const instructions = state.instructions[instructionId].instructions;
         state.instructions[instructionId].instructions = instructions.filter(
@@ -41,8 +44,23 @@ const dataSlice = createSlice({
     editModule: (state, { payload }: PayloadAction<ModulesType>) => {
       state.modules[payload.id] = payload;
     },
-    deleteModule: (state, { payload: id }: PayloadAction<string>) => {
-      delete state.modules[id];
+    deleteModule: (
+      state,
+      { payload }: PayloadAction<{ dashboardId: string; moduleId: string }>
+    ) => {
+      const { dashboardId, moduleId } = payload;
+
+      console.log("Dashboard ID:", dashboardId);
+
+      delete state.modules[moduleId];
+
+      // delete all references in the dashboard
+      const dashboard = state.pages.dashboards[dashboardId];
+
+      state.pages.dashboards[dashboardId].columns = deleteStringInNestedArray(
+        dashboard.columns,
+        moduleId
+      );
     },
     setColumns: (
       state,
