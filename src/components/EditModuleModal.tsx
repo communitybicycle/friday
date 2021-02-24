@@ -49,6 +49,7 @@ export const EditModalContent: React.FC<EditModalContentProps> = ({
     dispatch(
       deleteModule({ moduleId: module.id, dashboardId: module.dashboardId })
     );
+    handleClose();
   };
 
   return (

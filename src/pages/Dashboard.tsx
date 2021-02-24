@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   Grid,
+  Heading,
   PseudoBox,
   useColorMode,
 } from "@chakra-ui/core";
@@ -24,7 +25,7 @@ import { move, reorder } from "utils/dnd";
 import { uuid } from "utils/index";
 import { createModule } from "utils/module";
 
-const moduleCards: ModuleTypes[] = ["text", "notes"];
+const moduleCards: ModuleTypes[] = ["text", "notes", "automations"];
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
@@ -48,10 +49,13 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    if (source.droppableId === destination.droppableId) {
+    const start = source.droppableId;
+    const finish = destination.droppableId;
+
+    if (start === finish) {
       // same column
-      if (source.droppableId === "new-modules") return;
-      const columnIndex = parseInt(source.droppableId);
+      if (start === "new-modules") return;
+      const columnIndex = parseInt(start);
       const items = reorder(
         dashboard.columns[columnIndex],
         source.index,
@@ -62,8 +66,8 @@ const Dashboard: React.FC = () => {
       newColumns[columnIndex] = items;
 
       dispatch(setColumns({ id, columns: newColumns }));
-    } else if (source.droppableId === "new-modules") {
-      const destinationColumnIndex = parseInt(destination.droppableId);
+    } else if (start === "new-modules") {
+      const destinationColumnIndex = parseInt(finish);
 
       const newColumns = [...dashboard.columns];
       const newColumn = Array.from(newColumns[destinationColumnIndex]);
@@ -79,8 +83,8 @@ const Dashboard: React.FC = () => {
         dispatch(setColumns({ id, columns: newColumns }));
       }
     } else {
-      const sourceColumnIndex = parseInt(source.droppableId);
-      const destinationColumnIndex = parseInt(destination.droppableId);
+      const sourceColumnIndex = parseInt(start);
+      const destinationColumnIndex = parseInt(finish);
       const result = move(
         dashboard.columns[sourceColumnIndex],
         dashboard.columns[destinationColumnIndex],
@@ -104,22 +108,33 @@ const Dashboard: React.FC = () => {
         {isEditing && (
           <PseudoBox
             borderRadius={4}
-            width="90vw"
+            width="60vw"
             position="fixed"
             top="16px"
-            right="5vw"
+            right="20vw"
             p="16px"
             zIndex={100}
             boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
             bg={BG_COLOR[colorMode]}
-            d="flex"
           >
+            <Heading size="sm" mb={4}>
+              Drag and drop your new modules!
+            </Heading>
             <Flex justify="space-between" flex={1}>
-              <Droppable droppableId="new-modules" isDropDisabled>
+              <Droppable
+                droppableId="new-modules"
+                direction="horizontal"
+                isDropDisabled={true}
+              >
                 {(provided) => (
                   <Flex ref={provided.innerRef}>
                     {moduleCards.map((type, index) => (
-                      <ModuleCard type={type} index={index} key={index} />
+                      <ModuleCard
+                        type={type}
+                        id={type}
+                        index={index}
+                        key={type}
+                      />
                     ))}
                     {provided.placeholder}
                   </Flex>
@@ -148,16 +163,7 @@ const Dashboard: React.FC = () => {
             {dashboard.columns.map((column: any, index: number) => (
               <Droppable droppableId={index.toString()} key={uuid()}>
                 {(provided) => (
-                  <Box
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                    // style={{
-                    //   backgroundColor: snapshot.isDraggingOver
-                    //     ? "#eaeaea"
-                    //     : "fff",
-                    // }}
-                    // style={{ position: "static" }}
-                  >
+                  <Box ref={provided.innerRef} {...provided.droppableProps}>
                     {column.map((moduleId: string, index: number) => (
                       <Module
                         module={modules[moduleId]}

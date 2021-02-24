@@ -18,6 +18,7 @@ export const createModule = (
         type: "text",
         header: "New text module",
         text: "You can replace me!",
+        hideHeader: false,
       } as TextModule;
     case "notes":
       return {
@@ -26,7 +27,17 @@ export const createModule = (
         type: "notes",
         header: "New notes module",
         text: "You can write stuff in here easily.",
+        hideHeader: false,
       } as NotesModule;
+    case "automations":
+      return {
+        id: uuid(),
+        dashboardId,
+        type: "automations",
+        header: "Automations",
+        automations: [],
+        hideHeader: false,
+      };
     default:
       break;
   }

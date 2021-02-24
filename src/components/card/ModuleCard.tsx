@@ -1,28 +1,31 @@
-import { Box, Heading, PseudoBox, useColorMode } from "@chakra-ui/core";
+import { Box, Heading, useColorMode } from "@chakra-ui/core";
 import Center from "components/layout/Center";
 import { BG_COLOR } from "data/constants";
-import React, { Fragment } from "react";
-import { Draggable } from "react-beautiful-dnd";
+import { useDraggableInPortal } from "hooks/index";
+import React from "react";
+import { Draggable, DraggableProvided } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
 import { ModuleTypes } from "types/modules";
 
 interface Props {
+  id: string;
   type: ModuleTypes;
   index: number;
 }
 
-const ModuleCard: React.FC<Props> = ({ type, index }) => {
+const ModuleCard: React.FC<Props> = ({ id, type, index }) => {
+  const renderDraggable = useDraggableInPortal();
   const { colorMode } = useColorMode();
 
   return (
-    <Draggable draggableId={type} index={index}>
-      {(provided, snapshot) => (
-        <Fragment>
+    <Draggable draggableId={id} index={index}>
+      {renderDraggable((provided: DraggableProvided) => (
+        <Box position="static">
           <Box
             ref={provided.innerRef}
             borderRadius="8px"
-            minW={240}
-            minH={100}
+            minW="160px"
+            minH="56px"
             p="16px"
             borderWidth={1}
             bg={BG_COLOR[colorMode]}
@@ -32,7 +35,7 @@ const ModuleCard: React.FC<Props> = ({ type, index }) => {
           >
             <Center alignItems="center" height="100%">
               <Heading
-                size="lg"
+                size="md"
                 fontWeight="bold"
                 textTransform="capitalize"
                 textAlign="center"
@@ -41,32 +44,8 @@ const ModuleCard: React.FC<Props> = ({ type, index }) => {
               </Heading>
             </Center>
           </Box>
-          {snapshot.isDragging && (
-            <PseudoBox
-              borderRadius="8px"
-              minW={240}
-              minH={100}
-              p="16px"
-              borderWidth={1}
-              bg={BG_COLOR[colorMode]}
-              mr={4}
-              transform="none"
-              style={{ "& + div": { display: "none !important" } } as any}
-            >
-              <Center alignItems="center" height="100%">
-                <Heading
-                  size="lg"
-                  fontWeight="bold"
-                  textTransform="capitalize"
-                  textAlign="center"
-                >
-                  {type} Module
-                </Heading>
-              </Center>
-            </PseudoBox>
-          )}
-        </Fragment>
-      )}
+        </Box>
+      ))}
     </Draggable>
   );
 };
