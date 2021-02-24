@@ -158,7 +158,7 @@ const Dashboard: React.FC = () => {
           />
           <Grid
             templateColumns={`repeat(${dashboard.columns.length}, 1fr)`}
-            gap={4}
+            gap={8}
           >
             {dashboard.columns.map((column: any, index: number) => (
               <Droppable droppableId={index.toString()} key={uuid()}>
