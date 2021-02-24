@@ -1,35 +1,43 @@
-import { Box, Grid } from "@chakra-ui/core";
-import React from "react";
-import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
-import { hot } from "react-hot-loader";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import { useParams } from "react-router-dom";
+import { Box, Grid, PseudoBox, useColorMode } from "@chakra-ui/core";
+import ModuleCard from "components/card/ModuleCard";
 import EditModuleModal from "components/EditModuleModal";
 import FeatureImage from "components/FeatureImage";
 import Module from "components/Module";
 import PageHeader from "components/page/PageHeader";
-import { setColumns } from "reducers/dataReducer";
+import { BG_COLOR } from "data/constants";
+import React, { useState } from "react";
+import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import { hot } from "react-hot-loader";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { addModule, setColumns } from "reducers/dataReducer";
 import { RootState } from "reducers/store";
-import { uuid } from "utils/index";
+import { ModuleTypes } from "types/modules";
 import { move, reorder } from "utils/dnd";
+import { uuid } from "utils/index";
+import { createModule } from "utils/module";
 
 const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
   const { id } = useParams<{ id: string }>();
+  const { colorMode } = useColorMode();
   const {
     pages: { dashboards },
     modules,
   } = useSelector((state: RootState) => state.data);
+  const [isEditing, setIsEditing] = useState(true);
   const dashboard = dashboards[id];
 
   const editPage = () => {
-    history.push("/dashboard/edit");
+    setIsEditing(true);
   };
 
   const onDragEnd = (result: DropResult) => {
-    const { source, destination } = result;
+    const { source, destination, draggableId } = result;
+
+    console.log("Result:", result);
+    console.log("Source:", source);
+    console.log("Destination:", destination);
 
     if (!destination || !dashboard) {
       return;
@@ -48,6 +56,22 @@ const Dashboard: React.FC = () => {
       newColumns[columnIndex] = items;
 
       dispatch(setColumns({ id, columns: newColumns }));
+    } else if (source.droppableId === "new-modules") {
+      const destinationColumnIndex = parseInt(destination.droppableId);
+
+      const newColumns = [...dashboard.columns];
+      const newColumn = Array.from(newColumns[destinationColumnIndex]);
+
+      const newModule = createModule(draggableId as ModuleTypes);
+
+      if (newModule) {
+        dispatch(addModule(newModule));
+
+        newColumn.splice(destination.index, 0, newModule.id);
+        newColumns[destinationColumnIndex] = newColumn;
+
+        dispatch(setColumns({ id, columns: newColumns }));
+      }
     } else {
       const sourceColumnIndex = parseInt(source.droppableId);
       const destinationColumnIndex = parseInt(destination.droppableId);
@@ -70,10 +94,37 @@ const Dashboard: React.FC = () => {
 
   return (
     <Box>
-      <FeatureImage imgSrc={dashboard.featureImage} id={id} />
-      <Box px="50px" mt="20px">
-        <PageHeader id="dashboard" text="Welcome, Hal!" pageAction={editPage} />
-        <DragDropContext onDragEnd={onDragEnd}>
+      <DragDropContext onDragEnd={onDragEnd}>
+        {isEditing && (
+          <Droppable droppableId="new-modules" isDropDisabled={true}>
+            {(provided) => (
+              <PseudoBox
+                ref={provided.innerRef}
+                borderRadius={4}
+                width="90vw"
+                position="fixed"
+                top="60px"
+                right="5vw"
+                p="16px"
+                zIndex={100}
+                boxShadow="rgba(99, 99, 99, 0.2) 0px 2px 8px 0px"
+                bg={BG_COLOR[colorMode]}
+                d="flex"
+              >
+                <ModuleCard type="text" index={0} />
+                <ModuleCard type="notes" index={1} />
+                {provided.placeholder}
+              </PseudoBox>
+            )}
+          </Droppable>
+        )}
+        <FeatureImage imgSrc={dashboard.featureImage} id={id} />
+        <Box px="50px" mt="20px">
+          <PageHeader
+            id="dashboard"
+            text="Welcome, Hal!"
+            pageAction={editPage}
+          />
           <Grid
             templateColumns={`repeat(${dashboard.columns.length}, 1fr)`}
             gap={4}
@@ -104,8 +155,8 @@ const Dashboard: React.FC = () => {
               </Droppable>
             ))}
           </Grid>
-        </DragDropContext>
-      </Box>
+        </Box>
+      </DragDropContext>
       <EditModuleModal />
     </Box>
   );

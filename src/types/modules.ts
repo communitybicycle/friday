@@ -1,6 +1,6 @@
 import { Action } from "./action";
 
-type ModuleTypes =
+export type ModuleTypes =
   | "text"
   | "notes"
   | "photo"

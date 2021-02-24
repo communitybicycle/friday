@@ -1,5 +1,6 @@
 import {
   Button,
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,11 +15,13 @@ import TextEdit from "modules/Text/TextEdit";
 import React, { Fragment } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
+import { deleteModule } from "reducers/dataReducer";
 import { closeEditModuleModal } from "reducers/metaReducer";
 import { RootState } from "reducers/store";
 
 interface EditModalContentProps {
   width?: string | number;
+  id: string;
   onSubmit: () => void;
 }
 
@@ -27,6 +30,7 @@ export type ChildHandle = React.ElementRef<typeof TextEdit | typeof NotesEdit>;
 export const EditModalContent: React.FC<EditModalContentProps> = ({
   onSubmit,
   width,
+  id,
   children,
 }) => {
   const dispatch = useDispatch();
@@ -40,6 +44,10 @@ export const EditModalContent: React.FC<EditModalContentProps> = ({
     handleClose();
   };
 
+  const handleDelete = () => {
+    dispatch(deleteModule(id));
+  };
+
   return (
     <ModalContent maxW={width || 400}>
       <ModalHeader>Edit Module</ModalHeader>
@@ -47,20 +55,25 @@ export const EditModalContent: React.FC<EditModalContentProps> = ({
       <ModalBody>{children}</ModalBody>
 
       <ModalFooter>
-        <Button variant="ghost" mr={3} onClick={handleClose}>
-          Close
-        </Button>
-        <Button variantColor="blue" onClick={handleClick}>
-          Save
-        </Button>
+        <Flex justifyContent="space-between" flex={1}>
+          <Button variantColor="red" onClick={handleDelete}>
+            Delete
+          </Button>
+          <Flex>
+            <Button variant="ghost" mr={3} onClick={handleClose}>
+              Close
+            </Button>
+            <Button variantColor="blue" onClick={handleClick}>
+              Save
+            </Button>
+          </Flex>
+        </Flex>
       </ModalFooter>
     </ModalContent>
   );
 };
 
-interface Props {}
-
-const EditModuleModal: React.FC<Props> = () => {
+const EditModuleModal: React.FC = () => {
   const dispatch = useDispatch();
   const { isEditModuleModalOpen, editModuleModal: module } = useSelector(
     (state: RootState) => state.meta

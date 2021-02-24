@@ -1,6 +1,3 @@
-import React, { useState } from "react";
-import { hot } from "react-hot-loader";
-import { TextModule } from "../../types/modules";
 import {
   FormControl,
   FormLabel,
@@ -8,9 +5,12 @@ import {
   Stack,
   Textarea,
 } from "@chakra-ui/core";
-import { EditModalContent } from "../../components/EditModuleModal";
+import { EditModalContent } from "components/EditModuleModal";
+import React, { useState } from "react";
+import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
-import { editModule } from "../../reducers/dataReducer";
+import { editModule } from "reducers/dataReducer";
+import { TextModule } from "types/modules";
 
 interface Props {
   module: TextModule;
@@ -26,7 +26,7 @@ const TextEdit: React.FC<Props> = ({ module }) => {
   };
 
   return (
-    <EditModalContent onSubmit={update}>
+    <EditModalContent id={module.id} onSubmit={update}>
       <Stack spacing={2}>
         <FormControl>
           <FormLabel htmlFor="module-header">Name</FormLabel>

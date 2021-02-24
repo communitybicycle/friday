@@ -8,6 +8,9 @@ import {
   useColorMode,
 } from "@chakra-ui/core";
 import Center from "components/layout/Center";
+import Automations from "modules/Automations/Automations";
+import Notes from "modules/Notes/Notes";
+import TextModule from "modules/Text/Text";
 import React, { CSSProperties, Fragment } from "react";
 import {
   Draggable,
@@ -21,9 +24,6 @@ import { useDispatch } from "react-redux";
 import { openEditModuleModal, setEditModuleModal } from "reducers/metaReducer";
 import { ModulesType } from "types/modules";
 import { useDraggableInPortal } from "../hooks";
-import Automations from "modules/Automations/Automations";
-import Notes from "modules/Notes/Notes";
-import TextModule from "modules/Text/Text";
 
 interface Props {
   module: ModulesType;
@@ -34,7 +34,7 @@ const Module: React.FC<Props> = ({ module, index }) => {
   const dispatch = useDispatch();
   const renderDraggable = useDraggableInPortal();
   const { colorMode } = useColorMode();
-  const bgColor = { light: "white", dark: "gray.800" };
+  const BG_COLOR = { light: "white", dark: "gray.800" };
 
   const handleOpen = () => {
     dispatch(setEditModuleModal(module));
@@ -90,7 +90,7 @@ const Module: React.FC<Props> = ({ module, index }) => {
             )}
             width={snapshot.isDragging ? "300px" : "auto"}
             height={snapshot.isDragging ? "160px !important" : "auto"}
-            bg={bgColor[colorMode]}
+            bg={BG_COLOR[colorMode]}
           >
             {snapshot.isDragging ? (
               <Center alignItems="center" height="100%">

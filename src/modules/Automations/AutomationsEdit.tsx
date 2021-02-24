@@ -70,11 +70,11 @@ const AutomationsEdit: React.FC<Props> = ({ module }) => {
   };
 
   const update = () => {
-    dispatch(editModule({ ...module, automations: selected }));
+    dispatch(editModule({ ...module, header, automations: selected }));
   };
 
   return (
-    <EditModalContent onSubmit={update} width="720px">
+    <EditModalContent id={module.id} onSubmit={update} width="720px">
       <Stack spacing={2}>
         <FormControl>
           <FormLabel htmlFor="module-header">Name</FormLabel>
