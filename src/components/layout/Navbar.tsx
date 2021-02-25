@@ -132,31 +132,43 @@ const Navbar: React.FC = () => {
         </Heading>
         <Box mb={3}>
           {Object.values(dashboards).map((dashboard) => (
-            <Navigation to={`/dashboard/${dashboard.id}`} key={dashboard.id}>
+            <Navigation
+              to={`/dashboard/${dashboard.id}`}
+              key={dashboard.id}
+              icon="sun"
+            >
               {dashboard.title}
             </Navigation>
           ))}
         </Box>
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
-          Others
+          Automations
         </Heading>
         <Box mb={3}>
-          <Navigation to="/actions">Actions</Navigation>
-          <Navigation to="/instructions">Instructions</Navigation>
-          {settings.calendarPlugin && (
-            <Navigation to="/calendar">Calendar</Navigation>
-          )}
-          {settings.terminalPlugin && (
-            <Navigation to="/terminal">Terminal</Navigation>
-          )}
+          <Navigation to="/actions" icon="star">
+            Actions
+          </Navigation>
+          <Navigation to="/instructions" icon="moon">
+            Instructions
+          </Navigation>
         </Box>
 
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
-          Notes
+          Plugins
         </Heading>
         <Navigation to="/notes" icon="edit">
           Notes
         </Navigation>
+        {settings.calendarPlugin && (
+          <Navigation to="/calendar" icon="calendar">
+            Calendar
+          </Navigation>
+        )}
+        {settings.terminalPlugin && (
+          <Navigation to="/terminal" icon="info">
+            Terminal
+          </Navigation>
+        )}
       </Box>
 
       {/* Bottom section */}
