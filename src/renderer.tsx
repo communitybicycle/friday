@@ -33,7 +33,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "react-dropzone-uploader/dist/styles.css";
 import "react-hot-loader";
-import "react-quill/dist/quill.snow.css";
+import "react-quill/dist/quill.bubble.css";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "reducers/store";

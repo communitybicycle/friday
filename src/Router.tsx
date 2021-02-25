@@ -5,7 +5,8 @@ import Calendar from "pages/Calendar";
 import Dashboard from "pages/Dashboard";
 import Instructions from "pages/instructions/Instructions";
 import NewInstruction from "pages/instructions/NewInstruction";
-import Notes from "pages/Notes";
+import NoteDashboard from "pages/notes/NoteDashboard";
+import Notes from "pages/notes/Notes";
 import Terminal from "pages/Terminal";
 import Welcome from "pages/Welcome";
 import React, { FunctionComponent } from "react";
@@ -14,6 +15,7 @@ import { Switch } from "react-router-dom";
 const Router: FunctionComponent = () => {
   return (
     <Switch>
+      <Page path="/notes" component={NoteDashboard} noPadding />
       <Page path="/notes/:id" component={Notes} />
       <Page path="/terminal" component={Terminal} />
       <Page path="/calendar" component={Calendar} />

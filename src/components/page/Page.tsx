@@ -1,4 +1,5 @@
 import { Box, IconButton, useColorMode } from "@chakra-ui/core";
+import { WINDOW_BAR_HEIGHT } from "data/constants";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,7 +36,11 @@ const Page: React.FC<Props> = ({ noPadding, path, component, notExact }) => {
       exact={!notExact}
       path={path}
       component={() => (
-        <Box position="relative">
+        <Box
+          position="relative"
+          height="100%"
+          minH={`calc(100vh - ${WINDOW_BAR_HEIGHT})`}
+        >
           <IconButton
             icon={isMenuOpen ? "arrow-left" : "arrow-right"}
             aria-label="open and close menu"
@@ -51,6 +56,7 @@ const Page: React.FC<Props> = ({ noPadding, path, component, notExact }) => {
             pt={noPadding ? "0px" : "50px"}
             px={noPadding ? "0px" : "50px"}
             bg={bgColor[colorMode]}
+            height="100%"
           >
             {render(component)}
           </Box>

@@ -3,6 +3,7 @@ import {
   Button,
   Flex,
   Heading,
+  Icon,
   IconButton,
   Image,
   PseudoBox,
@@ -10,7 +11,11 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/core";
-import { NAVBAR_WIDTH } from "data/constants";
+import {
+  NAVBAR_BORDER_COLOR,
+  NAVBAR_WIDTH,
+  WINDOW_BAR_HEIGHT,
+} from "data/constants";
 import React, { FunctionComponent } from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
@@ -21,9 +26,16 @@ import Settings from "components/settings/Settings";
 
 interface IPropsNavigation {
   to: string;
+  icon?: string;
+  lighter?: boolean;
 }
 
-const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
+export const Navigation: FunctionComponent<IPropsNavigation> = ({
+  to,
+  icon,
+  lighter,
+  children,
+}) => {
   const history = useHistory();
 
   const handleClick = () => {
@@ -34,7 +46,8 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
 
   return (
     <PseudoBox
-      display="block"
+      display="flex"
+      alignItems="center"
       color="white"
       fontSize="lg"
       fontWeight="light"
@@ -42,12 +55,13 @@ const Navigation: FunctionComponent<IPropsNavigation> = ({ to, children }) => {
       height="34px"
       px={2}
       _hover={{
-        backgroundColor: "#555",
+        backgroundColor: lighter ? "gray.600" : "gray.700",
       }}
       borderRadius={4}
       cursor="pointer"
       onClick={handleClick}
     >
+      {icon && <Icon name={icon} mr={3} />}
       <span>{children}</span>
     </PseudoBox>
   );
@@ -58,7 +72,7 @@ const Navbar: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { settings } = useSelector((state: RootState) => state);
   const {
-    pages: { dashboards, notes },
+    pages: { dashboards },
   } = useSelector((state: RootState) => state.data);
   const { isMenuOpen } = useSelector((state: RootState) => state.meta);
   const { profilePicture } = useSelector((state: RootState) => state.user);
@@ -67,7 +81,7 @@ const Navbar: React.FC = () => {
   return (
     <Flex
       bg={bgColor[colorMode]}
-      height="calc(100vh - 30px)"
+      height={`calc(100vh - ${WINDOW_BAR_HEIGHT}px)`}
       transform={
         isMenuOpen ? "translate(0, 0)" : `translate(-${NAVBAR_WIDTH}px, 0)`
       }
@@ -75,12 +89,16 @@ const Navbar: React.FC = () => {
       w={`${NAVBAR_WIDTH}px`}
       transition="0.25s transform ease-in"
       position="fixed"
-      top="30px"
+      top={`${WINDOW_BAR_HEIGHT}px`}
       left={0}
       flexDir="column"
       justifyContent="space-between"
       borderRight={
-        colorMode === "dark" ? (isMenuOpen ? "1px solid #555" : "none") : "none"
+        colorMode === "dark"
+          ? isMenuOpen
+            ? `1px solid ${NAVBAR_BORDER_COLOR}`
+            : "none"
+          : "none"
       }
     >
       <Box px={isMenuOpen ? "20px" : "0px"}>
@@ -101,6 +119,8 @@ const Navbar: React.FC = () => {
             objectFit="cover"
           />
         </Center>
+
+        {/* Routes */}
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
           Home
         </Heading>
@@ -128,21 +148,23 @@ const Navbar: React.FC = () => {
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
           Notes
         </Heading>
-        <Box>
-          {Object.values(notes).map((notePage) => (
-            <Navigation to={`/notes/${notePage.id}`} key={notePage.id}>
-              {notePage.title}
-            </Navigation>
-          ))}
-        </Box>
+        <Navigation to="/notes" icon="edit">
+          Notes
+        </Navigation>
       </Box>
-      <Flex justifyContent="space-between" p={2} borderTop="1px solid #555">
+
+      {/* Bottom section */}
+      <Flex
+        justifyContent="space-between"
+        p={2}
+        borderTop={`1px solid ${NAVBAR_BORDER_COLOR}`}
+      >
         <Button
           justifyContent="flex-start"
           w="100%"
           variant="ghost"
           variantColor="veryWhite"
-          _hover={{ background: "none", backgroundColor: "#555" }}
+          _hover={{ background: "none", backgroundColor: NAVBAR_BORDER_COLOR }}
           _active={{ background: "none" }}
           transition="none"
           mr={1}
@@ -157,7 +179,7 @@ const Navbar: React.FC = () => {
           h="40px"
           onClick={onOpen}
           transition="none"
-          _hover={{ background: "none", backgroundColor: "#555" }}
+          _hover={{ background: "none", backgroundColor: NAVBAR_BORDER_COLOR }}
         />
       </Flex>
       <Settings isOpen={isOpen} onClose={onClose} />

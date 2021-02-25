@@ -31,7 +31,11 @@ code {
   font-weight: normal !important;
 }
 
-.ql-container.ql-snow,
-.ql-toolbar.ql-snow {
-  border: none;
+/*.ql-container.ql-snow,*/
+/*.ql-toolbar.ql-snow {*/
+/*  border: none;*/
+/*}*/
+
+.ql-editor > p {
+  font-size: 1.125rem;
 }

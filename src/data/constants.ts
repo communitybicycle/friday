@@ -8,3 +8,5 @@ export const BG_COLOR = { light: "white", dark: "gray.800" };
 export const TEXT_GRAY_COLOR = { light: "gray", dark: "white" };
 
 export const NAVBAR_WIDTH = "260";
+export const NAVBAR_BORDER_COLOR = "#484848";
+export const WINDOW_BAR_HEIGHT = "30";
