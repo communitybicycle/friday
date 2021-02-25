@@ -15,8 +15,8 @@ import { Switch } from "react-router-dom";
 const Router: FunctionComponent = () => {
   return (
     <Switch>
-      <Page path="/notes" component={NoteDashboard} noPadding />
       <Page path="/notes/:id" component={Notes} />
+      <Page path="/notes" component={NoteDashboard} noPadding />
       <Page path="/terminal" component={Terminal} />
       <Page path="/calendar" component={Calendar} />
       <Page path="/actions/new" component={NewAction} />

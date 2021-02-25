@@ -20,7 +20,7 @@ const NoteDashboard: React.FC = () => {
   return (
     <Flex>
       <Box
-        bg={colorMode === "light" ? "gray.100" : "gray.700"}
+        bg={colorMode === "light" ? "gray.100" : "#232a38"}
         width={`${NAVBAR_WIDTH}px`}
         height={`calc(100vh - ${WINDOW_BAR_HEIGHT}px)`}
         px="20px"

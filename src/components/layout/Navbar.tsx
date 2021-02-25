@@ -36,6 +36,7 @@ export const Navigation: FunctionComponent<IPropsNavigation> = ({
   lighter,
   children,
 }) => {
+  const { colorMode } = useColorMode();
   const history = useHistory();
 
   const handleClick = () => {
@@ -55,7 +56,12 @@ export const Navigation: FunctionComponent<IPropsNavigation> = ({
       height="34px"
       px={2}
       _hover={{
-        backgroundColor: lighter ? "gray.600" : "gray.700",
+        backgroundColor:
+          colorMode === "light"
+            ? NAVBAR_BORDER_COLOR
+            : lighter
+            ? "gray.600"
+            : "gray.700",
       }}
       borderRadius={4}
       cursor="pointer"
@@ -164,7 +170,11 @@ const Navbar: React.FC = () => {
           w="100%"
           variant="ghost"
           variantColor="veryWhite"
-          _hover={{ background: "none", backgroundColor: NAVBAR_BORDER_COLOR }}
+          _hover={{
+            background: "none",
+            backgroundColor:
+              colorMode === "light" ? NAVBAR_BORDER_COLOR : "gray.700",
+          }}
           _active={{ background: "none" }}
           transition="none"
           mr={1}
@@ -179,7 +189,11 @@ const Navbar: React.FC = () => {
           h="40px"
           onClick={onOpen}
           transition="none"
-          _hover={{ background: "none", backgroundColor: NAVBAR_BORDER_COLOR }}
+          _hover={{
+            background: "none",
+            backgroundColor:
+              colorMode === "light" ? NAVBAR_BORDER_COLOR : "gray.700",
+          }}
         />
       </Flex>
       <Settings isOpen={isOpen} onClose={onClose} />

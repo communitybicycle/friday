@@ -36,6 +36,8 @@ code {
 /*  border: none;*/
 /*}*/
 
-.ql-editor > p {
+.ql-editor > p,
+.ql-editor > ul,
+.ql-editor > ol {
   font-size: 1.125rem;
 }
