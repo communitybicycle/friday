@@ -52,7 +52,7 @@ const AutomationsEdit: React.FC<Props> = ({ module }) => {
 
       return name.includes(q) || desc.includes(q);
     });
-  }, [actions, instructions]);
+  }, [actions, instructions, search]);
 
   const addAction = (action: Action | Instruction) => {
     if (action.dataType) {
