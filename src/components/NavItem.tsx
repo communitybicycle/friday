@@ -1,0 +1,56 @@
+import { Icon, PseudoBox, useColorMode } from "@chakra-ui/core";
+import { NAVBAR_BORDER_COLOR } from "data/constants";
+import React from "react";
+import { useHistory } from "react-router";
+
+interface Props {
+  to: string;
+  icon?: string;
+  lighter?: boolean;
+}
+
+export const Navigation: React.FC<Props> = ({
+  to,
+  icon,
+  lighter,
+  children,
+}) => {
+  const { colorMode } = useColorMode();
+  const history = useHistory();
+  const isLightMode = colorMode === "light";
+
+  const handleClick = () => {
+    if (history.location.pathname !== to) {
+      history.push(to);
+    }
+  };
+
+  return (
+    <PseudoBox
+      display="flex"
+      alignItems="center"
+      color={isLightMode ? (lighter ? "gray.800" : "white") : "white"}
+      fontSize="lg"
+      fontWeight={isLightMode ? (lighter ? 400 : 300) : 300}
+      lineHeight="1.85"
+      height="34px"
+      px={2}
+      _hover={{
+        backgroundColor: isLightMode
+          ? lighter
+            ? "white"
+            : NAVBAR_BORDER_COLOR
+          : lighter
+          ? "gray.600"
+          : "gray.700",
+      }}
+      borderRadius={4}
+      cursor="pointer"
+      onClick={handleClick}
+      isTruncated
+    >
+      {icon && <Icon name={icon} mr={3} />}
+      <span>{children}</span>
+    </PseudoBox>
+  );
+};

@@ -1,14 +1,14 @@
-import { Flex } from "@chakra-ui/core";
+import { Flex, useDisclosure } from "@chakra-ui/core";
 import InstructionCard from "components/card/InstructionCard";
 import PageHeader from "components/page/PageHeader";
+import NewInstruction from "pages/instructions/NewInstruction";
 import React from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
 import { RootState } from "reducers/store";
 
 const Instructions: React.FC = () => {
-  const history = useHistory();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { instructions } = useSelector((state: RootState) => state.data);
 
   return (
@@ -16,7 +16,7 @@ const Instructions: React.FC = () => {
       <PageHeader
         id="instructions"
         text="Instructions"
-        buttonAction={() => history.push("/instructions/new")}
+        buttonAction={onOpen}
         buttonText="Add New"
         isDisabled
       />
@@ -25,6 +25,7 @@ const Instructions: React.FC = () => {
           <InstructionCard instruction={instruction} key={instruction.id} />
         ))}
       </Flex>
+      <NewInstruction isOpen={isOpen} onClose={onClose} />
     </div>
   );
 };

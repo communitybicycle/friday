@@ -11,9 +11,9 @@ import Dropzone from "react-dropzone-uploader";
 import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { addAction, editAction } from "../../reducers/dataReducer";
-import { Action } from "../../types/action";
-import { uuid } from "../../utils";
+import { addAction, editAction } from "reducers/dataReducer";
+import { Action } from "types/action";
+import { uuid } from "utils/index";
 
 interface Props {
   name: string;
@@ -89,7 +89,7 @@ const FolderForm: React.FC<Props> = ({ name, description, reset, action }) => {
         placeholder="E. g. /home/sally/statusReport"
       />
 
-      <Button variantColor="blue" onClick={handleSubmit} mt={4}>
+      <Button variantColor="blue" onClick={handleSubmit} mt={4} mb={2}>
         Submit
       </Button>
     </Fragment>

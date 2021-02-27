@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, useColorMode } from "@chakra-ui/core";
 import Container from "components/layout/Container";
-import { Navigation } from "components/layout/Navbar";
+import { Navigation } from "components/NavItem";
 import {
   NAVBAR_BORDER_COLOR,
   NAVBAR_WIDTH,

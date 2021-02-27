@@ -7,14 +7,18 @@ import {
   Input,
   List,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   PseudoBox,
   Text,
   Textarea,
   useColorMode,
   useToast,
 } from "@chakra-ui/core";
-import Center from "components/layout/Center";
-import PageHeader from "components/page/PageHeader";
 import { BG_COLOR } from "data/constants";
 import useQuery from "hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
@@ -25,7 +29,12 @@ import { addInstruction, editInstruction } from "reducers/dataReducer";
 import { RootState } from "reducers/store";
 import { uuid } from "utils/index";
 
-const NewInstruction: React.FC = () => {
+interface Props {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const NewInstruction: React.FC<Props> = ({ isOpen, onClose }) => {
   const toast = useToast();
   const query = useQuery();
   const instructionId = query.get("id");
@@ -118,119 +127,122 @@ const NewInstruction: React.FC = () => {
   };
 
   return (
-    <Center>
-      <Box w="720px">
-        <PageHeader
-          id="newInstruction"
-          text={`${instructionId ? "Edit" : "New"} Instruction`}
-          isDisabled
-        />
-
-        <FormLabel htmlFor="name">Name</FormLabel>
-        <Input
-          id="name"
-          value={name}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            if (e.target.value.length < 51) {
-              setName(e.target.value);
-            }
-          }}
-          placeholder="Add a name for your instruction! (50 character limit)"
-          mb={2}
-        />
-        <FormLabel htmlFor="description">Description</FormLabel>
-        <Textarea
-          id="description"
-          value={description}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            if (e.target.value.length < 257) {
-              setDescription(e.target.value);
-            }
-          }}
-          placeholder="Give a brief description for your action. (256 character limit)"
-          mb={8}
-        />
-        <Flex>
-          <Box flexBasis="67%" mr={6}>
-            <Heading size="lg" mb={2}>
-              Choose Actions
-            </Heading>
-            <Input
-              value={filter}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setFilter(e.target.value)
+    <Modal size="720px" isOpen={isOpen} onClose={onClose}>
+      <ModalOverlay />
+      <ModalContent borderRadius={8}>
+        <ModalHeader>{`${
+          instructionId ? "Edit" : "New"
+        } Instruction`}</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          <FormLabel htmlFor="name">Name</FormLabel>
+          <Input
+            id="name"
+            value={name}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (e.target.value.length < 51) {
+                setName(e.target.value);
               }
-              placeholder="Filter actions"
-              mb={3}
-            />
-            <Box
-              borderWidth={filteredActions.length > 0 ? 1 : 0}
-              borderRadius={4}
-              maxH={400}
-              overflowY="scroll"
-            >
-              {filteredActions.map((action) => {
-                const isSelected = instructions.includes(action.id);
-                return (
-                  <PseudoBox
-                    key={action.id}
-                    py={2}
-                    px={4}
-                    borderBottomWidth={1}
-                    cursor={isSelected ? "default" : "pointer"}
-                    backgroundColor={
-                      isSelected
-                        ? colorMode === "light"
-                          ? "#efefef"
-                          : "gray.700"
-                        : colorMode === "light"
-                        ? "#fff"
-                        : BG_COLOR[colorMode]
-                    }
-                    _last={{ border: "none" }}
-                    _hover={{
-                      background: colorMode === "light" ? "#efefef" : "#2D3748",
-                    }}
-                    onClick={() => {
-                      if (!isSelected) {
-                        addAction(action.id);
+            }}
+            placeholder="Add a name for your instruction! (50 character limit)"
+            mb={2}
+          />
+          <FormLabel htmlFor="description">Description</FormLabel>
+          <Textarea
+            id="description"
+            value={description}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              if (e.target.value.length < 257) {
+                setDescription(e.target.value);
+              }
+            }}
+            placeholder="Give a brief description for your action. (256 character limit)"
+            mb={4}
+          />
+          <Flex>
+            <Box flexBasis="67%" mr={6}>
+              <Heading size="lg" mb={2}>
+                Choose Actions
+              </Heading>
+              <Input
+                value={filter}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setFilter(e.target.value)
+                }
+                placeholder="Filter actions"
+                mb={3}
+              />
+              <Box
+                borderWidth={filteredActions.length > 0 ? 1 : 0}
+                borderRadius={4}
+                maxH={400}
+                overflowY="scroll"
+              >
+                {filteredActions.map((action) => {
+                  const isSelected = instructions.includes(action.id);
+                  return (
+                    <PseudoBox
+                      key={action.id}
+                      py={2}
+                      px={4}
+                      borderBottomWidth={1}
+                      cursor={isSelected ? "default" : "pointer"}
+                      backgroundColor={
+                        isSelected
+                          ? colorMode === "light"
+                            ? "#efefef"
+                            : "gray.700"
+                          : colorMode === "light"
+                          ? "#fff"
+                          : BG_COLOR[colorMode]
                       }
-                    }}
-                  >
-                    <Text fontWeight="bold">{action.name}</Text>
-                    <Text color="grey">{action.description}</Text>
-                  </PseudoBox>
-                );
-              })}
+                      _last={{ border: "none" }}
+                      _hover={{
+                        background:
+                          colorMode === "light" ? "#efefef" : "#2D3748",
+                      }}
+                      onClick={() => {
+                        if (!isSelected) {
+                          addAction(action.id);
+                        }
+                      }}
+                    >
+                      <Text fontWeight="bold">{action.name}</Text>
+                      <Text color="grey">{action.description}</Text>
+                    </PseudoBox>
+                  );
+                })}
+              </Box>
             </Box>
-          </Box>
-          <Box flexBasis="33%">
-            <Heading size="lg" mb={2}>
-              Selected
-            </Heading>
-            <List as="ol" styleType="decimal">
-              {instructions.map((actionId, actionIndex) => (
-                <ListItem
-                  key={actionId}
-                  cursor="pointer"
-                  onClick={() => removeAction(actionIndex)}
-                >
-                  {actions[actionId].name}
-                </ListItem>
-              ))}
-            </List>
-          </Box>
-        </Flex>
-        <Button
-          variantColor="blue"
-          onClick={handleSubmit}
-          mt={8}
-          isDisabled={!name || !description || instructions.length === 0}
-        >
-          Submit
-        </Button>
-      </Box>
-    </Center>
+            <Box flexBasis="33%">
+              <Heading size="lg" mb={2}>
+                Selected
+              </Heading>
+              <List as="ol" styleType="decimal">
+                {instructions.map((actionId, actionIndex) => (
+                  <ListItem
+                    key={actionId}
+                    cursor="pointer"
+                    onClick={() => removeAction(actionIndex)}
+                  >
+                    {actions[actionId].name}
+                  </ListItem>
+                ))}
+              </List>
+            </Box>
+          </Flex>
+          <Button
+            variantColor="blue"
+            onClick={handleSubmit}
+            mt={4}
+            mb={2}
+            isDisabled={!name || !description || instructions.length === 0}
+          >
+            Submit
+          </Button>
+        </ModalBody>
+      </ModalContent>
+    </Modal>
   );
 };
 

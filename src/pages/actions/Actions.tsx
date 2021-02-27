@@ -1,14 +1,14 @@
-import { Flex, Input } from "@chakra-ui/core";
+import { Flex, Input, useDisclosure } from "@chakra-ui/core";
 import ActionCard from "components/card/ActionCard";
 import PageHeader from "components/page/PageHeader";
+import NewAction from "pages/actions/NewAction";
 import React, { useMemo, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router";
 import { RootState } from "reducers/store";
 
 const Actions: React.FC = () => {
-  const history = useHistory();
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const { actions } = useSelector((state: RootState) => state.data);
   const [search, setSearch] = useState("");
 
@@ -28,7 +28,7 @@ const Actions: React.FC = () => {
       <PageHeader
         id="actions"
         text="Actions"
-        buttonAction={() => history.push("/actions/new")}
+        buttonAction={onOpen}
         buttonText="Add New"
         isDisabled
       />
@@ -47,6 +47,7 @@ const Actions: React.FC = () => {
             <ActionCard action={action} key={action.id} />
           ))}
       </Flex>
+      <NewAction isOpen={isOpen} onClose={onClose} />
     </div>
   );
 };

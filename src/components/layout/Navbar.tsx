@@ -3,80 +3,27 @@ import {
   Button,
   Flex,
   Heading,
-  Icon,
   IconButton,
   Image,
-  PseudoBox,
   Text,
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/core";
+import Center from "components/layout/Center";
+import { Navigation } from "components/NavItem";
+import Settings from "components/settings/Settings";
 import {
   NAVBAR_BORDER_COLOR,
   NAVBAR_WIDTH,
   WINDOW_BAR_HEIGHT,
 } from "data/constants";
-import React, { FunctionComponent } from "react";
+import React from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { RootState } from "reducers/store";
 import { addNote } from "reducers/dataReducer";
-import Center from "components/layout/Center";
-import Settings from "components/settings/Settings";
+import { RootState } from "reducers/store";
 import { uuid } from "utils/index";
-
-interface IPropsNavigation {
-  to: string;
-  icon?: string;
-  lighter?: boolean;
-}
-
-export const Navigation: FunctionComponent<IPropsNavigation> = ({
-  to,
-  icon,
-  lighter,
-  children,
-}) => {
-  const { colorMode } = useColorMode();
-  const history = useHistory();
-  const isLightMode = colorMode === "light";
-
-  const handleClick = () => {
-    if (history.location.pathname !== to) {
-      history.push(to);
-    }
-  };
-
-  return (
-    <PseudoBox
-      display="flex"
-      alignItems="center"
-      color={isLightMode ? (lighter ? "gray.800" : "white") : "white"}
-      fontSize="lg"
-      fontWeight={isLightMode ? (lighter ? 400 : 300) : 300}
-      lineHeight="1.85"
-      height="34px"
-      px={2}
-      _hover={{
-        backgroundColor: isLightMode
-          ? lighter
-            ? "white"
-            : NAVBAR_BORDER_COLOR
-          : lighter
-          ? "gray.600"
-          : "gray.700",
-      }}
-      borderRadius={4}
-      cursor="pointer"
-      onClick={handleClick}
-      isTruncated
-    >
-      {icon && <Icon name={icon} mr={3} />}
-      <span>{children}</span>
-    </PseudoBox>
-  );
-};
 
 const Navbar: React.FC = () => {
   const dispatch = useDispatch();

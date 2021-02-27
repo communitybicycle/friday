@@ -3,9 +3,9 @@ import React, { Fragment, useState } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { addAction, editAction } from "../../reducers/dataReducer";
-import { Action } from "../../types/action";
-import { uuid } from "../../utils";
+import { addAction, editAction } from "reducers/dataReducer";
+import { Action } from "types/action";
+import { uuid } from "utils/index";
 
 interface Props {
   name: string;
@@ -61,7 +61,7 @@ const LinkForm: React.FC<Props> = ({ name, description, reset, action }) => {
         placeholder="E. g. https://example.com"
       />
 
-      <Button variantColor="blue" onClick={handleSubmit} mt={4}>
+      <Button variantColor="blue" onClick={handleSubmit} mt={4} mb={2}>
         Submit
       </Button>
     </Fragment>
