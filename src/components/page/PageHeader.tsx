@@ -8,31 +8,40 @@ import {
   IconButton,
   PseudoBox,
 } from "@chakra-ui/core";
-import React, { FocusEventHandler } from "react";
+import React from "react";
 import { hot } from "react-hot-loader";
-import { setItem } from "utils/storage";
+import { useDispatch, useSelector } from "react-redux";
+import { setTitle } from "reducers/dataReducer";
+import { RootState } from "reducers/store";
+import { PageType } from "types/page";
 
-interface IProps {
+interface Props {
   id: string;
-  text: string;
+  type?: PageType;
+  text?: string;
   buttonAction?: () => void;
   buttonText?: string;
   pageAction?: () => void;
   isDisabled?: boolean;
 }
 
-const PageHeader: React.FC<IProps> = ({
+const PageHeader: React.FC<Props> = ({
   id,
+  type,
   text,
   buttonAction,
   buttonText,
   pageAction,
   isDisabled,
 }) => {
-  const headerId = "header." + id;
+  const dispatch = useDispatch();
+  const { pages } = useSelector((state: RootState) => state.data);
+  const title = type ? pages[type][id].title : "";
 
-  const handleBlur: FocusEventHandler<HTMLInputElement> = (e) => {
-    setItem(headerId, e.target.value);
+  const handleChange = (val: string) => {
+    if (!text && type) {
+      dispatch(setTitle({ id, newTitle: val, pageType: type }));
+    }
   };
 
   return (
@@ -46,12 +55,13 @@ const PageHeader: React.FC<IProps> = ({
         <Editable
           fontSize="5xl"
           fontWeight="bold"
-          defaultValue={text}
+          value={text || title}
           isDisabled={isDisabled}
           isPreviewFocusable={!isDisabled}
+          onChange={handleChange}
         >
-          <EditablePreview />
-          <EditableInput onBlur={handleBlur} />
+          <EditablePreview isTruncated />
+          <EditableInput />
         </Editable>
         <Box>
           {buttonAction && buttonText && (

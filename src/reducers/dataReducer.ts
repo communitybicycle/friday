@@ -4,7 +4,7 @@ import { DataState } from "types/index";
 import { Instruction } from "types/instructions";
 import { ModulesType } from "types/modules";
 import { Action } from "types/action";
-import { Columns, PageType } from "types/page";
+import { Columns, Note, PageType } from "types/page";
 import { eStore } from "utils/eStore";
 import { deleteStringInNestedArray } from "utils/index";
 
@@ -12,10 +12,13 @@ const dataSlice = createSlice({
   name: "data",
   initialState: (eStore.get("data") as DataState) || initialData,
   reducers: {
-    addAction: (state, { payload }: PayloadAction<Action>) => {
+    addAction: (state: DataState, { payload }: PayloadAction<Action>) => {
       state.actions[payload.id] = payload;
     },
-    deleteAction: (state, { payload: id }: PayloadAction<string>) => {
+    deleteAction: (
+      state: DataState,
+      { payload: id }: PayloadAction<string>
+    ) => {
       delete state.actions[id];
 
       // delete any references ot action in an instruction
@@ -26,32 +29,38 @@ const dataSlice = createSlice({
         );
       });
     },
-    editAction: (state, { payload }: PayloadAction<Action>) => {
+    editAction: (state: DataState, { payload }: PayloadAction<Action>) => {
       state.actions[payload.id] = payload;
     },
-    addInstruction: (state, { payload }: PayloadAction<Instruction>) => {
+    addInstruction: (
+      state: DataState,
+      { payload }: PayloadAction<Instruction>
+    ) => {
       state.instructions[payload.id] = payload;
     },
-    deleteInstruction: (state, { payload: id }: PayloadAction<string>) => {
+    deleteInstruction: (
+      state: DataState,
+      { payload: id }: PayloadAction<string>
+    ) => {
       delete state.instructions[id];
     },
-    editInstruction: (state, { payload }: PayloadAction<Instruction>) => {
+    editInstruction: (
+      state: DataState,
+      { payload }: PayloadAction<Instruction>
+    ) => {
       state.instructions[payload.id] = payload;
     },
-    addModule: (state, { payload }: PayloadAction<ModulesType>) => {
+    addModule: (state: DataState, { payload }: PayloadAction<ModulesType>) => {
       state.modules[payload.id] = payload;
     },
-    editModule: (state, { payload }: PayloadAction<ModulesType>) => {
+    editModule: (state: DataState, { payload }: PayloadAction<ModulesType>) => {
       state.modules[payload.id] = payload;
     },
     deleteModule: (
-      state,
+      state: DataState,
       { payload }: PayloadAction<{ dashboardId: string; moduleId: string }>
     ) => {
       const { dashboardId, moduleId } = payload;
-
-      console.log("Dashboard ID:", dashboardId);
-
       delete state.modules[moduleId];
 
       // delete all references in the dashboard
@@ -63,7 +72,7 @@ const dataSlice = createSlice({
       );
     },
     setColumns: (
-      state,
+      state: DataState,
       { payload }: PayloadAction<{ id: string; columns: Columns }>
     ) => {
       state.pages.dashboards[payload.id].columns = payload.columns;
@@ -75,16 +84,34 @@ const dataSlice = createSlice({
       return payload || initialData;
     },
     updateFeatureImage: (
-      state,
+      state: DataState,
       { payload }: PayloadAction<{ imgSrc: string; id: string; type: PageType }>
     ) => {
       state.pages[payload.type][payload.id].featureImage = payload.imgSrc;
     },
+    addNote: (state: DataState, { payload }: PayloadAction<{ id: string }>) => {
+      const { id } = payload;
+      state.pages.notes[id] = {
+        id,
+        content: "",
+        type: "notes",
+        header: "",
+        title: "",
+      } as Note;
+    },
     setNoteContent: (
-      state,
+      state: DataState,
       { payload }: PayloadAction<{ id: string; content: string }>
     ) => {
       state.pages.notes[payload.id].content = payload.content;
+    },
+    setTitle: (
+      state: DataState,
+      {
+        payload,
+      }: PayloadAction<{ id: string; newTitle: string; pageType: PageType }>
+    ) => {
+      state.pages[payload.pageType][payload.id].title = payload.newTitle;
     },
   },
 });
@@ -103,6 +130,8 @@ export const {
   reinitializeDataReducer,
   updateFeatureImage,
   setNoteContent,
+  addNote,
+  setTitle,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

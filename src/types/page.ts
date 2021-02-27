@@ -8,7 +8,7 @@ export interface Pages {
 export interface Page {
   id: string;
   title: string;
-  header: string;
+  header?: string;
   featureImage?: string;
   type: PageType;
 }

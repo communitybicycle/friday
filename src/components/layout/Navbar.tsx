@@ -18,11 +18,13 @@ import {
 } from "data/constants";
 import React, { FunctionComponent } from "react";
 import { hot } from "react-hot-loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { RootState } from "reducers/store";
+import { addNote } from "reducers/dataReducer";
 import Center from "components/layout/Center";
 import Settings from "components/settings/Settings";
+import { uuid } from "utils/index";
 
 interface IPropsNavigation {
   to: string;
@@ -38,6 +40,7 @@ export const Navigation: FunctionComponent<IPropsNavigation> = ({
 }) => {
   const { colorMode } = useColorMode();
   const history = useHistory();
+  const isLightMode = colorMode === "light";
 
   const handleClick = () => {
     if (history.location.pathname !== to) {
@@ -49,23 +52,25 @@ export const Navigation: FunctionComponent<IPropsNavigation> = ({
     <PseudoBox
       display="flex"
       alignItems="center"
-      color="white"
+      color={isLightMode ? (lighter ? "gray.800" : "white") : "white"}
       fontSize="lg"
-      fontWeight="light"
+      fontWeight={isLightMode ? (lighter ? 400 : 300) : 300}
       lineHeight="1.85"
       height="34px"
       px={2}
       _hover={{
-        backgroundColor:
-          colorMode === "light"
-            ? NAVBAR_BORDER_COLOR
-            : lighter
-            ? "gray.600"
-            : "gray.700",
+        backgroundColor: isLightMode
+          ? lighter
+            ? "white"
+            : NAVBAR_BORDER_COLOR
+          : lighter
+          ? "gray.600"
+          : "gray.700",
       }}
       borderRadius={4}
       cursor="pointer"
       onClick={handleClick}
+      isTruncated
     >
       {icon && <Icon name={icon} mr={3} />}
       <span>{children}</span>
@@ -74,6 +79,8 @@ export const Navigation: FunctionComponent<IPropsNavigation> = ({
 };
 
 const Navbar: React.FC = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { settings } = useSelector((state: RootState) => state);
@@ -83,6 +90,12 @@ const Navbar: React.FC = () => {
   const { isMenuOpen } = useSelector((state: RootState) => state.meta);
   const { profilePicture } = useSelector((state: RootState) => state.user);
   const bgColor = { light: "#333", dark: "gray.800" };
+
+  const handleNewNote = () => {
+    const id = uuid();
+    dispatch(addNote({ id }));
+    history.push(`/notes/${id}`);
+  };
 
   return (
     <Flex
@@ -189,6 +202,7 @@ const Navbar: React.FC = () => {
           }}
           _active={{ background: "none" }}
           transition="none"
+          onClick={handleNewNote}
           mr={1}
         >
           + New Note

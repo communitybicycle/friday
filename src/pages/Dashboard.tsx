@@ -152,8 +152,8 @@ const Dashboard: React.FC = () => {
         <FeatureImage imgSrc={dashboard.featureImage} id={id} />
         <Box px="50px" mt="20px">
           <PageHeader
-            id="dashboard"
-            text="Welcome, Hal!"
+            type="dashboards"
+            id={dashboard.id}
             pageAction={editPage}
           />
           <Grid

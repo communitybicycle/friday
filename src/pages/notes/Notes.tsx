@@ -1,3 +1,5 @@
+import PageHeader from "components/page/PageHeader";
+import NoteSubMenu from "pages/notes/NoteSubMenu";
 import React from "react";
 import { hot } from "react-hot-loader";
 import ReactQuill from "react-quill";
@@ -5,8 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setNoteContent } from "reducers/dataReducer";
 import { RootState } from "reducers/store";
-import Container from "components/layout/Container";
-import PageHeader from "components/page/PageHeader";
 
 const Notes: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,8 +20,8 @@ const Notes: React.FC = () => {
   };
 
   return (
-    <Container>
-      <PageHeader id="notes" text="Notes" />
+    <NoteSubMenu>
+      <PageHeader id={id} type="notes" />
       <ReactQuill
         theme="bubble"
         value={content}
@@ -87,7 +87,7 @@ const Notes: React.FC = () => {
       {/*    bullist numlist outdent indent | removeformat | help",*/}
       {/*  }}*/}
       {/*/>*/}
-    </Container>
+    </NoteSubMenu>
   );
 };
 

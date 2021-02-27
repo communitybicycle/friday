@@ -123,6 +123,7 @@ const NewInstruction: React.FC = () => {
         <PageHeader
           id="newInstruction"
           text={`${instructionId ? "Edit" : "New"} Instruction`}
+          isDisabled
         />
 
         <FormLabel htmlFor="name">Name</FormLabel>
