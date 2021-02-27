@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/core";
 import Center from "components/layout/Center";
-import { Navigation } from "components/NavItem";
+import { NavItem } from "components/NavItem";
 import Settings from "components/settings/Settings";
 import {
   NAVBAR_BORDER_COLOR,
@@ -92,42 +92,42 @@ const Navbar: React.FC = () => {
         </Heading>
         <Box mb={3}>
           {Object.values(dashboards).map((dashboard) => (
-            <Navigation
+            <NavItem
               to={`/dashboard/${dashboard.id}`}
               key={dashboard.id}
               icon="sun"
             >
               {dashboard.title}
-            </Navigation>
+            </NavItem>
           ))}
         </Box>
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
           Automations
         </Heading>
         <Box mb={3}>
-          <Navigation to="/actions" icon="star">
+          <NavItem to="/actions" icon="star">
             Actions
-          </Navigation>
-          <Navigation to="/instructions" icon="moon">
+          </NavItem>
+          <NavItem to="/instructions" icon="moon">
             Instructions
-          </Navigation>
+          </NavItem>
         </Box>
 
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
           Plugins
         </Heading>
-        <Navigation to="/notes" icon="edit">
+        <NavItem to="/notes" icon="edit">
           Notes
-        </Navigation>
+        </NavItem>
         {settings.calendarPlugin && (
-          <Navigation to="/calendar" icon="calendar">
+          <NavItem to="/calendar" icon="calendar">
             Calendar
-          </Navigation>
+          </NavItem>
         )}
         {settings.terminalPlugin && (
-          <Navigation to="/terminal" icon="info">
+          <NavItem to="/terminal" icon="info">
             Terminal
-          </Navigation>
+          </NavItem>
         )}
       </Box>
 

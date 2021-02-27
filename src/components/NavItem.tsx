@@ -9,12 +9,7 @@ interface Props {
   lighter?: boolean;
 }
 
-export const Navigation: React.FC<Props> = ({
-  to,
-  icon,
-  lighter,
-  children,
-}) => {
+export const NavItem: React.FC<Props> = ({ to, icon, lighter, children }) => {
   const { colorMode } = useColorMode();
   const history = useHistory();
   const isLightMode = colorMode === "light";
