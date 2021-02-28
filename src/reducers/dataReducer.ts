@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initialData } from "data/initial";
+import moment from "moment";
+import { Action } from "types/action";
 import { DataState } from "types/index";
 import { Instruction } from "types/instructions";
 import { ModulesType } from "types/modules";
-import { Action } from "types/action";
-import { Columns, Note, PageType } from "types/page";
+import { Columns, Note, NoteOrFolderMenuItem, PageType } from "types/page";
 import { eStore } from "utils/eStore";
 import { deleteStringInNestedArray } from "utils/index";
-import moment from "moment";
 
 const dataSlice = createSlice({
   name: "data",
@@ -100,6 +100,7 @@ const dataSlice = createSlice({
         createdAt: moment().format(),
         updatedAt: moment().format(),
       } as Note;
+      state.noteMenu.push({ id, type: "note" });
     },
     setNoteContent: (
       state: DataState,
@@ -114,6 +115,12 @@ const dataSlice = createSlice({
       }: PayloadAction<{ id: string; newTitle: string; pageType: PageType }>
     ) => {
       state[payload.pageType][payload.id].title = payload.newTitle;
+    },
+    reorderNoteMenu: (
+      state: DataState,
+      { payload }: PayloadAction<NoteOrFolderMenuItem[]>
+    ) => {
+      state.noteMenu = payload;
     },
   },
 });
@@ -134,6 +141,7 @@ export const {
   setNoteContent,
   addNote,
   setTitle,
+  reorderNoteMenu,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

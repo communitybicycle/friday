@@ -43,7 +43,7 @@ export interface NoteMenuItem extends MenuItem {
 export interface FolderMenuItem extends MenuItem {
   type: "folder";
   title: string;
-  subItems?: NoteOrFolderMenuItem[];
+  subItems: NoteOrFolderMenuItem[];
 }
 
 export type NoteOrFolderMenuItem = NoteMenuItem | FolderMenuItem;
