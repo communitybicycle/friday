@@ -11,9 +11,7 @@ import { RootState } from "reducers/store";
 const Notes: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
-  const { content } = useSelector(
-    (state: RootState) => state.data.pages.notes[id]
-  );
+  const { content } = useSelector((state: RootState) => state.data.notes[id]);
 
   const handleChange = (newContent: string) => {
     dispatch(setNoteContent({ id, content: newContent }));
@@ -68,25 +66,6 @@ const Notes: React.FC = () => {
         //   "background",
         // ]}
       />
-      {/*<Editor*/}
-      {/*  initialValue="What a beautiful world!"*/}
-      {/*  apiKey={process.env.REACT_APP_TINY_API_KEY}*/}
-      {/*  init={{*/}
-      {/*    width: "100%",*/}
-      {/*    inline: true,*/}
-      {/*    height: 600,*/}
-      {/*    menubar: false,*/}
-      {/*    plugins: [*/}
-      {/*      "advlist autolink lists link image charmap print preview anchor",*/}
-      {/*      "searchreplace visualblocks code fullscreen",*/}
-      {/*      "insertdatetime media table paste code help wordcount",*/}
-      {/*    ],*/}
-      {/*    toolbar:*/}
-      {/*      "undo redo | formatselect | bold italic backcolor | \*/}
-      {/*    alignleft aligncenter alignright alignjustify | \*/}
-      {/*    bullist numlist outdent indent | removeformat | help",*/}
-      {/*  }}*/}
-      {/*/>*/}
     </NoteSubMenu>
   );
 };

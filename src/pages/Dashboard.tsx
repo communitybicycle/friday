@@ -31,10 +31,7 @@ const Dashboard: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
   const { colorMode } = useColorMode();
-  const {
-    pages: { dashboards },
-    modules,
-  } = useSelector((state: RootState) => state.data);
+  const { dashboards, modules } = useSelector((state: RootState) => state.data);
   const [isEditing, setIsEditing] = useState(false);
   const dashboard = dashboards[id];
 

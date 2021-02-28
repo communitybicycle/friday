@@ -1,6 +1,6 @@
 import { Box, Flex, Heading, useColorMode } from "@chakra-ui/core";
 import Container from "components/layout/Container";
-import { NavItem } from "components/NavItem";
+import NoteNavItem from "components/NoteNavItem";
 import {
   NAVBAR_BORDER_COLOR,
   NAVBAR_WIDTH,
@@ -15,9 +15,7 @@ import { RootState } from "reducers/store";
 const NoteSubMenu: React.FC = ({ children }) => {
   const { colorMode } = useColorMode();
   const history = useHistory();
-  const {
-    pages: { notes },
-  } = useSelector((state: RootState) => state.data);
+  const { notes } = useSelector((state: RootState) => state.data);
 
   return (
     <Flex>
@@ -44,12 +42,14 @@ const NoteSubMenu: React.FC = ({ children }) => {
           Notes
         </Heading>
         {Object.values(notes).map((notePage) => (
-          <NavItem to={`/notes/${notePage.id}`} key={notePage.id} lighter>
-            {notePage.title}
-          </NavItem>
+          <NoteNavItem
+            to={`/notes/${notePage.id}`}
+            key={notePage.id}
+            text={notePage.title}
+          />
         ))}
       </Box>
-      <Box pt="50px" px="50px">
+      <Box pt="50px" px="50px" flex={1}>
         <Container>{children}</Container>
       </Box>
     </Flex>

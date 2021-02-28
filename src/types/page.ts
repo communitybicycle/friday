@@ -23,7 +23,11 @@ export interface Dashboard extends Page {
   type: "dashboards";
 }
 
-export interface Note extends Page {
-  content: any;
-  type: "notes";
+export interface Note {
+  id: string;
+  title: string;
+  content: string;
+  tags: string[];
+  createdAt: string;
+  updatedAt: string;
 }

@@ -35,8 +35,8 @@ const PageHeader: React.FC<Props> = ({
   isDisabled,
 }) => {
   const dispatch = useDispatch();
-  const { pages } = useSelector((state: RootState) => state.data);
-  const title = type ? pages[type][id].title : "";
+  const { data } = useSelector((state: RootState) => state);
+  const title = type ? data[type][id].title : "";
 
   const handleChange = (val: string) => {
     if (!text && type) {
@@ -59,6 +59,7 @@ const PageHeader: React.FC<Props> = ({
           isDisabled={isDisabled}
           isPreviewFocusable={!isDisabled}
           onChange={handleChange}
+          width="100%"
         >
           <EditablePreview isTruncated />
           <EditableInput />

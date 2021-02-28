@@ -22,6 +22,7 @@ import {
 import { BG_COLOR } from "data/constants";
 import useQuery from "hooks/useQuery";
 import React, { useEffect, useMemo, useState } from "react";
+import Scrollbars from "react-custom-scrollbars";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -176,42 +177,44 @@ const NewInstruction: React.FC<Props> = ({ isOpen, onClose }) => {
                 borderWidth={filteredActions.length > 0 ? 1 : 0}
                 borderRadius={4}
                 maxH={400}
-                overflowY="scroll"
+                overflowY="hidden"
               >
-                {filteredActions.map((action) => {
-                  const isSelected = instructions.includes(action.id);
-                  return (
-                    <PseudoBox
-                      key={action.id}
-                      py={2}
-                      px={4}
-                      borderBottomWidth={1}
-                      cursor={isSelected ? "default" : "pointer"}
-                      backgroundColor={
-                        isSelected
-                          ? colorMode === "light"
-                            ? "#efefef"
-                            : "gray.700"
-                          : colorMode === "light"
-                          ? "#fff"
-                          : BG_COLOR[colorMode]
-                      }
-                      _last={{ border: "none" }}
-                      _hover={{
-                        background:
-                          colorMode === "light" ? "#efefef" : "#2D3748",
-                      }}
-                      onClick={() => {
-                        if (!isSelected) {
-                          addAction(action.id);
+                <Scrollbars style={{ height: "400px", overflow: "hidden" }}>
+                  {filteredActions.map((action) => {
+                    const isSelected = instructions.includes(action.id);
+                    return (
+                      <PseudoBox
+                        key={action.id}
+                        py={2}
+                        px={4}
+                        borderBottomWidth={1}
+                        cursor={isSelected ? "default" : "pointer"}
+                        backgroundColor={
+                          isSelected
+                            ? colorMode === "light"
+                              ? "#efefef"
+                              : "gray.700"
+                            : colorMode === "light"
+                            ? "#fff"
+                            : BG_COLOR[colorMode]
                         }
-                      }}
-                    >
-                      <Text fontWeight="bold">{action.name}</Text>
-                      <Text color="grey">{action.description}</Text>
-                    </PseudoBox>
-                  );
-                })}
+                        _last={{ border: "none" }}
+                        _hover={{
+                          background:
+                            colorMode === "light" ? "#efefef" : "#2D3748",
+                        }}
+                        onClick={() => {
+                          if (!isSelected) {
+                            addAction(action.id);
+                          }
+                        }}
+                      >
+                        <Text fontWeight="bold">{action.name}</Text>
+                        <Text color="grey">{action.description}</Text>
+                      </PseudoBox>
+                    );
+                  })}
+                </Scrollbars>
               </Box>
             </Box>
             <Box flexBasis="33%">

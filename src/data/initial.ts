@@ -76,6 +76,56 @@ export const initialData: DataState = {
       description: "Opens a folder at the Granular Titan UI location.",
       path: "C:\\Users\\Hal\\Desktop\\Work\\granular.ai\\titan-ui",
     },
+    "11b8077f-14d3-4f5f-891b-6d05f7756e1d": {
+      id: "11b8077f-14d3-4f5f-891b-6d05f7756e1d",
+      name: "Open Titan UI in Webstorm",
+      description: "Begin your work on Titan UI.",
+      type: "cmd",
+      command: "webstorm .",
+      target: "C:\\Users\\Hal\\Desktop\\Work\\granular.ai\\titan-ui",
+      detached: false,
+    },
+    "ed2a08e1-2693-4a0f-bd52-ce9159476b50": {
+      id: "ed2a08e1-2693-4a0f-bd52-ce9159476b50",
+      name: "Open Titan API in VS Code",
+      description: "Begin your work on Titan API.",
+      type: "cmd",
+      command: "code .",
+      target: "C:\\Users\\Hal\\Desktop\\Work\\granular.ai\\titan-api",
+      detached: false,
+    },
+    "564c2d03-1ce3-4e3c-9e66-41b5606f264c": {
+      id: "564c2d03-1ce3-4e3c-9e66-41b5606f264c",
+      name: "Granular Scrum Meetings",
+      description: "Opens the Granular daily scrum meetings Notion page.",
+      type: "link",
+      url:
+        "https://www.notion.so/granular/Scrum-Meetings-b2939023df594e53abfb03ade10229ff",
+    },
+    "39e97043-358d-467c-9048-280dfa4c6b5b": {
+      id: "39e97043-358d-467c-9048-280dfa4c6b5b",
+      name: "Open Granular.ai in Webstorm",
+      description: "Begin work on Granular's Gatsby site.",
+      type: "cmd",
+      command: "webstorm .",
+      target: "C:\\Users\\Hal\\Desktop\\Work\\granular.ai\\granular.ai",
+      detached: false,
+    },
+    "57ba0fcc-461b-4251-95a4-b10db548d400": {
+      id: "57ba0fcc-461b-4251-95a4-b10db548d400",
+      name: "Campbell River Rentals",
+      description: "Shows all latest rental units on Craigslist for CR.",
+      type: "link",
+      url:
+        "https://comoxvalley.craigslist.org/d/apartments-housing-for-rent/search/apa?sort=date&availabilityMode=0&query=campbell%20river",
+    },
+    "cf4f4e87-0817-46d0-b125-ff8a1c06ae78": {
+      id: "cf4f4e87-0817-46d0-b125-ff8a1c06ae78",
+      name: "Open MongoDBCompass",
+      description: "Open the mongoDB Compass application.",
+      type: "link",
+      url: "C:\\Program Files\\MongoDB Compass\\MongoDBCompass.exe",
+    },
   },
   instructions: {
     "1": {
@@ -84,15 +134,26 @@ export const initialData: DataState = {
       description: "Fast AI course to learn ML quickly!",
       instructions: ["4", "5"],
     },
+    "bb2076b4-5671-45ed-80c1-45475e3ef7a3": {
+      id: "bb2076b4-5671-45ed-80c1-45475e3ef7a3",
+      name: "Begin Titan Work",
+      description: "Initializes the full stack Titan workspace.",
+      instructions: [
+        "7",
+        "8",
+        "11b8077f-14d3-4f5f-891b-6d05f7756e1d",
+        "ed2a08e1-2693-4a0f-bd52-ce9159476b50",
+        "cf4f4e87-0817-46d0-b125-ff8a1c06ae78",
+      ],
+    },
+    "6c5064ee-6f3d-4270-ad88-d398c5896961": {
+      id: "6c5064ee-6f3d-4270-ad88-d398c5896961",
+      name: "Open Granular Sites",
+      description: "Opens the bundle of Granular-related sites.",
+      instructions: ["2", "3", "1"],
+    },
   },
   modules: {
-    "999": {
-      id: "999",
-      dashboardId: "abc",
-      type: "notes",
-      header: "Notes",
-      text: "Your notes can go here!",
-    },
     "123": {
       id: "123",
       dashboardId: "abc",
@@ -101,7 +162,11 @@ export const initialData: DataState = {
       automations: [
         {
           type: "instruction",
-          automationId: "1",
+          automationId: "bb2076b4-5671-45ed-80c1-45475e3ef7a3",
+        },
+        {
+          type: "instruction",
+          automationId: "6c5064ee-6f3d-4270-ad88-d398c5896961",
         },
       ],
     },
@@ -113,25 +178,46 @@ export const initialData: DataState = {
       text:
         "Welcome to Friday. Here you can automate your tedious tasks, keep notes, see the weather, and more!",
     },
-  },
-  pages: {
-    dashboards: {
-      abc: {
-        id: "abc",
-        title: "Personal Dashboard",
-        header: "Welcome, Hal!",
-        type: "dashboards",
-        columns: [["234", "123"], ["999"]],
-      },
+    "265f0e7d-c95e-427b-8efb-fc518034ee0a": {
+      id: "265f0e7d-c95e-427b-8efb-fc518034ee0a",
+      dashboardId: "abc",
+      type: "notes",
+      header: "New notes module",
+      text: "You can write stuff in here easily.",
     },
-    notes: {
-      bce: {
-        id: "bce",
-        title: "General Notes",
-        header: "Notes Page Here",
-        type: "notes",
-        content: "Notes placeholder here",
-      },
+    "979d845d-9d41-44c9-96ef-3b7bc83d30ca": {
+      id: "979d845d-9d41-44c9-96ef-3b7bc83d30ca",
+      dashboardId: "abc",
+      type: "automations",
+      header: "Automations",
+      automations: [],
+      hideHeader: false,
+    },
+  },
+  dashboards: {
+    abc: {
+      id: "abc",
+      title: "Personal Dashboard",
+      header: "Welcome, Hal!",
+      type: "dashboards",
+      columns: [
+        ["123"],
+        [
+          "979d845d-9d41-44c9-96ef-3b7bc83d30ca",
+          "234",
+          "265f0e7d-c95e-427b-8efb-fc518034ee0a",
+        ],
+      ],
+    },
+  },
+  notes: {
+    bce: {
+      id: "bce",
+      title: "General Notes",
+      content: "Notes placeholder here",
+      tags: [],
+      createdAt: "",
+      updatedAt: "",
     },
   },
 };

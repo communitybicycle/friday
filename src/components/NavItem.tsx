@@ -1,4 +1,4 @@
-import { Icon, PseudoBox, useColorMode } from "@chakra-ui/core";
+import { Icon, PseudoBox, Text, useColorMode } from "@chakra-ui/core";
 import { NAVBAR_BORDER_COLOR } from "data/constants";
 import React from "react";
 import { useHistory } from "react-router";
@@ -26,7 +26,6 @@ export const NavItem: React.FC<Props> = ({ to, icon, lighter, children }) => {
       alignItems="center"
       color={isLightMode ? (lighter ? "gray.800" : "white") : "white"}
       fontSize="lg"
-      fontWeight={isLightMode ? (lighter ? 400 : 300) : 300}
       lineHeight="1.85"
       height="34px"
       px={2}
@@ -42,10 +41,11 @@ export const NavItem: React.FC<Props> = ({ to, icon, lighter, children }) => {
       borderRadius={4}
       cursor="pointer"
       onClick={handleClick}
-      isTruncated
     >
       {icon && <Icon name={icon} mr={3} />}
-      <span>{children}</span>
+      <Text fontWeight={isLightMode ? (lighter ? 400 : 300) : 300} isTruncated>
+        {children}
+      </Text>
     </PseudoBox>
   );
 };

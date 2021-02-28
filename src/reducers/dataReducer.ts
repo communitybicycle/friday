@@ -7,6 +7,7 @@ import { Action } from "types/action";
 import { Columns, Note, PageType } from "types/page";
 import { eStore } from "utils/eStore";
 import { deleteStringInNestedArray } from "utils/index";
+import moment from "moment";
 
 const dataSlice = createSlice({
   name: "data",
@@ -64,9 +65,9 @@ const dataSlice = createSlice({
       delete state.modules[moduleId];
 
       // delete all references in the dashboard
-      const dashboard = state.pages.dashboards[dashboardId];
+      const dashboard = state.dashboards[dashboardId];
 
-      state.pages.dashboards[dashboardId].columns = deleteStringInNestedArray(
+      state.dashboards[dashboardId].columns = deleteStringInNestedArray(
         dashboard.columns,
         moduleId
       );
@@ -75,7 +76,7 @@ const dataSlice = createSlice({
       state: DataState,
       { payload }: PayloadAction<{ id: string; columns: Columns }>
     ) => {
-      state.pages.dashboards[payload.id].columns = payload.columns;
+      state.dashboards[payload.id].columns = payload.columns;
     },
     reinitializeDataReducer: (
       _,
@@ -87,23 +88,24 @@ const dataSlice = createSlice({
       state: DataState,
       { payload }: PayloadAction<{ imgSrc: string; id: string; type: PageType }>
     ) => {
-      state.pages[payload.type][payload.id].featureImage = payload.imgSrc;
+      state.dashboards[payload.id].featureImage = payload.imgSrc;
     },
     addNote: (state: DataState, { payload }: PayloadAction<{ id: string }>) => {
       const { id } = payload;
-      state.pages.notes[id] = {
+      state.notes[id] = {
         id,
         content: "",
-        type: "notes",
-        header: "",
         title: "",
+        tags: [],
+        createdAt: moment().format(),
+        updatedAt: moment().format(),
       } as Note;
     },
     setNoteContent: (
       state: DataState,
       { payload }: PayloadAction<{ id: string; content: string }>
     ) => {
-      state.pages.notes[payload.id].content = payload.content;
+      state.notes[payload.id].content = payload.content;
     },
     setTitle: (
       state: DataState,
@@ -111,7 +113,7 @@ const dataSlice = createSlice({
         payload,
       }: PayloadAction<{ id: string; newTitle: string; pageType: PageType }>
     ) => {
-      state.pages[payload.pageType][payload.id].title = payload.newTitle;
+      state[payload.pageType][payload.id].title = payload.newTitle;
     },
   },
 });

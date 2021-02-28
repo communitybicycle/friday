@@ -31,9 +31,7 @@ const Navbar: React.FC = () => {
   const { colorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { settings } = useSelector((state: RootState) => state);
-  const {
-    pages: { dashboards },
-  } = useSelector((state: RootState) => state.data);
+  const { dashboards } = useSelector((state: RootState) => state.data);
   const { isMenuOpen } = useSelector((state: RootState) => state.meta);
   const { profilePicture } = useSelector((state: RootState) => state.user);
   const bgColor = { light: "#333", dark: "gray.800" };
