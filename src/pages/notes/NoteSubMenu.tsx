@@ -1,5 +1,6 @@
 import { Box, Flex, Heading, useColorMode } from "@chakra-ui/core";
 import Container from "components/layout/Container";
+import NoteFolderItem from "components/NoteFolderItem";
 import NoteNavItem from "components/NoteNavItem";
 import {
   NAVBAR_BORDER_COLOR,
@@ -11,11 +12,30 @@ import { hot } from "react-hot-loader";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { RootState } from "reducers/store";
+import { NoteOrFolderMenuItem } from "types/page";
 
 const NoteSubMenu: React.FC = ({ children }) => {
   const { colorMode } = useColorMode();
   const history = useHistory();
-  const { notes } = useSelector((state: RootState) => state.data);
+  const { notes, noteMenu } = useSelector((state: RootState) => state.data);
+
+  const renderMenuItem = (item: NoteOrFolderMenuItem) => {
+    if (item.type === "note") {
+      return (
+        <NoteNavItem
+          to={`/notes/${item.id}`}
+          key={item.id}
+          text={notes[item.id].title}
+        />
+      );
+    } else {
+      return (
+        <NoteFolderItem text={item.title}>
+          {item.subItems?.map((subItem) => renderMenuItem(subItem))}
+        </NoteFolderItem>
+      );
+    }
+  };
 
   return (
     <Flex>
@@ -41,13 +61,7 @@ const NoteSubMenu: React.FC = ({ children }) => {
         >
           Notes
         </Heading>
-        {Object.values(notes).map((notePage) => (
-          <NoteNavItem
-            to={`/notes/${notePage.id}`}
-            key={notePage.id}
-            text={notePage.title}
-          />
-        ))}
+        {noteMenu.map((item) => renderMenuItem(item))}
       </Box>
       <Box pt="50px" px="50px" flex={1}>
         <Container>{children}</Container>

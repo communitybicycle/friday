@@ -219,5 +219,22 @@ export const initialData: DataState = {
       createdAt: "",
       updatedAt: "",
     },
+    bcf: {
+      id: "bcf",
+      title: "General Notes 2",
+      content: "Notes placeholder here 2",
+      tags: [],
+      createdAt: "",
+      updatedAt: "",
+    },
   },
+  noteMenu: [
+    { type: "note", id: "bce" },
+    {
+      type: "folder",
+      id: "folderaaa",
+      subItems: [{ type: "note", id: "bcf" }],
+      title: "July 1st",
+    },
+  ],
 };

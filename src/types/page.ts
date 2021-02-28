@@ -31,3 +31,19 @@ export interface Note {
   createdAt: string;
   updatedAt: string;
 }
+
+interface MenuItem {
+  id: string;
+}
+
+export interface NoteMenuItem extends MenuItem {
+  type: "note";
+}
+
+export interface FolderMenuItem extends MenuItem {
+  type: "folder";
+  title: string;
+  subItems?: NoteOrFolderMenuItem[];
+}
+
+export type NoteOrFolderMenuItem = NoteMenuItem | FolderMenuItem;

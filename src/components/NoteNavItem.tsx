@@ -27,13 +27,13 @@ const NoteNavItem: React.FC<Props> = ({ to, text }) => {
       fontSize="lg"
       lineHeight="1.85"
       height="34px"
-      px={2}
       _hover={{
         backgroundColor: isLightMode ? "white" : "gray.600",
       }}
       borderRadius={4}
       cursor="pointer"
       onClick={handleClick}
+      px={2}
       mb={1}
     >
       <Text fontWeight={isLightMode ? 400 : 300} isTruncated>
