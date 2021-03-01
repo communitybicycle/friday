@@ -2,6 +2,7 @@ import {
   Box,
   Collapse,
   Icon,
+  IconButton,
   PseudoBox,
   Text,
   useColorMode,
@@ -41,9 +42,14 @@ const NoteFolderItem: React.FC<Props> = ({ text, id, index, children }) => {
             lineHeight="1.85"
             height="34px"
             px={2}
-            _hover={{
-              backgroundColor: isLightMode ? "white" : "gray.600",
-            }}
+            _hover={
+              {
+                backgroundColor: isLightMode ? "white" : "gray.600",
+                "& > button": {
+                  visibility: "visible",
+                },
+              } as any
+            }
             borderRadius={4}
             cursor="pointer"
             onClick={onToggle}
@@ -51,9 +57,20 @@ const NoteFolderItem: React.FC<Props> = ({ text, id, index, children }) => {
             transition={DEFAULT_CHAKRA_TRANSITION}
           >
             <Icon name={isOpen ? "chevron-down" : "chevron-right"} mr={3} />
-            <Text fontWeight={isLightMode ? 400 : 300} isTruncated>
+            <Text fontWeight={isLightMode ? 400 : 300} flex={1} isTruncated>
               {text}
             </Text>
+            <IconButton
+              icon="settings"
+              variant="ghost"
+              variantColor="blue"
+              aria-label="Edit folder name"
+              visibility="hidden"
+              size="sm"
+              _hover={{
+                background: "none",
+              }}
+            />
           </PseudoBox>
           <Collapse isOpen={isOpen} ml="28px">
             <Droppable droppableId={id}>

@@ -19,7 +19,13 @@ export const Card: React.FC<CardProps> = ({ children, _hover, ...rest }) => {
       overflow="hidden"
       py="4"
       px="4"
-      _hover={_hover}
+      transition="all 0.12s ease"
+      _hover={{
+        transform: "translate(0, -4px)",
+        boxShadow:
+          "rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
+        ..._hover,
+      }}
       {...rest}
     >
       {children}
