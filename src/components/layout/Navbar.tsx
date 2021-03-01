@@ -115,9 +115,11 @@ const Navbar: React.FC = () => {
         <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
           Plugins
         </Heading>
-        <NavItem to="/notes" icon="edit">
-          Notes
-        </NavItem>
+        {settings.notesPlugin && (
+          <NavItem to="/notes" icon="edit">
+            Notes
+          </NavItem>
+        )}
         {settings.calendarPlugin && (
           <NavItem to="/calendar" icon="calendar">
             Calendar

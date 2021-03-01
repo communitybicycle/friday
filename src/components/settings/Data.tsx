@@ -3,10 +3,11 @@ import { ipcRenderer } from "electron";
 import React, { Fragment } from "react";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
-import { reinitializeDataReducer } from "../../reducers/dataReducer";
-import { reinitializeMetaReducer } from "../../reducers/metaReducer";
-import { RootState } from "../../reducers/store";
-import { reinitializeUserReducer } from "../../reducers/userReducer";
+import { reinitializeSettingsReducer } from "reducers/settingReducer";
+import { reinitializeDataReducer } from "reducers/dataReducer";
+import { reinitializeMetaReducer } from "reducers/metaReducer";
+import { RootState } from "reducers/store";
+import { reinitializeUserReducer } from "reducers/userReducer";
 import Item from "./Item";
 
 const DataSettings: React.FC = () => {
@@ -69,6 +70,16 @@ const DataSettings: React.FC = () => {
     });
   };
 
+  const resetSettingsReducer = () => {
+    dispatch(reinitializeSettingsReducer());
+    toast({
+      status: "success",
+      duration: 7000,
+      position: "bottom",
+      title: "Settings has been re-initialized!",
+    });
+  };
+
   return (
     <Fragment>
       <Item
@@ -102,6 +113,11 @@ const DataSettings: React.FC = () => {
       </Item>
       <Item name="Reset user" description="Resets only the user data.">
         <Button variantColor="red" onClick={resetUserReducer}>
+          Reset
+        </Button>
+      </Item>
+      <Item name="Reset settings" description="Resets only the settings data.">
+        <Button variantColor="red" onClick={resetSettingsReducer}>
           Reset
         </Button>
       </Item>

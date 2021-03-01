@@ -1,4 +1,16 @@
-import { Box, Button, Flex, IconButton, useColorMode } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Flex,
+  IconButton,
+  Popover,
+  PopoverArrow,
+  PopoverBody,
+  PopoverContent,
+  PopoverHeader,
+  PopoverTrigger,
+  useColorMode,
+} from "@chakra-ui/core";
 import Container from "components/layout/Container";
 import NoteFolderItem from "components/NoteFolderItem";
 import NoteNavItem from "components/NoteNavItem";
@@ -13,16 +25,28 @@ import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { reorderNoteMenu } from "reducers/dataReducer";
+import { addFolder, addNote, reorderNoteMenu } from "reducers/dataReducer";
 import { RootState } from "reducers/store";
 import { NoteOrFolderMenuItem } from "types/page";
-import { reorderNotes } from "utils/index";
+import { reorderNotes, uuid } from "utils/index";
 
 const NoteSubMenu: React.FC = ({ children }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { colorMode } = useColorMode();
   const { notes, noteMenu } = useSelector((state: RootState) => state.data);
+
+  const handleNewNote = () => {
+    const id = uuid();
+    dispatch(addNote({ id }));
+
+    history.push("/notes/" + id);
+  };
+
+  const handleNewFolder = () => {
+    const id = uuid();
+    dispatch(addFolder(id));
+  };
 
   const renderMenu = (menu: NoteOrFolderMenuItem[]): ReactNode => {
     let index = 0;
@@ -104,16 +128,33 @@ const NoteSubMenu: React.FC = ({ children }) => {
                 Notes
               </Button>
             </Box>
-            <IconButton
-              aria-label="Add new note or folder"
-              icon="add"
-              variant="ghost"
-              borderRadius={100}
-              fontSize="14px"
-              _hover={{
-                backgroundColor: colorMode === "light" ? "white" : "gray.600",
-              }}
-            />
+            <Popover>
+              <PopoverTrigger>
+                <IconButton
+                  aria-label="Add new note or folder"
+                  icon="add"
+                  variant="ghost"
+                  borderRadius={100}
+                  fontSize="14px"
+                  _hover={{
+                    backgroundColor:
+                      colorMode === "light" ? "white" : "gray.600",
+                  }}
+                />
+              </PopoverTrigger>
+              <PopoverContent zIndex={4}>
+                <PopoverArrow />
+                <PopoverHeader>Add a note or a folder</PopoverHeader>
+                <PopoverBody>
+                  <Button variantColor="blue" onClick={handleNewNote}>
+                    Note
+                  </Button>
+                  <Button variantColor="blue" onClick={handleNewFolder}>
+                    Folder
+                  </Button>
+                </PopoverBody>
+              </PopoverContent>
+            </Popover>
           </Flex>
           <Droppable droppableId="root">
             {(provided) => (

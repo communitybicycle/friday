@@ -123,6 +123,14 @@ const dataSlice = createSlice({
     ) => {
       state.noteMenu = payload;
     },
+    addFolder: (state: DataState, { payload }: PayloadAction<string>) => {
+      state.noteMenu.push({
+        id: payload,
+        type: "folder",
+        subItems: [],
+        title: "New Folder",
+      });
+    },
   },
 });
 
@@ -143,6 +151,7 @@ export const {
   addNote,
   setTitle,
   reorderNoteMenu,
+  addFolder,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

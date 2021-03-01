@@ -14,4 +14,4 @@ export interface DataState {
   noteMenu: NoteOrFolderMenuItem[];
 }
 
-export type Plugins = "calendar" | "terminal";
+export type Plugins = "calendar" | "terminal" | "notes";
