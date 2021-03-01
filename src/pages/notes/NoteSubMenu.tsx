@@ -34,6 +34,7 @@ const NoteSubMenu: React.FC = ({ children }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { colorMode } = useColorMode();
+  const isLight = colorMode === "light";
   const { notes, noteMenu } = useSelector((state: RootState) => state.data);
 
   const handleNewNote = () => {
@@ -101,7 +102,7 @@ const NoteSubMenu: React.FC = ({ children }) => {
     <DragDropContext onDragEnd={onDragEnd}>
       <Flex>
         <Box
-          bg={colorMode === "light" ? "gray.100" : "#232a38"}
+          bg={isLight ? "gray.100" : "#232a38"}
           minWidth={`${NAVBAR_WIDTH}px`}
           maxWidth={`${NAVBAR_WIDTH}px`}
           height={`calc(100vh - ${WINDOW_BAR_HEIGHT}px)`}
@@ -109,9 +110,7 @@ const NoteSubMenu: React.FC = ({ children }) => {
           pt="56px"
           // boxShadow="7px 0 16px -6px rgba(0, 0, 0, 0.16)"
           borderRight={
-            colorMode === "light"
-              ? "1px solid #ececec"
-              : `1px solid ${NAVBAR_BORDER_COLOR}`
+            isLight ? "1px solid #ececec" : `1px solid ${NAVBAR_BORDER_COLOR}`
           }
         >
           <Flex justify="space-between" align="center" mb={4}>
@@ -121,7 +120,7 @@ const NoteSubMenu: React.FC = ({ children }) => {
                 display="inline"
                 fontSize="1.625rem"
                 fontWeight="bold"
-                color="black"
+                color={isLight ? "black" : "white"}
                 onClick={() => history.push("/notes")}
                 cursor="pointer"
               >
@@ -137,8 +136,7 @@ const NoteSubMenu: React.FC = ({ children }) => {
                   borderRadius={100}
                   fontSize="14px"
                   _hover={{
-                    backgroundColor:
-                      colorMode === "light" ? "white" : "gray.600",
+                    backgroundColor: isLight ? "white" : "gray.600",
                   }}
                 />
               </PopoverTrigger>

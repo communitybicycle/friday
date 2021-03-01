@@ -34,8 +34,12 @@ const NoteDashboard: React.FC = () => {
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as SortOptions)}
           >
-            <option value="updatedAt">Updated At</option>
-            <option value="createdAt">Created At</option>
+            <option value="updatedAt" style={{ color: "black" }}>
+              Updated At
+            </option>
+            <option value="createdAt" style={{ color: "black" }}>
+              Created At
+            </option>
           </Select>
         </Box>
       </Flex>
