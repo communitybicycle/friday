@@ -13,6 +13,7 @@ import Center from "components/layout/Center";
 import { NavItem } from "components/NavItem";
 import Settings from "components/settings/Settings";
 import {
+  DEFAULT_CHAKRA_TRANSITION,
   NAVBAR_BORDER_COLOR,
   NAVBAR_WIDTH,
   WINDOW_BAR_HEIGHT,
@@ -130,42 +131,49 @@ const Navbar: React.FC = () => {
       </Box>
 
       {/* Bottom section */}
-      <Flex
-        justifyContent="space-between"
-        p={2}
-        borderTop={`1px solid ${NAVBAR_BORDER_COLOR}`}
-      >
-        <Button
-          justifyContent="flex-start"
-          w="100%"
-          variant="ghost"
-          variantColor="veryWhite"
-          _hover={{
-            background: "none",
-            backgroundColor:
-              colorMode === "light" ? NAVBAR_BORDER_COLOR : "gray.700",
-          }}
-          _active={{ background: "none" }}
-          transition="none"
-          onClick={handleNewNote}
-          mr={1}
+      <Flex direction="column">
+        <Box px={5} mb={2}>
+          <NavItem to="/" icon="help">
+            Help
+          </NavItem>
+        </Box>
+        <Flex
+          justifyContent="space-between"
+          p={2}
+          borderTop={`1px solid ${NAVBAR_BORDER_COLOR}`}
         >
-          + New Note
-        </Button>
-        <IconButton
-          aria-label="personal settings"
-          icon="settings"
-          variant="link"
-          variantColor="veryWhite"
-          h="40px"
-          onClick={onOpen}
-          transition="none"
-          _hover={{
-            background: "none",
-            backgroundColor:
-              colorMode === "light" ? NAVBAR_BORDER_COLOR : "gray.700",
-          }}
-        />
+          <Button
+            justifyContent="flex-start"
+            w="100%"
+            variant="ghost"
+            variantColor="veryWhite"
+            _hover={{
+              background: "none",
+              backgroundColor:
+                colorMode === "light" ? NAVBAR_BORDER_COLOR : "gray.700",
+            }}
+            _active={{ background: "none" }}
+            transition={DEFAULT_CHAKRA_TRANSITION}
+            onClick={handleNewNote}
+            mr={2}
+          >
+            + New Note
+          </Button>
+          <IconButton
+            aria-label="personal settings"
+            icon="settings"
+            variant="link"
+            variantColor="veryWhite"
+            h="40px"
+            onClick={onOpen}
+            transition={DEFAULT_CHAKRA_TRANSITION}
+            _hover={{
+              background: "none",
+              backgroundColor:
+                colorMode === "light" ? NAVBAR_BORDER_COLOR : "gray.700",
+            }}
+          />
+        </Flex>
       </Flex>
       <Settings isOpen={isOpen} onClose={onClose} />
     </Flex>

@@ -1,4 +1,6 @@
+import { Text } from "@chakra-ui/core";
 import PageHeader from "components/page/PageHeader";
+import moment from "moment";
 import NoteSubMenu from "pages/notes/NoteSubMenu";
 import React from "react";
 import { hot } from "react-hot-loader";
@@ -11,7 +13,9 @@ import { RootState } from "reducers/store";
 const Notes: React.FC = () => {
   const dispatch = useDispatch();
   const { id } = useParams<{ id: string }>();
-  const { content } = useSelector((state: RootState) => state.data.notes[id]);
+  const note = useSelector((state: RootState) => state.data.notes[id]);
+
+  const { content, updatedAt } = note;
 
   const handleChange = (newContent: string) => {
     dispatch(setNoteContent({ id, content: newContent }));
@@ -19,7 +23,11 @@ const Notes: React.FC = () => {
 
   return (
     <NoteSubMenu>
-      <PageHeader id={id} type="notes" />
+      <PageHeader id={id} type="notes">
+        <Text fontSize="sm" color="gray.500">
+          Last updated: {moment(updatedAt).format("MMM, DD, YYYY - h:mm:ss a")}
+        </Text>
+      </PageHeader>
       <ReactQuill
         theme="bubble"
         value={content}

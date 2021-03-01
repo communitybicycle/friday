@@ -1,4 +1,5 @@
 import { PseudoBox, Text, useColorMode } from "@chakra-ui/core";
+import { DEFAULT_CHAKRA_TRANSITION } from "data/constants";
 import { useDraggableInPortal } from "hooks/index";
 import React from "react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
@@ -45,6 +46,7 @@ const NoteNavItem: React.FC<Props> = ({ to, id, index, text }) => {
           onClick={handleClick}
           px={2}
           mb={1}
+          transition={DEFAULT_CHAKRA_TRANSITION}
         >
           <Text fontWeight={isLightMode ? 400 : 300} isTruncated>
             {text}

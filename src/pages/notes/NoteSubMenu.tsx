@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, useColorMode } from "@chakra-ui/core";
+import { Box, Button, Flex, IconButton, useColorMode } from "@chakra-ui/core";
 import Container from "components/layout/Container";
 import NoteFolderItem from "components/NoteFolderItem";
 import NoteNavItem from "components/NoteNavItem";
@@ -7,6 +7,7 @@ import {
   NAVBAR_WIDTH,
   WINDOW_BAR_HEIGHT,
 } from "data/constants";
+import _ from "lodash";
 import React, { ReactNode } from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
@@ -16,7 +17,6 @@ import { reorderNoteMenu } from "reducers/dataReducer";
 import { RootState } from "reducers/store";
 import { NoteOrFolderMenuItem } from "types/page";
 import { reorderNotes } from "utils/index";
-import _ from "lodash";
 
 const NoteSubMenu: React.FC = ({ children }) => {
   const dispatch = useDispatch();
@@ -62,9 +62,6 @@ const NoteSubMenu: React.FC = ({ children }) => {
       return;
     }
 
-    console.log("Source:", source);
-    console.log("Destination:", destination);
-
     const newMenu = reorderNotes(
       _.cloneDeep(noteMenu),
       source.droppableId,
@@ -93,15 +90,32 @@ const NoteSubMenu: React.FC = ({ children }) => {
               : `1px solid ${NAVBAR_BORDER_COLOR}`
           }
         >
-          <Heading
-            size="lg"
-            onClick={() => history.push("/notes")}
-            cursor="pointer"
-            mb={2}
-          >
-            Notes
-          </Heading>
-          <Droppable droppableId="notes">
+          <Flex justify="space-between" align="center" mb={4}>
+            <Box flex={1}>
+              <Button
+                variant="link"
+                display="inline"
+                fontSize="1.625rem"
+                fontWeight="bold"
+                color="black"
+                onClick={() => history.push("/notes")}
+                cursor="pointer"
+              >
+                Notes
+              </Button>
+            </Box>
+            <IconButton
+              aria-label="Add new note or folder"
+              icon="add"
+              variant="ghost"
+              borderRadius={100}
+              fontSize="14px"
+              _hover={{
+                backgroundColor: colorMode === "light" ? "white" : "gray.600",
+              }}
+            />
+          </Flex>
+          <Droppable droppableId="root">
             {(provided) => (
               <Box
                 {...provided.droppableProps}

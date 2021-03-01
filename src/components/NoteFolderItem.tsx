@@ -7,6 +7,7 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/core";
+import { DEFAULT_CHAKRA_TRANSITION } from "data/constants";
 import React from "react";
 import { Draggable, DraggableProvided, Droppable } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
@@ -47,6 +48,7 @@ const NoteFolderItem: React.FC<Props> = ({ text, id, index, children }) => {
             cursor="pointer"
             onClick={onToggle}
             mb={1}
+            transition={DEFAULT_CHAKRA_TRANSITION}
           >
             <Icon name={isOpen ? "chevron-down" : "chevron-right"} mr={3} />
             <Text fontWeight={isLightMode ? 400 : 300} isTruncated>

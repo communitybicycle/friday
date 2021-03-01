@@ -96,17 +96,14 @@ export const reorderNotes = (
   const menu = Array.from(source);
   const sourceRoute = noteSearch(menu, sourceId);
   const destinationRoute = noteSearch(menu, destinationId);
-  destinationRoute.pop();
-  console.log("menu:", menu);
-
-  console.log("Source route:", sourceRoute);
-  console.log("Destination route:", destinationRoute);
+  if (destinationRoute[0] === "root") {
+    destinationRoute.pop();
+  }
 
   // remove source item
   let current: NoteOrFolderMenuItem[] = menu;
   let removed: NoteOrFolderMenuItem | undefined;
   for (let i = 0; i <= sourceRoute.length; i++) {
-    console.log("Current:", current);
     if (i === sourceRoute.length) {
       // last loop
       removed = current.splice(sourceIndex, 1)[0];
@@ -114,9 +111,7 @@ export const reorderNotes = (
     } else if (i < sourceRoute.length) {
       // get index of the current item
       const index = toIndex(current, sourceRoute[i]);
-      console.log("Index:", index);
       const folder = current[index] as FolderMenuItem;
-      console.log("Folder:", folder);
       current = folder.subItems;
     }
   }
@@ -135,8 +130,6 @@ export const reorderNotes = (
       current = folder.subItems;
     }
   }
-
-  console.log("New Menu:", menu);
 
   return menu;
 };

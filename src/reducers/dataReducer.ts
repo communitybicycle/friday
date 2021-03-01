@@ -107,6 +107,7 @@ const dataSlice = createSlice({
       { payload }: PayloadAction<{ id: string; content: string }>
     ) => {
       state.notes[payload.id].content = payload.content;
+      state.notes[payload.id].updatedAt = moment().format();
     },
     setTitle: (
       state: DataState,

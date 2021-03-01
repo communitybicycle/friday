@@ -33,6 +33,7 @@ const PageHeader: React.FC<Props> = ({
   buttonText,
   pageAction,
   isDisabled,
+  children,
 }) => {
   const dispatch = useDispatch();
   const { data } = useSelector((state: RootState) => state);
@@ -83,6 +84,7 @@ const PageHeader: React.FC<Props> = ({
           )}
         </Box>
       </PseudoBox>
+      {children}
       <Divider />
     </Box>
   );

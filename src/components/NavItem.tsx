@@ -1,5 +1,5 @@
 import { Icon, PseudoBox, Text, useColorMode } from "@chakra-ui/core";
-import { NAVBAR_BORDER_COLOR } from "data/constants";
+import { DEFAULT_CHAKRA_TRANSITION, NAVBAR_BORDER_COLOR } from "data/constants";
 import React from "react";
 import { useHistory } from "react-router";
 
@@ -41,6 +41,7 @@ export const NavItem: React.FC<Props> = ({ to, icon, lighter, children }) => {
       borderRadius={4}
       cursor="pointer"
       onClick={handleClick}
+      transition={DEFAULT_CHAKRA_TRANSITION}
     >
       {icon && <Icon name={icon} mr={3} />}
       <Text fontWeight={isLightMode ? (lighter ? 400 : 300) : 300} isTruncated>
