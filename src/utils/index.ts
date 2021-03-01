@@ -104,11 +104,10 @@ export const reorderNotes = (
 
   // remove source item
   let current: NoteOrFolderMenuItem[] = menu;
-  let removed: NoteOrFolderMenuItem;
+  let removed: NoteOrFolderMenuItem | undefined;
   for (let i = 0; i <= sourceRoute.length; i++) {
     console.log("Current:", current);
     if (i === sourceRoute.length) {
-      console.log("HERE");
       // last loop
       removed = current.splice(sourceIndex, 1)[0];
       break;
@@ -122,13 +121,10 @@ export const reorderNotes = (
     }
   }
 
-  console.log("Removed:", removed);
-
   // add to destination
   current = menu;
   for (let i = 0; i <= destinationRoute.length; i++) {
-    if (i === destinationRoute.length) {
-      console.log("Last loop");
+    if (i === destinationRoute.length && removed) {
       // last loop
       current.splice(destinationIndex, 0, removed);
       break;

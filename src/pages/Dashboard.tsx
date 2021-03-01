@@ -126,12 +126,7 @@ const Dashboard: React.FC = () => {
                 {(provided) => (
                   <Flex ref={provided.innerRef}>
                     {moduleCards.map((type, index) => (
-                      <ModuleCard
-                        type={type}
-                        id={type}
-                        index={index}
-                        key={type}
-                      />
+                      <ModuleCard type={type} index={index} key={type} />
                     ))}
                     {provided.placeholder}
                   </Flex>

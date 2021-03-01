@@ -7,7 +7,6 @@ import {
   useColorMode,
   useDisclosure,
 } from "@chakra-ui/core";
-import { useDraggableInPortal } from "hooks/index";
 import React from "react";
 import { Draggable, DraggableProvided, Droppable } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
@@ -20,17 +19,18 @@ interface Props {
 
 const NoteFolderItem: React.FC<Props> = ({ text, id, index, children }) => {
   const { isOpen, onToggle } = useDisclosure();
-  const renderDraggable = useDraggableInPortal();
   const { colorMode } = useColorMode();
   const isLightMode = colorMode === "light";
 
   return (
     <Draggable draggableId={id} index={index}>
-      {renderDraggable((provided: DraggableProvided) => (
+      {(provided: DraggableProvided) => (
         <Box
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          left="auto !important"
+          top="auto !important"
         >
           <PseudoBox
             display="flex"
@@ -59,6 +59,7 @@ const NoteFolderItem: React.FC<Props> = ({ text, id, index, children }) => {
                 <Box
                   ref={innerProvided.innerRef}
                   {...innerProvided.droppableProps}
+                  minH="10px"
                 >
                   {children}
                   {innerProvided.placeholder}
@@ -67,7 +68,7 @@ const NoteFolderItem: React.FC<Props> = ({ text, id, index, children }) => {
             </Droppable>
           </Collapse>
         </Box>
-      ))}
+      )}
     </Draggable>
   );
 };
