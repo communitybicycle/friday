@@ -1,4 +1,4 @@
-import { Box, Flex, Grid, Heading, Select } from "@chakra-ui/core";
+import { Box, Flex, Heading, Select } from "@chakra-ui/core";
 import { Card, CardTitle } from "components/card/Card";
 import PageHeader from "components/page/PageHeader";
 import moment from "moment";
@@ -39,18 +39,20 @@ const NoteDashboard: React.FC = () => {
           </Select>
         </Box>
       </Flex>
-      <Grid templateColumns="repeat(4, 1fr)" gap={2}>
+      <Flex flexWrap="wrap" mr="-8px">
         {recentNotes.map((note) => (
           <Card
             key={note.id}
             onClick={() => history.push(`/notes/${note.id}`)}
             cursor="pointer"
+            mr={2}
+            mb={2}
           >
-            <CardTitle isTruncated>{note.title}</CardTitle>
+            <CardTitle>{note.title}</CardTitle>
             Last updated: {moment(note.updatedAt).format("MMM DD, YYYY")}
           </Card>
         ))}
-      </Grid>
+      </Flex>
     </NoteSubMenu>
   );
 };
