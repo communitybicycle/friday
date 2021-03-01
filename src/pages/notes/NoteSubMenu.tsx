@@ -142,10 +142,10 @@ const NoteSubMenu: React.FC = ({ children }) => {
                   }}
                 />
               </PopoverTrigger>
-              <PopoverContent zIndex={4}>
+              <PopoverContent w={192} zIndex={4}>
                 <PopoverArrow />
                 <PopoverHeader>Add a note or a folder</PopoverHeader>
-                <PopoverBody>
+                <PopoverBody d="flex" justifyContent="space-between">
                   <Button variantColor="blue" onClick={handleNewNote}>
                     Note
                   </Button>

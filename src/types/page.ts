@@ -47,3 +47,5 @@ export interface FolderMenuItem extends MenuItem {
 }
 
 export type NoteOrFolderMenuItem = NoteMenuItem | FolderMenuItem;
+
+export type NoteMenu = NoteOrFolderMenuItem[];

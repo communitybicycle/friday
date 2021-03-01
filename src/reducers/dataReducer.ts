@@ -5,7 +5,7 @@ import { Action } from "types/action";
 import { DataState } from "types/index";
 import { Instruction } from "types/instructions";
 import { ModulesType } from "types/modules";
-import { Columns, Note, NoteOrFolderMenuItem, PageType } from "types/page";
+import { Columns, Note, NoteMenu, PageType } from "types/page";
 import { eStore } from "utils/eStore";
 import { deleteStringInNestedArray } from "utils/index";
 
@@ -119,7 +119,7 @@ const dataSlice = createSlice({
     },
     reorderNoteMenu: (
       state: DataState,
-      { payload }: PayloadAction<NoteOrFolderMenuItem[]>
+      { payload }: PayloadAction<NoteMenu>
     ) => {
       state.noteMenu = payload;
     },
@@ -130,6 +130,9 @@ const dataSlice = createSlice({
         subItems: [],
         title: "New Folder",
       });
+    },
+    setNoteMenu: (state: DataState, { payload }: PayloadAction<NoteMenu>) => {
+      state.noteMenu = payload;
     },
   },
 });
@@ -152,6 +155,7 @@ export const {
   setTitle,
   reorderNoteMenu,
   addFolder,
+  setNoteMenu,
 } = dataSlice.actions;
 
 export default dataSlice.reducer;

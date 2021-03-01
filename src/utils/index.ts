@@ -1,4 +1,5 @@
-import { FolderMenuItem, NoteOrFolderMenuItem } from "types/page";
+import _ from "lodash";
+import { FolderMenuItem, NoteMenu, NoteOrFolderMenuItem } from "types/page";
 import { v4 } from "uuid";
 
 export const capitalize = (str: string): string => {
@@ -48,13 +49,10 @@ export const deleteStringInNestedArray = (
   return output;
 };
 
-export const noteSearch = (
-  source: NoteOrFolderMenuItem[],
-  target: string
-): string[] => {
+export const noteSearch = (source: NoteMenu, target: string): string[] => {
   let output: string[] = [];
 
-  const loop = (src: NoteOrFolderMenuItem[], arr: string[]) => {
+  const loop = (src: NoteMenu, arr: string[]) => {
     src.forEach((item) => {
       const newArray = Array.from(arr);
 
@@ -79,20 +77,17 @@ export const noteSearch = (
   return output;
 };
 
-export const toIndex = (
-  src: NoteOrFolderMenuItem[],
-  target: string
-): number => {
+export const toIndex = (src: NoteMenu, target: string): number => {
   return src.findIndex((item) => item.id === target);
 };
 
 export const reorderNotes = (
-  source: NoteOrFolderMenuItem[],
+  source: NoteMenu,
   sourceId: string, // draggable id
   destinationId: string, // column id
   sourceIndex: number,
   destinationIndex: number
-): NoteOrFolderMenuItem[] => {
+): NoteMenu => {
   const menu = Array.from(source);
   const sourceRoute = noteSearch(menu, sourceId);
   const destinationRoute = noteSearch(menu, destinationId);
@@ -101,7 +96,7 @@ export const reorderNotes = (
   }
 
   // remove source item
-  let current: NoteOrFolderMenuItem[] = menu;
+  let current: NoteMenu = menu;
   let removed: NoteOrFolderMenuItem | undefined;
   for (let i = 0; i <= sourceRoute.length; i++) {
     if (i === sourceRoute.length) {
@@ -132,4 +127,34 @@ export const reorderNotes = (
   }
 
   return menu;
+};
+
+export const alterNestedMenuItem = (
+  target: string,
+  menu: NoteMenu,
+  callback: (foundItem: NoteOrFolderMenuItem) => void
+): NoteMenu => {
+  try {
+    const menuCopy = _.cloneDeep(menu);
+    const targetRoute = noteSearch(menuCopy, target);
+    targetRoute.pop();
+
+    let current: NoteMenu = menuCopy;
+
+    for (let i = 0; i < targetRoute.length; i++) {
+      const index = toIndex(current, targetRoute[i]);
+
+      const folder = current[index] as FolderMenuItem;
+      current = folder.subItems;
+    }
+
+    const index = toIndex(current, target);
+
+    callback(current[index]);
+
+    return menuCopy;
+  } catch (e) {
+    console.log("alterNestedMenuItem error:", e);
+    return menu;
+  }
 };
