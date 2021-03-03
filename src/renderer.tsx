@@ -47,7 +47,7 @@ dotenv.config();
 process.env["ELECTRON_DISABLE_SECURITY_WARNINGS"] = "true";
 
 const colorMode = eStore.get("colorMode");
-const color = colorMode && colorMode === "dark" ? "#1A202C" : "#333";
+const color = colorMode ? (colorMode === "dark" ? "#1A202C" : "#333") : "#333";
 
 const titleBar = new Titlebar({
   backgroundColor: Color.fromHex(color || "#333"),
