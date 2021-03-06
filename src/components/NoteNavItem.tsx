@@ -1,5 +1,4 @@
 import { PseudoBox, Text, useColorMode } from "@chakra-ui/core";
-import { useDraggableInPortal } from "hooks/index";
 import React from "react";
 import { Draggable, DraggableProvided } from "react-beautiful-dnd";
 import { hot } from "react-hot-loader";
@@ -14,7 +13,6 @@ interface Props {
 
 const NoteNavItem: React.FC<Props> = ({ to, id, index, text }) => {
   const { colorMode } = useColorMode();
-  const renderDraggable = useDraggableInPortal();
   const history = useHistory();
   const isLightMode = colorMode === "light";
 
@@ -26,7 +24,7 @@ const NoteNavItem: React.FC<Props> = ({ to, id, index, text }) => {
 
   return (
     <Draggable draggableId={id} index={index}>
-      {renderDraggable((provided: DraggableProvided) => (
+      {(provided: DraggableProvided) => (
         <PseudoBox
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -46,12 +44,14 @@ const NoteNavItem: React.FC<Props> = ({ to, id, index, text }) => {
           px={2}
           mb={1}
           transition="background-color .25s ease"
+          left="auto !important"
+          top="auto !important"
         >
           <Text fontWeight={isLightMode ? 400 : 300} isTruncated>
             {text}
           </Text>
         </PseudoBox>
-      ))}
+      )}
     </Draggable>
   );
 };
