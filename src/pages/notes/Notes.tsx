@@ -33,6 +33,7 @@ const Notes: React.FC = () => {
         value={content}
         onChange={handleChange}
         placeholder="Input goes here"
+        style={{ paddingBottom: "50px" }}
 
         // modules={{
         //   toolbar: [

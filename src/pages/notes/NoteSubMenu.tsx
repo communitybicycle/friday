@@ -22,6 +22,7 @@ import {
 import _ from "lodash";
 import React, { ReactNode } from "react";
 import { DragDropContext, Droppable, DropResult } from "react-beautiful-dnd";
+import Scrollbars from "react-custom-scrollbars";
 import { hot } from "react-hot-loader";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
@@ -100,7 +101,11 @@ const NoteSubMenu: React.FC = ({ children }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Flex>
+      <Flex
+        height={`calc(100vh - ${WINDOW_BAR_HEIGHT}px)`}
+        position="relative"
+        overflow="hidden"
+      >
         <Box
           bg={isLight ? "gray.100" : "#232a38"}
           minWidth={`${NAVBAR_WIDTH}px`}
@@ -112,6 +117,8 @@ const NoteSubMenu: React.FC = ({ children }) => {
           borderRight={
             isLight ? "1px solid #ececec" : `1px solid ${NAVBAR_BORDER_COLOR}`
           }
+          // position="fixed"
+          // top={`${WINDOW_BAR_HEIGHT}px`}
         >
           <Flex justify="space-between" align="center" mb={4}>
             <Box flex={1}>
@@ -167,9 +174,11 @@ const NoteSubMenu: React.FC = ({ children }) => {
             )}
           </Droppable>
         </Box>
-        <Box pt="50px" px="50px" flex={1}>
-          <Container>{children}</Container>
-        </Box>
+        <Scrollbars height="100%" width="100%">
+          <Box pt="50px" px="50px" flex={1} pl={NAVBAR_WIDTH}>
+            <Container>{children}</Container>
+          </Box>
+        </Scrollbars>
       </Flex>
     </DragDropContext>
   );

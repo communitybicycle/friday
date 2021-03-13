@@ -86,9 +86,22 @@ const Navbar: React.FC = () => {
         </Center>
 
         {/* Routes */}
-        <Heading fontSize="md" textTransform="uppercase" color="white" mb={2}>
-          Home
-        </Heading>
+        <Flex mb={2} position="relative">
+          <Heading fontSize="md" textTransform="uppercase" color="white">
+            Home
+          </Heading>
+          <IconButton
+            position="absolute"
+            top={0}
+            right={0}
+            variantColor="veryWhite"
+            aria-label="Add new dashboard"
+            icon="add"
+            borderRadius={100}
+            size="sm"
+            variant="link"
+          />
+        </Flex>
         <Box mb={3}>
           {Object.values(dashboards).map((dashboard) => (
             <NavItem
